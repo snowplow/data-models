@@ -1,0 +1,12 @@
+# temp dir:
+tmp/
+
+# virtualenv related:
+.test/bin/
+.test/lib/
+.test/include/
+.test/.Python
+.test/pip-selfcheck.json
+
+# great expectation results:
+.test/great_expectations/results
