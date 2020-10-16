@@ -8,5 +8,6 @@ tmp/
 .test/.Python
 .test/pip-selfcheck.json
 
-# great expectation results:
+# great expectations related:
 .test/great_expectations/results
+.test/great_expectations/config
