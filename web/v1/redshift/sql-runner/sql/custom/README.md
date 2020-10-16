@@ -1,5 +1,7 @@
 # Adding custom sql
 
+This directory contains two examples of custom modules. The directories follow the same naming convention as the standard module, whereby each directory is assigned a number corresponding to the level of aggregation that the SQL is concerned with. In addition to these examples, below is a guide to creating custom modules.
+
 ## Guidelines & Best Practice
 
 The v1 Model's modular structure allows for custom SQL modules to leverage the model's incrementalisation logic, and operate as 'plugins' to compliment the standard model. This can be achieved by using the `_staged` tables as an input, and producing custom tables which may join too the standard model's main production tables (for example, to aggregate custom contexts to a page_view level), or provide a separate level of aggregation (for example, to aggregate data per- link_click, or some custom user interaction).

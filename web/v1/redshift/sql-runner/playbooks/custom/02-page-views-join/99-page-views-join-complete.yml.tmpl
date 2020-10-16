@@ -1,0 +1,20 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :input_schema:       atomic
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 99-page-views-join-cleanup
+  :queries:
+    - :name: 99-page-views-join-cleanup
+      :file: custom/02-page-views-join/99-page-views-join-cleanup.sql
+      :template: true
