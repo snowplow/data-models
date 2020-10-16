@@ -1,0 +1,16 @@
+# temp dir:
+tmp/
+
+# script templates:
+.scripts/templates/
+
+# virtualenv related:
+.test/bin/
+.test/lib/
+.test/include/
+.test/.Python
+.test/pip-selfcheck.json
+
+# great expectations related:
+.test/great_expectations/results
+.test/great_expectations/config

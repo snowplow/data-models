@@ -1,0 +1,27 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/web/1.1.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           false
+:steps:
+- :name: 98-truncate-page-views-staged
+  :queries:
+    - :name: 98-truncate-page-views-staged
+      :file: standard/03-sessions/99-complete/98-truncate-page-views-staged.sql
+      :template: true
+- :name: 99-sessions-cleanup
+  :queries:
+    - :name: 99-sessions-cleanup
+      :file: standard/03-sessions/99-complete/99-sessions-cleanup.sql
+      :template: true

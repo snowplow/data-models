@@ -1,0 +1,85 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/web/1.1.0
+  :input_schema:       atomic
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :minimumVisitLength: 5
+  :heartbeat:          10
+  :ua_bot_filter:      true
+  :iab:                false
+  :ua_parser:          false
+  :yauaa:              false
+  :upsert_lookback:
+  :skip_derived:
+  :stage_next:         true
+:steps:
+- :name: 00-setup
+  :queries:
+    - :name: 00-setup
+      :file: standard/02-page-views/01-main/00-setup.sql
+      :template: true
+- :name: 01-limits
+  :queries:
+    - :name: 01-limits
+      :file: standard/02-page-views/01-main/01-limits.sql
+      :template: true
+- :name: 02-page-view-events
+  :queries:
+    - :name: 02-page-view-events
+      :file: standard/02-page-views/01-main/02-page-view-events.sql
+      :template: true
+- :name: 03-page-view-duplicates
+  :queries:
+    - :name: 03-page-view-duplicates
+      :file: standard/02-page-views/01-main/03-page-view-duplicates.sql
+      :template: true
+- :name: 04-engaged-time
+  :queries:
+    - :name: 04-engaged-time
+      :file: standard/02-page-views/01-main/04-engaged-time.sql
+      :template: true
+- :name: 05-scroll-depth
+  :queries:
+    - :name: 05-scroll-depth
+      :file: standard/02-page-views/01-main/05-scroll-depth.sql
+      :template: true
+- :name: 06-a-iab
+  :queries:
+    - :name: 06-a-iab
+      :file: standard/02-page-views/01-main/06-a-iab.sql
+      :template: true
+- :name: 06-b-ua-parser
+  :queries:
+    - :name: 06-b-ua-parser
+      :file: standard/02-page-views/01-main/06-b-ua-parser.sql
+      :template: true
+- :name: 06-c-yauaa
+  :queries:
+    - :name: 06-c-yauaa
+      :file: standard/02-page-views/01-main/06-c-yauaa.sql
+      :template: true
+- :name: 07-page-views
+  :queries:
+    - :name: 07-page-views
+      :file: standard/02-page-views/01-main/07-page-views.sql
+      :template: true
+- :name: 08-page-views-metadata
+  :queries:
+    - :name: 08-page-views-metadata
+      :file: standard/02-page-views/01-main/08-page-views-metadata.sql
+      :template: true
+- :name: 09-commit-page-views
+  :queries:
+    - :name: 09-commit-page-views
+      :file: standard/02-page-views/01-main/09-commit-page-views.sql
+      :template: true
