@@ -1,6 +1,9 @@
 # temp dir:
 tmp/
 
+# script templates:
+.scripts/templates/
+
 # virtualenv related:
 .test/bin/
 .test/lib/
