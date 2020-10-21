@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Expected input:
-# bash run_playbooks.sh {path_to_sql_runner} {database} {version} '{list_of_playbooks_no_extension},{comma_separated}' {credentials (optional)}
+# bash run_playbooks.sh {path_to_sql_runner} {database} {major version} '{list_of_playbooks_no_extension},{comma_separated}' {credentials (optional)}
 
 root_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )/..
 script_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
