@@ -3,40 +3,8 @@
   "batches": [
     {
       "batch_kwargs": {
-        "schema": "scratch",
-        "table": "events_this_run",
-        "datasource": "redshift"
-      },
-      "expectation_suite_names": ["web.v1.base"]
-    },
-    {
-      "batch_kwargs": {
-        "schema": "scratch",
-        "table": "events_staged",
-        "datasource": "redshift"
-      },
-      "expectation_suite_names": ["web.v1.base"]
-    },
-    {
-      "batch_kwargs": {
         "schema": "derived",
         "table": "page_views",
-        "datasource": "redshift"
-      },
-      "expectation_suite_names": ["web.v1.page_views"]
-    },
-    {
-      "batch_kwargs": {
-        "schema": "scratch",
-        "table": "page_views_this_run",
-        "datasource": "redshift"
-      },
-      "expectation_suite_names": ["web.v1.page_views"]
-    },
-    {
-      "batch_kwargs": {
-        "schema": "scratch",
-        "table": "page_views_staged",
         "datasource": "redshift"
       },
       "expectation_suite_names": ["web.v1.page_views"]
@@ -58,24 +26,8 @@
     },
     {
       "batch_kwargs": {
-        "schema": "scratch",
-        "table": "sessions_this_run",
-        "datasource": "redshift"
-      },
-      "expectation_suite_names": ["web.v1.sessions"]
-    },
-    {
-      "batch_kwargs": {
         "schema": "derived",
         "table": "users",
-        "datasource": "redshift"
-      },
-      "expectation_suite_names": ["web.v1.users"]
-    },
-    {
-      "batch_kwargs": {
-        "schema": "scratch",
-        "table": "users_this_run",
         "datasource": "redshift"
       },
       "expectation_suite_names": ["web.v1.users"]

@@ -11,10 +11,12 @@ bash $script_path/run_playbooks.sh $1 $2 $3 'standard/01-base/01-base-main,stand
 
 echo "e2e: Running great expectations";
 
-bash $script_path/run_test.sh $2 $3 $4;
+bash $script_path/run_test.sh $2 $3 temp_tables $4;
 
 echo "e2e: Running completion steps";
 
 bash $script_path/run_playbooks.sh $1 $2 $3 'standard/01-base/99-base-complete,standard/02-page-views/99-page-views-complete,standard/03-sessions/99-sessions-complete,standard/04-users/99-users-complete' $4;
+
+bash $script_path/run_test.sh $2 $3 perm_tables $4;
 
 echo "e2e: Done";

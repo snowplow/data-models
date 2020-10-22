@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Expected input:
-# bash run_test.sh {database} {major version} {credentials (optional)}
+# bash run_test.sh {database} {major version} {validation_config} {credentials (optional)}
 
 # set working dir
 root_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )/..
@@ -9,7 +9,7 @@ cd $root_path/.test
 
 if [ "$1" == "bigquery" ]; then
 
-  BIGQUERY_CREDS=${BIGQUERY_CREDS:-$3}
+  BIGQUERY_CREDS=${BIGQUERY_CREDS:-$4}
 
   if [ -n "$BIGQUERY_CREDS" ]; then
 
@@ -36,11 +36,11 @@ if [ "$1" == "bigquery" ]; then
 else
 
   # If not BQ, take the relevant env var if it exists, set it to whatever's provided otherwise.
-  export REDSHIFT_PASSWORD=${REDSHIFT_PASSWORD:-$3:-'dummy'}
-  export SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD:-$3:-'dummy'}
+  export REDSHIFT_PASSWORD=${REDSHIFT_PASSWORD:-$4:-'dummy'}
+  export SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD:-$4:-'dummy'}
   export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS:-'dummy'}
 
 fi
 
 echo "running $2 expectations for $1"
-great_expectations validation-operator run --validation_config_file great_expectations/validation_configs/web/$2/$1.json --run_name $1_$2
+great_expectations validation-operator run --validation_config_file great_expectations/validation_configs/web/$2/$1/$3.json --run_name $1_$2_$3
