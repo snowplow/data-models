@@ -76,7 +76,22 @@ The arguments are:
 `e2e.sh` runs a complete single run of a model, along with the tests for that model. This happens in two steps - first the main steps run and the `temp_tables` validation config is run, then the `complete` steps run, and the `perm_tables` validation config is run.
 
 ```bash
-bash e2e {path_to_sql_runner} {database} {major version} {credentials (optional)}
+bash e2e.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
+```
+
+The arguments are:
+
+`{path_to_sql_runner}` - Path to your local instance of SQL-runner
+`{database}` - Database to run (`redshift`, `snowflake` or `bigquery` - note that only redshift is currently implemented)
+`{major version}` - Version of the model to run (according to the directory that houses it - eg. `v0` or `v1`)
+`{credentials (optional)}` - Credentials for the database (optional, this can be provided by env var also)
+
+## pr-check.sh
+
+`pr-check.sh` runs `e2e.sh` ten times. Because there are certain types of bugs and anomalies in incremental data modeling which only manifest themselves after several runs of the model, we run the tests many times before any release. It is expected that anyone using this script is working with a dataset of a manageable size for their cost tolerance. The amount of data that any run of the model processes can be configured using playbook variables.
+
+```bash
+bash pr-check.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
 ```
 
 The arguments are:
