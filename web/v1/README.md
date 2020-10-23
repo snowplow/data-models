@@ -1,6 +1,6 @@
 # Web model v1
 
-## Quickstart guide
+## Quickstart
 
 ### Prerequisites
 
@@ -14,7 +14,7 @@ Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment vari
 
 Variables in each module's playbook can also optionally be configured also. See each playbook directory's README for more detail on configuration of each module.
 
-### Run using the `rub_playbooks.sh` script
+### Run using the `run_playbooks.sh` script
 
 To run the entire model, end to end (for redshift):
 
@@ -23,3 +23,51 @@ bash data-models/.scripts/run_playbooks.sh {path_to_sql_runner} {database} {majo
 ```
 
 See the README in the `.scripts/` directory for more details.
+
+## Custom Modules
+
+A guide to creating custom modules can be found in the README of the `sql/custom/` directory of the relevant model. Each custom module created must consist of a set of sql files and a playbook, or set of playbooks. The helper scripts described above can also be used to run custom modules.
+
+## Testing
+
+### Setup
+
+Python3 is required.
+
+Install Great Expectations and dependencies, and configure a datasource:
+
+```bash
+cd .test
+pip3 install -r requirements.txt
+great_expectations datasource new
+```
+
+Follow the CLI guide to configure access to your database. The configuration for your datasource will be generated in `.test/great_expectations/config/config_variables.tml` - these values can be replaced by environment variables if desired.
+
+### Using the helper scripts
+
+To run the test suite alone:
+
+```bash
+bash run_test.sh {database} {major version} {validation_config} {credentials (optional)}
+```
+
+To run an entire run of the standard model, and tests end to end:
+
+```bash
+bash e2e.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
+```
+
+To run a full battery of ten runs of the standard model, and tests:
+
+```bash
+bash pr_check.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
+```
+
+### Adding to tests
+
+Check out the [Great Expectations documentation](https://docs.greatexpectations.io/en/latest/) for guidance on using it to run existing test suites directly, create new expectations, use the profiler, and autogenerate data documentation.
+
+Quickstart to create a new test suite:
+
+`great_expectations suite new`
