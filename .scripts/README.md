@@ -4,11 +4,11 @@ These scripts were created to simplify the process of running and testing the mo
 
 ## Setup
 
-The `run_playbooks`, `e2e` and `pr-check` scripts require SQL-runnner.
+The `run_playbooks`, `e2e` and `pr_check` scripts require SQL-runnner.
 
 They also require that the relevant template database target in the `templates/` directory is populated. One can include the password in this template, or leave it as `PASSWORD_PLACEHOLDER` and authenticate by other means - see the authentication section below.
 
-The `run_test`, `e2e` and `pr-check` scripts require `python3`. To install dependencies:
+The `run_test`, `e2e` and `pr_check` scripts require `python3`. To install dependencies:
 
 `cd data-models/.test`
 `pip3 install -r requirements.txt`
@@ -86,12 +86,12 @@ The arguments are:
 `{major version}` - Version of the model to run (according to the directory that houses it - eg. `v0` or `v1`)
 `{credentials (optional)}` - Credentials for the database (optional, this can be provided by env var also)
 
-## pr-check.sh
+## pr_check.sh
 
-`pr-check.sh` runs `e2e.sh` ten times. Because there are certain types of bugs and anomalies in incremental data modeling which only manifest themselves after several runs of the model, we run the tests many times before any release. It is expected that anyone using this script is working with a dataset of a manageable size for their cost tolerance. The amount of data that any run of the model processes can be configured using playbook variables.
+`pr_check.sh` runs `e2e.sh` ten times. Because there are certain types of bugs and anomalies in incremental data modeling which only manifest themselves after several runs of the model, we run the tests many times before any release. It is expected that anyone using this script is working with a dataset of a manageable size for their cost tolerance. The amount of data that any run of the model processes can be configured using playbook variables.
 
 ```bash
-bash pr-check.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
+bash pr_check.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
 ```
 
 The arguments are:
