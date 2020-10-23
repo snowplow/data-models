@@ -1,52 +1,81 @@
 # Redshift v1 model README
 
-This readme is an overview of the model's logic and how the modules interact with each other. For a guide to configuring each module, there is a README in each of the modules' `playbooks` directory.
+This readme contains a quickstart guide, and details of how the modules interact with each other. For a guide to configuring each module, there is a README in each of the modules' `playbooks` directory.
 
 To customise the model, we recommend following the guidance found in the README in the `sql/custom` directory.
 
-## Overview
+## Quickstart
 
-This model consists of a series of modules, each is idempotent and can be run on independent schedules, each produces a table which serves as the input to the next module.
+### Prerequisites
 
-The 'standard' modules can be thought of as source code for the core logic of the model, which Snowplow maintains. These modules carry out the incremental logic in such a way as custom modules can be written to plug into the model's structure, without needing to write a parallel incremental logic. We recommend that all customisations are written in this way, which allows us to safely maintain and roll out updates to the model, without impact on dependent custom sql.
+[SQL-runner](https://github.com/snowplow/sql-runner) must be installed, and a dataset of web events from the [Snowplow Javascript tracker](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) must be available in the database.
 
-Each module produces a table which acts as the input to the subsequent module (the `_staged` tables), and updates a production table - with the exception of the Base module, which takes atomic data as its input, and does not update a production table.
+### Configuration
 
-Each module comes with a `99-{module}-complete` playbook, which marks that module complete by updating any relevant manifests, and truncating the input, and cleaning up temporary tables. The complete steps may be run at the end of each module, or at the end of the run.
+First, fill in the connection details for the target database in the relevant template in `.scripts/template/redshift_template.yml.tmpl`.
 
-![module-structure](web_model_module.jpg)
+Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment variable or passed as an argument to the run_playbooks script. See the README in `.scripts` for more detail.
 
-More detail on each module can be found in the 'Modules detail' section below.
+Variables in each module's playbook can also optionally be configured also. See each playbook directory's README for more detail on configuration of each module.
 
-Custom modules can fit into the incremental structure by consuming the same inputs, and running before the `99-{module}-complete` playbook runs.
+### Run using the `run_playbooks.sh` script
 
-Custom modules may also consume and intermediary tables of the standard module, which will not be dropped until the `99-{module}-complete` playbook runs.
+To run the entire model, end to end:
 
-Any custom sql that depends on a `_staged` table as its input should run before the `complete` step of the module which handles that same input. For example, custom logic which takes `events_staged` as an input should run before the `99-page-views-complete` playbook.
+```bash
+bash data-models/.scripts/run_playbooks.sh {path_to_sql_runner} redshift v1 'standard/01-base/01-base-main,standard/02-page-views/01-page-views-main,standard/03-sessions/01-sessions-main,standard/04-users/01-users-main,standard/01-base/99-base-complete,standard/02-page-views/99-page-views-complete,standard/03-sessions/99-sessions-complete,standard/04-users/99-users-complete' {credentials (optional)};
+```
 
-As an introductory example, if there is a requirement to include data from custom events and entities for page views, for example, we would write a custom module which:
+See the README in the `.scripts/` directory for more details.
 
-- Reads events/event_ids from the derived.events_staged table
-- Aggregates to one-row-per page_view_id.
-- Delete-inserts this to a custom table which can join to the derived.page_views table on page_view_id.
+## Custom Modules
 
-If the playbook for this custom module is called `AA-my-custom-page-views-level-module.yml.tmpl`, then we would run the playbooks as follows:
+A guide to creating custom modules can be found in the README of the `sql/custom/` directory of the relevant model. Each custom module created must consist of a set of sql files and a playbook, or set of playbooks. The helper scripts described above can also be used to run custom modules.
 
-1. standard/01-base/01-base-main.yml.tmpl
-2. standard/01-base/99-base-complete.yml.tmpl
-3. standard/02-page-views/01-page-views-main.yml.tmpl
-4. custom/AA-my-custom-page-views-level-module.yml.tmpl
-5. standard/02-page-views/99-page-views-complete.yml.tmpl
+## Testing
 
-Custom modules can also be created with their own independent manifesting logic, in which case they are more complex, but don't rely on the standard modules.
+### Setup
 
-![full-standard-model-structure](full_model_structure.jpg)
+Python3 is required.
 
-## Metadata
+Install Great Expectations and dependencies, and configure a datasource:
 
-Metadata is logged in the `{{.output_schema}}.web_model_run_metadata{{.entropy}}` table, per-module and per-run. A persistent ID is created, so that separate modules within the same run may be identified. This ID is automatically handled, as long as the `99-{module}-complete` step of the last module to run has the `:ends_run:` variable set to `false`.
+```bash
+cd .test
+pip3 install -r requirements.txt
+great_expectations datasource new
+```
 
-Rather than setting this variable, this can be maintained manually be running the `00-setup/00-setup-metadata.yml.tmpl` before all other steps, and the `00-setup/99-complete-metadata.yml.tmpl` playbook after all other steps.
+Follow the CLI guide to configure access to your database. The configuration for your datasource will be generated in `.test/great_expectations/config/config_variables.tml` - these values can be replaced by environment variables if desired.
+
+### Using the helper scripts
+
+To run the test suites alone:
+
+```bash
+bash run_test.sh redshift v1 perm_tables {credentials (optional)}
+bash run_test.sh redshift v1 temp_tables {credentials (optional)}
+```
+
+To run an entire run of the standard model, and tests end to end:
+
+```bash
+bash e2e.sh {path_to_sql_runner} redshift v1 {credentials (optional)}
+```
+
+To run a full battery of ten runs of the standard model, and tests:
+
+```bash
+bash pr_check.sh {path_to_sql_runner} redshift v1 {credentials (optional)}
+```
+
+### Adding to tests
+
+Check out the [Great Expectations documentation](https://docs.greatexpectations.io/en/latest/) for guidance on using it to run existing test suites directly, create new expectations, use the profiler, and autogenerate data documentation.
+
+Quickstart to create a new test suite:
+
+`great_expectations suite new`
 
 ## Modules detail
 
