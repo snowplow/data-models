@@ -163,7 +163,7 @@ The users module's 'complete' playbook `99-users-complete.yml.tmpl` truncates th
 
 The `{{.scratch_schema}}.users_this_run` table contains all events relevant only to this run of the model (since the last time the `99-users-complete.yml.tmpl` playbook has run). This table is dropped and recomputed _every_ run of the module, regardless of whether another module has used the data.
 
-Detail on configuring the users module's playbook can be found [in the relevant playbook directory's README](sql-runner/playbooks/04-users).
+Detail on configuring the users module's playbook can be found [in the relevant playbook directory's README](sql-runner/playbooks/standard/04-users).
 
 ## A note on duplicates
 

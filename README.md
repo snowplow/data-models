@@ -1,5 +1,5 @@
 [![License][license-image]][license]
-[![actively-maintained]][tracker-classificiation]
+
 
 ![snowplow-logo](media/snowplow_logo.png)
 
@@ -17,8 +17,8 @@ The Snowplow atomic data acts as an immutable log of all the actions that occurr
 
 # Repo Contents
 
-- [Web (v1)](v1)
-  - [Redshift](v1/redshift)
+- [Web (v1)](web/v1) [![actively-maintained]][tracker-classificiation]
+  - [Redshift](web/v1/redshift)
   - BigQuery (coming soon)
   - Snowflake (coming soon)
 - Mobile (coming soon)
