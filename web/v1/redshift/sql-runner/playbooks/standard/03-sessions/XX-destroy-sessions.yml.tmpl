@@ -1,0 +1,27 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/web/1.1.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 99-sessions-cleanup
+  :queries:
+    - :name: 99-sessions-cleanup
+      :file: standard/03-sessions/99-complete/99-sessions-cleanup.sql
+      :template: true
+- :name: XX-destroy-sessions
+  :queries:
+    - :name: XX-destroy-sessions
+      :file: standard/03-sessions/XX-destroy/XX-destroy-sessions.sql
+      :template: true

@@ -1,0 +1,20 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :input_schema:       atomic
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 99-pages-cleanup
+  :queries:
+    - :name: 99-pages-cleanup
+      :file: custom/05-pages/99-pages-cleanup.sql
+      :template: true
