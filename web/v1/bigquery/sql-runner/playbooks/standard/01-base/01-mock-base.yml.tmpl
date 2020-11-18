@@ -1,0 +1,92 @@
+:targets:
+  - :name:
+    :type:    bigquery
+    :project: 
+:variables:
+    :model_version:       bigquery/web/1.0.0-alpha
+    :input_schema:        scratch_dev1
+    :scratch_schema:      scratch_dev1
+    :output_schema:       derived_dev1
+    :entropy:             ""
+    :ua_bot_filter:       true
+    :minimumVisitLength: 5
+    :heartbeat:          10
+    :iab:                true
+    :ua_parser:          true
+    :yauaa:              true
+:steps:
+- :name: 01-mock-base
+  :queries:
+    - :name: 01-mock-base
+      :file: standard/01-base/01-main/01-mock-base.sql
+      :template: true
+- :name: 01-mock-page-view-events
+  :queries:
+    - :name: 01-mock-page-view-events
+      :file: standard/02-page-views/01-main/01-mock-page-view-events.sql
+      :template: true
+- :name: 02-mock-engaged-time
+  :queries:
+    - :name: 02-mock-engaged-time
+      :file: standard/02-page-views/01-main/02-mock-engaged-time.sql
+      :template: true
+- :name: 03-mock-scroll-depth
+  :queries:
+    - :name: 03-mock-scroll-depth
+      :file: standard/02-page-views/01-main/03-mock-scroll-depth.sql
+      :template: true
+- :name: 04-mock-iab
+  :queries:
+    - :name: 04-mock-iab
+      :file: standard/02-page-views/01-main/04-mock-iab.sql
+      :template: true
+- :name: 05-mock-ua-parser
+  :queries:
+    - :name: 05-mock-ua-parser
+      :file: standard/02-page-views/01-main/05-mock-ua-parser.sql
+      :template: true
+- :name: 06-mock-yauaa
+  :queries:
+    - :name: 06-mock-yauaa
+      :file: standard/02-page-views/01-main/06-mock-yauaa.sql
+      :template: true
+- :name: 07-mock-page-views
+  :queries:
+    - :name: 07-mock-page-views
+      :file: standard/02-page-views/01-main/07-mock-page-views.sql
+      :template: true
+- :name: 01-mock-sessions-aggs
+  :queries:
+    - :name: 01-mock-sessions-aggs
+      :file: standard/03-sessions/01-main/01-mock-sessions-aggs.sql
+      :template: true
+- :name: 02-mock-sessions-lasts
+  :queries:
+    - :name: 02-mock-sessions-lasts
+      :file: standard/03-sessions/01-main/02-mock-sessions-lasts.sql
+      :template: true
+- :name: 03-mock-sessions
+  :queries:
+    - :name: 03-mock-sessions
+      :file: standard/03-sessions/01-main/03-mock-sessions.sql
+      :template: true
+- :name: 01-mock-users-sessions-this-run
+  :queries:
+    - :name: 01-mock-users-sessions-this-run
+      :file: standard/04-users/01-main/01-mock-users-sessions-this-run.sql
+      :template: true
+- :name: 02-mock-users-aggs
+  :queries:
+    - :name: 02-mock-users-aggs
+      :file: standard/04-users/01-main/02-mock-users-aggs.sql
+      :template: true
+- :name: 03-mock-users-lasts
+  :queries:
+    - :name: 03-mock-users-lasts
+      :file: standard/04-users/01-main/03-mock-users-lasts.sql
+      :template: true
+- :name: 04-mock-users
+  :queries:
+    - :name: 04-mock-users
+      :file: standard/04-users/01-main/04-mock-users.sql
+      :template: true
