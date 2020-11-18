@@ -27,9 +27,29 @@ if [ "$2" == "redshift" ]; then
   MODEL_PATH=$root_path/web/$3/redshift/sql-runner
   # TODO: Fix path here
 
-# Yet to be implemented:
+
 elif [ "$2" == "bigquery" ]; then
-  echo "bigquery v1 not implemented yet. Use the old scripts to run v0.9.X"
+  BIGQUERY_CREDS=${BIGQUERY_CREDS:-$5}
+  TEMPLATE=$script_path/templates/bq_template.yml.tmpl
+  MODEL_PATH=$root_path/web/$3/bigquery/sql-runner
+  export GOOGLE_APPLICATION_CREDENTIALS=$root_path/tmp/bq_creds.json
+
+  if [ -n "$BIGQUERY_CREDS" ]; then
+
+    # If creds provided via env var or argument, set trap to clean up, then create creds file.
+    set -e
+    cleanup() {
+      echo "Removing credentials file"
+      rm -f $root_path/tmp/bq_creds.json
+    }
+    trap cleanup EXIT
+
+    echo "writing bq creds to file"
+    echo $BIGQUERY_CREDS > $root_path/tmp/bq_creds.json
+
+  fi
+
+# Yet to be implemented:
 elif [ "$2" == "snowflake" ]; then
   echo "snowflake v1 not implemented yet. Use the old scripts to run v0.9.X"
 fi
