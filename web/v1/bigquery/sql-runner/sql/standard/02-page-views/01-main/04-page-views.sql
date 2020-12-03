@@ -1,7 +1,22 @@
+/*
+   Copyright 2020-2021 Snowplow Analytics Ltd. All rights reserved.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 CREATE OR REPLACE TABLE {{.scratch_schema}}.page_views_this_run{{.entropy}}
 AS(
   SELECT
-
     ev.page_view_id,
     ev.event_id,
 
@@ -85,49 +100,44 @@ AS(
 
     ev.os_timezone,
 
-    -- Optional fields, only populated if enabled.
+    ev.category,
+    ev.primary_impact,
+    ev.reason,
+    ev.spider_or_robot,
 
-    -- iab enrichment fields: set iab variable to true to enable
-    iab.category,
-    iab.primary_impact,
-    iab.reason,
-    iab.spider_or_robot,
+    ev.useragent_family,
+    ev.useragent_major,
+    ev.useragent_minor,
+    ev.useragent_patch,
+    ev.useragent_version,
+    ev.os_family,
+    ev.os_major,
+    ev.os_minor,
+    ev.os_patch,
+    ev.os_patch_minor,
+    ev.os_version,
+    ev.device_family,
 
-    -- ua parser enrichment fields: set ua_parser variable to true to enable
-    ua.useragent_family,
-    ua.useragent_major,
-    ua.useragent_minor,
-    ua.useragent_patch,
-    ua.useragent_version,
-    ua.os_family,
-    ua.os_major,
-    ua.os_minor,
-    ua.os_patch,
-    ua.os_patch_minor,
-    ua.os_version,
-    ua.device_family,
-
-    -- yauaa enrichment fields: set yauaa variable to true to enable
-    ya.device_class,
-    ya.agent_class,
-    ya.agent_name,
-    ya.agent_name_version,
-    ya.agent_name_version_major,
-    ya.agent_version,
-    ya.agent_version_major,
-    ya.device_brand,
-    ya.device_name,
-    ya.device_version,
-    ya.layout_engine_class,
-    ya.layout_engine_name,
-    ya.layout_engine_name_version,
-    ya.layout_engine_name_version_major,
-    ya.layout_engine_version,
-    ya.layout_engine_version_major,
-    ya.operating_system_class,
-    ya.operating_system_name,
-    ya.operating_system_name_version,
-    ya.operating_system_version
+    ev.device_class,
+    ev.agent_class,
+    ev.agent_name,
+    ev.agent_name_version,
+    ev.agent_name_version_major,
+    ev.agent_version,
+    ev.agent_version_major,
+    ev.device_brand,
+    ev.device_name,
+    ev.device_version,
+    ev.layout_engine_class,
+    ev.layout_engine_name,
+    ev.layout_engine_name_version,
+    ev.layout_engine_name_version_major,
+    ev.layout_engine_version,
+    ev.layout_engine_version_major,
+    ev.operating_system_class,
+    ev.operating_system_name,
+    ev.operating_system_name_version,
+    ev.operating_system_version
 
   FROM {{.scratch_schema}}.pv_page_view_events{{.entropy}} ev
 
@@ -137,16 +147,4 @@ AS(
   LEFT JOIN {{.scratch_schema}}.pv_scroll_depth{{.entropy}} sd
   ON ev.page_view_id = sd.page_view_id
 
-  LEFT JOIN {{.scratch_schema}}.pv_addon_iab{{.entropy}} iab
-  ON ev.page_view_id = iab.page_view_id
-
-  LEFT JOIN {{.scratch_schema}}.pv_addon_ua_parser{{.entropy}} AS ua
-  ON ev.page_view_id = ua.page_view_id
-
-  LEFT JOIN {{.scratch_schema}}.pv_addon_yauaa{{.entropy}} ya
-    ON ev.page_view_id = ya.page_view_id
 );
-
-CREATE OR REPLACE TABLE {{.scratch_schema}}.page_views_staged{{.entropy}} AS(SELECT * FROM {{.scratch_schema}}.page_views_this_run{{.entropy}});
-
-CREATE OR REPLACE TABLE {{.output_schema}}.page_views{{.entropy}} AS(SELECT * FROM {{.scratch_schema}}.page_views_this_run{{.entropy}});

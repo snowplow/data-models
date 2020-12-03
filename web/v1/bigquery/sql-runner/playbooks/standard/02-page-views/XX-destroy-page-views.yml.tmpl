@@ -1,0 +1,23 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:      bigquery/web/1.0.0
+  :scratch_schema:     scratch_prod1
+  :output_schema:      derived_prod1
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 99-page-views-cleanup
+  :queries:
+    - :name: 99-page-views-cleanup
+      :file: standard/02-page-views/99-complete/99-page-views-cleanup.sql
+      :template: true
+- :name: XX-destroy-page-views
+  :queries:
+    - :name: XX-destroy-page-views
+      :file: standard/02-page-views/XX-destroy/XX-destroy-page-views.sql
+      :template: true
