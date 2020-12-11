@@ -14,7 +14,7 @@ mkdir -p $root_path/tmp
 #Always remove files which may contain creds on exit
 set -e
 cleanup() {
-  echo "Removing /tmp/ files"
+  echo "run_playbooks: Removing /tmp/ files"
   rm  -f $root_path/tmp/current_playbook.yml
 }
 trap cleanup EXIT
@@ -22,7 +22,7 @@ trap cleanup EXIT
 
 if [ "$2" == "redshift" ]; then
 
-  PASSWORD=${REDSHIFT_PASSWORD:-$5}
+  PASSWORD=${DB_PASSWORD:-$5}
   TEMPLATE=$script_path/templates/redshift_template.yml.tmpl
   MODEL_PATH=$root_path/web/$3/redshift/sql-runner
   # TODO: Fix path here
@@ -36,22 +36,21 @@ elif [ "$2" == "bigquery" ]; then
 
   if [ -n "$BIGQUERY_CREDS" ]; then
 
-    # If creds provided via env var or argument, set trap to clean up, then create creds file.
-    set -e
     cleanup() {
-      echo "Removing credentials file"
+      echo "run_playbooks: Removing playbook file"
+      rm -f $root_path/tmp/current_playbook.yml
+      echo "run_playbooks: Removing credentials file"
       rm -f $root_path/tmp/bq_creds.json
     }
-    trap cleanup EXIT
 
-    echo "writing bq creds to file"
+    echo "run_playbooks: writing bq creds to file"
     echo $BIGQUERY_CREDS > $root_path/tmp/bq_creds.json
 
   fi
 
 # Yet to be implemented:
 elif [ "$2" == "snowflake" ]; then
-  echo "snowflake v1 not implemented yet. Use the old scripts to run v0.9.X"
+  echo "run_playbooks: snowflake v1 not implemented yet. Use the old scripts to run v0.9.X"
 fi
 
 # Interpret comma separated list of playbooks
@@ -65,12 +64,12 @@ do
   sed "s/PASSWORD_PLACEHOLDER/$PASSWORD/" $TEMPLATE > $root_path/tmp/current_playbook.yml
   sed "1,/^:variables:$/d" $MODEL_PATH/playbooks/$i.yml.tmpl >> $root_path/tmp/current_playbook.yml
 
-  echo "starting playbook: $i"
+  echo "run_playbooks: starting playbook: $i"
 
   # Create run command
   run_command='$1 -playbook $root_path/tmp/current_playbook.yml -sqlroot $MODEL_PATH/sql'
 
   eval $run_command
 
-  echo "done with playbook: $i";
+  echo "run_playbooks: done with playbook: $i";
 done;
