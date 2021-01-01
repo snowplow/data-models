@@ -1,0 +1,26 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/web/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           false
+:steps:
+- :name: 98-truncate-base-staged
+  :queries:
+    - :name: 98-truncate-base-staged
+      :file: standard/02-page-views/99-complete/98-truncate-base-staged.sql
+      :template: true
+- :name: 99-page-views-cleanup
+  :queries:
+    - :name: 99-page-views-cleanup
+      :file: standard/02-page-views/99-complete/99-page-views-cleanup.sql
+      :template: true

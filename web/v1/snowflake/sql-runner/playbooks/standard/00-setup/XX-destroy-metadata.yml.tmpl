@@ -1,0 +1,24 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/web/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 99-metadata-cleanup
+  :queries:
+    - :name: 99-metadata-cleanup
+      :file: standard/00-setup/99-complete/99-metadata-cleanup.sql
+      :template: true
+- :name: XX-destroy-metadata
+  :queries:
+    - :name: XX-destroy-metadata
+      :file: standard/00-setup/XX-destroy/XX-destroy-metadata.sql
+      :template: true

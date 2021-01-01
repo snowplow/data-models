@@ -1,0 +1,50 @@
+{
+  "validation_operator_name": "action_list_operator",
+  "batches": [
+    {
+      "batch_kwargs": {
+        "schema": "derived",
+        "table": "page_views",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_derived_pv"
+      },
+      "expectation_suite_names": ["web.v1.page_views"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "query": "SELECT domain_sessionid, count(DISTINCT page_views_in_session) AS dist_pvis_values, count(*) - count(DISTINCT page_view_in_session_index)  AS all_minus_dist_pvisi, count(*) - count(DISTINCT page_view_id) AS all_minus_dist_pvids FROM derived.page_views GROUP BY 1",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "ge_test_derived_pv_in_sess_values"
+      },
+      "expectation_suite_names": ["web.v1.page_view_in_session_values"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "derived",
+        "table": "sessions",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_derived_sess"
+      },
+      "expectation_suite_names": ["web.v1.sessions"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "derived",
+        "table": "users",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_derived_usr"
+      },
+      "expectation_suite_names": ["web.v1.users"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "query": "SELECT *, rows_this_run - distinct_key_count AS diff_rows FROM derived.datamodel_metadata",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "ge_test_derived_metadata"
+      },
+      "expectation_suite_names": ["web.v1.metadata"]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/web/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 99-sessions-cleanup
+  :queries:
+    - :name: 99-sessions-cleanup
+      :file: standard/03-sessions/99-complete/99-sessions-cleanup.sql
+      :template: true
+- :name: XX-destroy-sessions
+  :queries:
+    - :name: XX-destroy-sessions
+      :file: standard/03-sessions/XX-destroy/XX-destroy-sessions.sql
+      :template: true

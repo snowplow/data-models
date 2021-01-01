@@ -1,0 +1,33 @@
+{
+  "schema": "iglu:com.snowplowanalytics.datamodeling/config/jsonschema/1-0-0",
+  "data": {
+    "enabled": true,
+    "storage": "Default",
+    "sqlRunner": "0.9.3",
+    "lockType": "hard",
+    "playbooks": [
+      {
+        "playbook": "standard/01-base/99-base-complete",
+        "dependsOn": []
+      },
+      {
+        "playbook": "standard/02-page-views/99-page-views-complete",
+        "dependsOn": [
+          "standard/01-base/99-base-complete"
+        ]
+      },
+      {
+        "playbook": "standard/03-sessions/99-sessions-complete",
+        "dependsOn": [
+          "standard/02-page-views/99-page-views-complete"
+        ]
+      },
+      {
+        "playbook": "standard/04-users/99-users-complete",
+        "dependsOn": [
+          "standard/03-sessions/99-sessions-complete"
+        ]
+      }
+    ]
+  }
+}

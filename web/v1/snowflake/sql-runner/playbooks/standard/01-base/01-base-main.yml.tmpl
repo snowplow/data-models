@@ -1,0 +1,76 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:         snowflake/web/1.0.0
+  :input_schema:          atomic
+  :scratch_schema:        scratch
+  :output_schema:         derived
+  :entropy:               ""
+  :stage_next:            true
+  :start_date:            2020-01-01
+  :lookback_window_hours:
+  :days_late_allowed:
+  :update_cadence_days:
+  :session_lookback_days:
+:steps:
+- :name: 01-stored-procedures
+  :queries:
+    - :name: 01-stored-procedures
+      :file: standard/00-setup/01-main/01-stored-procedures.sql
+      :template: true
+- :name: 00-setup-base
+  :queries:
+    - :name: 00-setup-base
+      :file: standard/01-base/01-main/00-setup-base.sql
+      :template: true
+- :name: 01-new-events-limits
+  :queries:
+    - :name: 01-new-events-limits
+      :file: standard/01-base/01-main/01-new-events-limits.sql
+      :template: true
+- :name: 02-run-manifest
+  :queries:
+    - :name: 02-run-manifest
+      :file: standard/01-base/01-main/02-run-manifest.sql
+      :template: true
+- :name: 03-sessions-to-process
+  :queries:
+    - :name: 03-sessions-to-process
+      :file: standard/01-base/01-main/03-sessions-to-process.sql
+      :template: true
+- :name: 04-sessions-to-include
+  :queries:
+    - :name: 04-sessions-to-include
+      :file: standard/01-base/01-main/04-sessions-to-include.sql
+      :template: true
+- :name: 05-batch-limits
+  :queries:
+    - :name: 05-batch-limits
+      :file: standard/01-base/01-main/05-batch-limits.sql
+      :template: true
+- :name: 06-events-this-run
+  :queries:
+    - :name: 06-events-this-run
+      :file: standard/01-base/01-main/06-events-this-run.sql
+      :template: true
+- :name: 07-duplicates
+  :queries:
+    - :name: 07-duplicates
+      :file: standard/01-base/01-main/07-duplicates.sql
+      :template: true
+- :name: 08-metadata
+  :queries:
+    - :name: 08-metadata
+      :file: standard/01-base/01-main/08-metadata.sql
+      :template: true
+- :name: 09-commit-base
+  :queries:
+    - :name: 09-commit-base
+      :file: standard/01-base/01-main/09-commit-base.sql
+      :template: true

@@ -1,0 +1,70 @@
+{
+  "schema": "iglu:com.snowplowanalytics.datamodeling/config/jsonschema/1-0-0",
+  "data": {
+    "dagName": "custom-webmodel",
+    "enabled": true,
+    "storage": "Default",
+    "sqlRunner": "0.9.3",
+    "lockType": "hard",
+    "playbooks": [
+      {
+        "playbook": "standard/01-base/01-base-main",
+        "dependsOn": []
+      },
+      {
+        "playbook": "standard/02-page-views/01-page-views-main",
+        "dependsOn": [
+          "standard/01-base/01-base-main"
+        ]
+      },
+      {
+        "playbook": "custom/02-page-views-join/01-page-views-join",
+        "dependsOn": [
+          "standard/02-page-views/01-page-views-main"
+        ]
+      },
+      {
+        "playbook": "standard/03-sessions/01-sessions-main",
+        "dependsOn": [
+          "custom/02-page-views-join/01-page-views-join"
+        ]
+      },
+      {
+        "playbook": "standard/04-users/01-users-main",
+        "dependsOn": [
+          "standard/03-sessions/01-sessions-main"
+        ]
+      },
+      {
+        "playbook": "standard/01-base/99-base-complete",
+        "dependsOn": [
+          "standard/04-users/01-users-main"
+        ]
+      },
+      {
+        "playbook": "standard/02-page-views/99-page-views-complete",
+        "dependsOn": [
+          "standard/01-base/99-base-complete"
+        ]
+      },
+      {
+        "playbook": "custom/02-page-views-join/99-page-views-join-complete",
+        "dependsOn": [
+          "standard/02-page-views/99-page-views-complete"
+        ]
+      },
+      {
+        "playbook": "standard/03-sessions/99-sessions-complete",
+        "dependsOn": [
+          "custom/02-page-views-join/99-page-views-join-complete"
+        ]
+      },
+      {
+        "playbook": "standard/04-users/99-users-complete",
+        "dependsOn": [
+          "standard/03-sessions/99-sessions-complete"
+        ]
+      }
+    ]
+  }
+}

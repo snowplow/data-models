@@ -1,0 +1,23 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 99-page-views-join-cleanup
+  :queries:
+    - :name: 99-page-views-join-cleanup
+      :file: custom/02-page-views-join/99-complete/99-page-views-join-cleanup.sql
+      :template: true
+- :name: XX-destroy-page-views-join
+  :queries:
+    - :name: XX-destroy-page-views-join
+      :file: custom/02-page-views-join/XX-destroy/XX-destroy-page-views-join.sql
+      :template: true

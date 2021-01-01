@@ -1,0 +1,28 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 00-setup-page-views-join
+  :queries:
+    - :name: 00-setup-page-views-join
+      :file: custom/02-page-views-join/01-main/00-setup-page-views-join.sql
+      :template: true
+- :name: 01-page-views-join-staged
+  :queries:
+    - :name: 01-page-views-join-staged
+      :file: custom/02-page-views-join/01-main/01-page-views-join-staged.sql
+      :template: true
+- :name: 02-page-views-join-upsert
+  :queries:
+    - :name: 02-page-views-join-upsert
+      :file: custom/02-page-views-join/01-main/02-page-views-join-upsert.sql
+      :template: true

@@ -1,0 +1,59 @@
+{
+  "validation_operator_name": "action_list_operator",
+  "batches": [
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "events_this_run",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_scratch_events_this_run"
+      },
+      "expectation_suite_names": ["web.v1.base"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "events_staged",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_scratch_events_staged"
+      },
+      "expectation_suite_names": ["web.v1.base"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "page_views_this_run",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_scratch_pv_this_run"
+      },
+      "expectation_suite_names": ["web.v1.page_views"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "page_views_staged",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_scratch_pv_staged"
+      },
+      "expectation_suite_names": ["web.v1.page_views"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "sessions_this_run",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_scratch_sess_this_run"
+      },
+      "expectation_suite_names": ["web.v1.sessions"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "users_this_run",
+        "datasource": "snowflake",
+        "snowflake_transient_table": "scratch.ge_test_scratch_usr_this_run"
+      },
+      "expectation_suite_names": ["web.v1.users"]
+    }
+  ]
+}
