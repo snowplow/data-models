@@ -7,7 +7,7 @@
         "table": "events_this_run",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["web.v1.base"]
+      "expectation_suite_names": ["web.v1.base_redshift"]
     },
     {
       "batch_kwargs": {
@@ -15,7 +15,7 @@
         "table": "events_staged",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["web.v1.base"]
+      "expectation_suite_names": ["web.v1.base_redshift"]
     },
     {
       "batch_kwargs": {
