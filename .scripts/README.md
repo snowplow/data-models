@@ -4,7 +4,7 @@ These scripts were created to simplify the process of running and testing the mo
 
 ## Setup
 
-The `run_playbooks`, `e2e` and `pr_check` scripts require SQL-runnner.
+The `run_playbooks`, `run_config` `e2e` and `pr_check` scripts require SQL-runnner.
 
 They also require that the relevant template database target in the `templates/` directory is populated. One can include the password in this template, or leave it as `PASSWORD_PLACEHOLDER` and authenticate by other means - see the authentication section below.
 
@@ -19,43 +19,61 @@ These scripts also require setting up a great_expectations datasource. To do so,
 
 ## Authentication
 
+### Passwords
+
 These scripts allow for handling passwords via two means which reduce the risk of committing credentials to source control.
 
-One may either set the variable `REDSHIFT_PASSWORD` or pass it into `credentials` argument of the relevant script. In both cases the relevant credential will be written to temporary files in order to run the script, and these will be removed on exit.
+1. Set the `DB_PASSWORD` environment variable for Redshift and Snowflake, or the `BIGQUERY_CREDS` environment variable for Bigquery.
 
-For great_expectations authentication, after configuring a datasource, set the entry for password in `.test/great_expectations/config/config_variables.tml` to `${REDSHIFT_PASSWORD}`.
+2. Pass the relevant credential to the relevant argument of the script in question.
 
-It is also possible to set passwords directly in the relevant configuration, however this adds scope for an accidental credentials leak.
+### Other database details
+
+Any script which uses SQL-runner will leverage the templates in `.scripts/templates/` to manage the database target connection details. Passwords should be left set to `PASSWORD_PLACEHOLDER`, but all other details should be hardcoded.
+
+It's best to avoid committing these to source control - however doing so is less severe a risk than leaking a password.
 
 ## Usage
 
-### `run_playbooks.sh`
+## run_config.sh
 
-`run_playbooks` runs a list of playbooks in sequence, using sql-runnner.
+Runs a config json file (examples found in the `configs` folder of each model) - which specifies a list of playbooks to run.
 
-Before running, make sure to populate the relevant target template in the `.scripts/templates` directory.
+Note that this script does not enforce dependencies, rather runs the playbooks in order of appearance. Snowplow Insights customers can take advantage of dependency resolution when running jobs on our Orchestration services.
 
-```bash
-bash run_playbooks.sh {path_to_sql_runner} {database} {major version} '{list_of_playbooks_no_extension},{comma_separated}' {credentials (optional)}
+**Arguments:**
+
+```
+-b (binary) path to sql-runner binary [required]
+-c (config) path to config [required]
+-a (auth) optional credentials for database target
+-p (print SQL) use sql-runner fillTemplates to print pure sql
+-d (dryRun) use sql-runner dry run
+-o (output path) path to store output of sql-runner to sql file (to be used in conjunction with p)
+-t (target template) path to target template to use (minimizes risk of credential leak)
 ```
 
-The arguments are:
-
-`{path_to_sql_runner}` - Path to your local instance of SQL-runner
-`{database}` - Database to run (`redshift`, `snowflake` or `bigquery` - note that only redshift is currently implemented)
-`{major version}` - Version of the model to run (according to the directory that houses it - eg. `v0` or `v1`)
-`'{list_of_playbooks_no_extension},{comma_separated}'` - A string containing a list of playbook paths, from the 'playbooks' folder, with no file extension (eg. `standard/00-setup/00-setup-metadata,standard/01-base/01-base-main`).
-`{credentials (optional)}` - Credentials for the database (optional, this can be provided by env var also)
-
-For example:
+**Examples:**
 
 ```bash
-bash .scripts/run_playbooks.sh ~/sql-runner redshift v1 'standard/01-base/01-base-main,standard/02-page-views/01-page-views-main,standard/03-sessions/01-sessions-main,standard/04-users/01-users-main' abcd1234;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/datamodeling.json;
+
+# Runs the standard bigquery web model end to end.
+
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/datamodeling.json -d;
+
+# Dry-runs the standard bigquery web model end to end.
+
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/example_with_custom.json -t -o tmp/sql;
+
+# Prints pure sql for the bigquery model and example custom steps to files in `tmp/sql` - with all templates filled in.
 ```
 
 ## run_test.sh
 
-`run_test.sh` runs a great_expectations test suite on the output of the model. The configuration for the tests can be found in the `expectations` directory. Currently, the tests are configured to run on both temporary and permanent tables, and so should be run before the cleanup step of a model, or on a model that has `cleanup_mode` configure to `debug` or `trace`.
+Runs a great_expectations suite.
+
+The configuration for the tests can be found in the `expectations` directory.
 
 Before running, make sure to install python requirements (python3 required):
 
@@ -64,43 +82,85 @@ cd data-models/.test
 pip3 install -r requirements.txt
 ```
 
-```bash
-bash run_test.sh {database} {major version} {validation_config} {credentials (optional)}
+**Arguments:**
+
+```
+-d (database) target database for expectations [required]
+-c (config) expectation config name [required]
+-a (auth) optional credentials for database target
 ```
 
-The arguments are:
+**Examples:**
 
-`{database}` - Database to run (`redshift`, `snowflake` or `bigquery` - note that only redshift is currently implemented)
-`{major version}` - Version of the model to test (according to the directory that houses it - eg. `v0` or `v1`)
-`{validation_config}` - Name of the validation config to run. (Options can be found in the `.tests/great_expectations/` directory)
-`{credentials (optional)}` - Credentials for the database (optional, this can be provided by env var also)
+```bash
+bash .scripts/run_test.sh -d bigquery -c perm_tables;
+
+# runs the perm_tables validation config against bigquery
+```
 
 ## e2e.sh
 
-`e2e.sh` runs a complete single run of a model, along with the tests for that model. This happens in two steps - first the main steps run and the `temp_tables` validation config is run, then the `complete` steps run, and the `perm_tables` validation config is run.
+`e2e.sh` runs a single end to end run of a standard model and great expectations tests.  
 
-```bash
-bash e2e.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
+**Arguments:**
+
+```
+-b (binary) path to sql-runner binary [required]
+-d (database) target database for expectations [required]
+-a (auth) optional credentials for database target
 ```
 
-The arguments are:
+**Examples:**
 
-`{path_to_sql_runner}` - Path to your local instance of SQL-runner
-`{database}` - Database to run (`redshift`, `snowflake` or `bigquery` - note that only redshift is currently implemented)
-`{major version}` - Version of the model to run (according to the directory that houses it - eg. `v0` or `v1`)
-`{credentials (optional)}` - Credentials for the database (optional, this can be provided by env var also)
+```bash
+bash .scripts/e2e.sh -b ~/pathTo/sql-runner -d bigquery;
+
+# Runs the end to end testing script against bigquery
+```
 
 ## pr_check.sh
 
-`pr_check.sh` runs `e2e.sh` ten times. Because there are certain types of bugs and anomalies in incremental data modeling which only manifest themselves after several runs of the model, we run the tests many times before any release. It is expected that anyone using this script is working with a dataset of a manageable size for their cost tolerance. The amount of data that any run of the model processes can be configured using playbook variables.
+Runs ten end to end runs of a standard model and tests. Exits on failure.
 
-```bash
-bash pr_check.sh {path_to_sql_runner} {database} {major version} {credentials (optional)}
+**Arguments:**
+
+```
+-b (binary) path to sql-runner binary [required]
+-d (database) target database for expectations [required]
+-a (auth) optional credentials for database target
 ```
 
-The arguments are:
+**Examples:**
 
-`{path_to_sql_runner}` - Path to your local instance of SQL-runner
-`{database}` - Database to run (`redshift`, `snowflake` or `bigquery` - note that only redshift is currently implemented)
-`{major version}` - Version of the model to run (according to the directory that houses it - eg. `v0` or `v1`)
-`{credentials (optional)}` - Credentials for the database (optional, this can be provided by env var also)
+```bash
+bash .scripts/pr_check.sh -b ~/pathTo/sql-runner -d bigquery;
+
+# Runs the pr check testing script against bigquery
+```
+
+### `run_playbooks.sh` (deprecated)
+
+Deprecated - `run_config.sh` provides a simpler instrumentation for this functionality.
+
+Runs a list of playbooks in sequence, using sql-runnner.
+
+**Arguments:**
+
+```bash
+bash run_playbooks.sh {path_to_sql_runner} {database} {major version} '{list_of_playbooks_no_extension},{comma_separated}' {credentials (optional)}
+
+
+# {path_to_sql_runner} - Path to your local instance of SQL-runner
+# {database} - Database to run (`redshift`, `snowflake` or `bigquery` - note that only redshift is currently implemented)
+# {major version} - Version of the model to run (according to the directory that houses it - eg. `v0` or `v1`)
+# '{list_of_playbooks_no_extension},{comma_separated}' - A string containing a list of playbook paths, from the 'playbooks' folder, with no file extension (eg. `standard/00-setup/00-setup-metadata,standard/01-base/01-base-main`).
+# {credentials (optional)} - Credentials for the database (optional, this can be provided by env var also)
+```
+
+**Examples:**
+
+```bash
+bash .scripts/run_playbooks.sh ~/sql-runner redshift v1 'standard/01-base/01-base-main,standard/02-page-views/01-page-views-main,standard/03-sessions/01-sessions-main,standard/04-users/01-users-main';
+
+# Runs the base, page views, sessions and users main playbooks for redshift
+```
