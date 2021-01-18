@@ -6,38 +6,58 @@ The page views module runs the standard web page views model. It takes the `even
 
 ## Configuration quick reference
 
-`01-page-views-main`
+### 01-page-views-main
 
 `:input_schema:`       name of atomic schema
+
 `:scratch_schema:`     name of scratch schema  
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables (eg. `_test` produces tables like `page_views_test`). Must match entropy value used for all other modules in a given run.
+
 `:stage_next:`         update staging tables - set to true if running the next module. If true, make sure that the next module includes a 'complete' step.
+
 `:minimumVisitLength:` The value of minimumVisitLength configured in the Javascript tracker.
+
 `:heartbeat:`          The value of heartbeat configured in the Javascript tracker.
+
 `:upsert_lookback:`    Default 30. Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible.
+
 `:ua_bot_filter:`      Configuration to filter out bots via useragent string pattern match.
+
 `:iab:`                Configuration to include data from the IAB enrichment.
+
 `:ua_parser:`          Configuration to include data from the UA Parser enrichment.
+
 `:yauaa:`              Configuration to include data from the YAUAA enrichment.
+
 `:skip_derived:`       Default false. Set to true to skip insert to production page views table.
 
 **Note:** `upsert_lookback` can produce duplicates if set to too short a window.
 
-`99-page-views-complete`
+### 99-page-views-complete
 
 `:scratch_schema:`     name of scratch schema
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables. Must match entropy value used for all other modules in a given run.
+
 `:cleanup_mode:`       Options: `debug` - only keeps main tables. `trace` - keeps all tables. `all` - cleans up everything.
+
 `:ends_run:`           set to true if there are no subsequent modules in the run, false otherwise.
 
-`XX-destroy-page-views`
+### XX-destroy-page-views
 
 `:scratch_schema:`     name of scratch schema
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables. Must match entropy value used for all other modules in a given run.
+
 `:cleanup_mode:`       Should be set to "all" for a destroy.
+
 `:ends_run:`           Should be set to true for a destroy.
 
 ## Order of execution
