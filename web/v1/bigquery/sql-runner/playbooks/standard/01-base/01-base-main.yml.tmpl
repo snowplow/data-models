@@ -1,0 +1,69 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:           bigquery/web/1.0.0
+  :input_schema:            rt_pipeline_prod1
+  :scratch_schema:          scratch_prod1
+  :output_schema:           derived_prod1
+  :entropy:                 ""
+  :stage_next:              true
+  :start_date:              2020-01-01
+  :lookback_window_hours:
+  :days_late_allowed:
+  :session_lookback_days:
+  :update_cadence_days:
+  :upsert_lookback_days:
+:steps:
+- :name: 01-functions-and-procedures
+  :queries:
+    - :name: 01-functions-and-procedures
+      :file: standard/00-setup/01-main/01-functions-and-procedures.sql
+      :template: true
+- :name: 00-setup-base
+  :queries:
+    - :name: 00-setup-base
+      :file: standard/01-base/01-main/00-setup-base.sql
+      :template: true
+- :name: 01-new-events-limits
+  :queries:
+    - :name: 01-new-events-limits
+      :file: standard/01-base/01-main/01-new-events-limits.sql
+      :template: true
+- :name: 02-run-manifest
+  :queries:
+    - :name: 02-run-manifest
+      :file: standard/01-base/01-main/02-run-manifest.sql
+      :template: true
+- :name: 03-sessions-to-process
+  :queries:
+    - :name: 03-sessions-to-process
+      :file: standard/01-base/01-main/03-sessions-to-process.sql
+      :template: true
+- :name: 04-sessions-to-include
+  :queries:
+    - :name: 04-sessions-to-include
+      :file: standard/01-base/01-main/04-sessions-to-include.sql
+      :template: true
+- :name: 05-batch-limits
+  :queries:
+    - :name: 05-batch-limits
+      :file: standard/01-base/01-main/05-batch-limits.sql
+      :template: true
+- :name: 06-events-this-run
+  :queries:
+    - :name: 06-events-this-run
+      :file: standard/01-base/01-main/06-events-this-run.sql
+      :template: true
+- :name: 07-base-metadata
+  :queries:
+    - :name: 07-base-metadata
+      :file: standard/01-base/01-main/07-base-metadata.sql
+      :template: true
+- :name: 08-commit-base
+  :queries:
+    - :name: 08-commit-base
+      :file: standard/01-base/01-main/08-commit-base.sql
+      :template: true

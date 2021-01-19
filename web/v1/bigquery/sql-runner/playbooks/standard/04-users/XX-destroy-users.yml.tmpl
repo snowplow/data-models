@@ -1,0 +1,23 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:      bigquery/web/1.0.0
+  :scratch_schema:     scratch_prod1
+  :output_schema:      derived_prod1
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 99-users-cleanup
+  :queries:
+    - :name: 99-users-cleanup
+      :file: standard/04-users/99-complete/99-users-cleanup.sql
+      :template: true
+- :name: XX-destroy-users
+  :queries:
+    - :name: XX-destroy-users
+      :file: standard/04-users/XX-destroy/XX-destroy-users.sql
+      :template: true
