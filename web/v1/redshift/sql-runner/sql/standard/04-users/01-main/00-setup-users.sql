@@ -108,8 +108,8 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.users{{.entropy}} (
 
   -- user fields
   user_id VARCHAR(255) ENCODE ZSTD,
-  domain_userid VARCHAR(255) ENCODE ZSTD,
-  network_userid VARCHAR(255) ENCODE ZSTD,
+  domain_userid VARCHAR(128) ENCODE ZSTD,
+  network_userid VARCHAR(128) ENCODE ZSTD,
 
   start_tstamp TIMESTAMP ENCODE ZSTD,
   end_tstamp TIMESTAMP ENCODE ZSTD,

@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.sessions{{.entropy}} (
   app_id VARCHAR(255) ENCODE ZSTD,
 
   -- session fields
-  domain_sessionid VARCHAR(255) ENCODE ZSTD,
+  domain_sessionid VARCHAR(128) ENCODE ZSTD,
   domain_sessionidx INT ENCODE ZSTD,
 
   start_tstamp TIMESTAMP ENCODE ZSTD,
@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.sessions{{.entropy}} (
 
   -- user fields
   user_id VARCHAR(255) ENCODE ZSTD,
-  domain_userid VARCHAR(255) ENCODE ZSTD,
-  network_userid VARCHAR(255) ENCODE ZSTD,
+  domain_userid VARCHAR(128) ENCODE ZSTD,
+  network_userid VARCHAR(128) ENCODE ZSTD,
 
   page_views INT ENCODE ZSTD,
   engaged_time_in_s INT ENCODE ZSTD,

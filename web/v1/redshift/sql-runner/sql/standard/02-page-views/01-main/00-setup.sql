@@ -95,10 +95,10 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.page_views{{.entropy}} (
   app_id VARCHAR(255) ENCODE ZSTD,
 
   user_id VARCHAR(255) ENCODE ZSTD,
-  domain_userid CHAR(36) ENCODE ZSTD,
-  network_userid CHAR(36) ENCODE ZSTD,
+  domain_userid VARCHAR(128) ENCODE ZSTD,
+  network_userid VARCHAR(128) ENCODE ZSTD,
 
-  domain_sessionid CHAR(36) ENCODE ZSTD,
+  domain_sessionid VARCHAR(128) ENCODE ZSTD,
   domain_sessionidx INT ENCODE ZSTD,
   page_view_in_session_index INT ENCODE ZSTD,
   page_views_in_session INT ENCODE ZSTD,
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.page_views{{.entropy}} (
   doc_width INT ENCODE ZSTD,
   doc_height INT ENCODE ZSTD,
 
-  page_title VARCHAR(1024) ENCODE ZSTD,
+  page_title VARCHAR(2000) ENCODE ZSTD,
   page_url VARCHAR(4096) ENCODE ZSTD,
   page_urlscheme VARCHAR(16) ENCODE ZSTD,
   page_urlhost VARCHAR(255) ENCODE ZSTD,
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.page_views{{.entropy}} (
   page_referrer VARCHAR(4096) ENCODE ZSTD,
   refr_urlscheme  VARCHAR(16) ENCODE ZSTD,
   refr_urlhost VARCHAR(255) ENCODE ZSTD,
-  refr_urlpath VARCHAR(3000) ENCODE ZSTD,
+  refr_urlpath VARCHAR(6000) ENCODE ZSTD,
   refr_urlquery VARCHAR(6000) ENCODE ZSTD,
   refr_urlfragment VARCHAR(3000) ENCODE ZSTD,
   refr_medium VARCHAR(25) ENCODE ZSTD,
@@ -162,8 +162,8 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.page_views{{.entropy}} (
   br_lang VARCHAR(255) ENCODE ZSTD,
   br_viewwidth INT ENCODE ZSTD,
   br_viewheight INT ENCODE ZSTD,
-  br_colordepth VARCHAR(64),
-  br_renderengine VARCHAR(64),
+  br_colordepth VARCHAR(12),
+  br_renderengine VARCHAR(50),
   os_timezone VARCHAR(255),
 
   -- optional iab fields
