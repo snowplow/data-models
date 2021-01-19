@@ -24,4 +24,5 @@ CREATE TABLE {{.scratch_schema}}.pv_run_limits{{.entropy}} AS(
 
   FROM
     {{.scratch_schema}}.events_staged{{.entropy}}
+  WHERE page_view_id IS NOT NULL
 );

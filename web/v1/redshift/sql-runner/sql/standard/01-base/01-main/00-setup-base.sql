@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.events_staged{{.entropy}} (
 	event_fingerprint VARCHAR(128) ENCODE ZSTD,
 	true_tstamp TIMESTAMP ENCODE ZSTD,
 
-  page_view_id CHAR(36) ENCODE RAW NOT NULL
+  page_view_id CHAR(36) ENCODE ZSTD
 
 )
 DISTSTYLE KEY
