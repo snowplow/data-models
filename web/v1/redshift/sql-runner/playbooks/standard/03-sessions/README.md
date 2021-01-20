@@ -16,11 +16,11 @@ The sessions module runs the standard web sessions model - it takes the `page_vi
 
 `:stage_next:`         update staging tables - set to true if running the next module. If true, make sure that the next module includes a 'complete' step.
 
-`:upsert_lookback:`    Default 30. Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible.
+`:upsert_lookback_days:`    Default 30. Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible.
 
 `:skip_derived:`       Default false. Set to true to skip insert to production sessions table.
 
-**Note:** upsert_lookback can produce duplicates if set to too short a window.
+**Note:** `upsert_lookback_days` can produce duplicates if set to too short a window.
 
 ### 99-sessions-complete
 

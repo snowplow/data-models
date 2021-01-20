@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS {{.scratch_schema}}.pv_upsert_limit{{.entropy}};
 
 CREATE TABLE {{.scratch_schema}}.pv_upsert_limit{{.entropy}} AS (
   SELECT
-    DATEADD(DAY, -{{or .upsert_lookback 30}}, min(start_tstamp)) AS lower_limit
+    DATEADD(DAY, -{{or .upsert_lookback_days 30}}, min(start_tstamp)) AS lower_limit
   FROM {{.scratch_schema}}.page_views_this_run{{.entropy}}
 );
 

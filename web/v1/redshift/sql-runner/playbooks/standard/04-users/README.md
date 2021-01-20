@@ -16,7 +16,7 @@ The users module runs the standard web sessions model - it takes the `sessions_u
 
 `:skip_derived:`       Default false. Set to true to skip insert to production users table.
 
-**Note:** upsert_lookback can produce duplicates if set to too short a window.
+**Note:** `upsert_lookback_days` can produce duplicates if set to too short a window.
 
 ### 99-users-complete
 

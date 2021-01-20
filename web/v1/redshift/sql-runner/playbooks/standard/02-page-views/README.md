@@ -22,7 +22,7 @@ The page views module runs the standard web page views model. It takes the `even
 
 `:heartbeat:`          The value of heartbeat configured in the Javascript tracker.
 
-`:upsert_lookback:`    Default 30. Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible.
+`:upsert_lookback_days:`    Default 30. Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible.
 
 `:ua_bot_filter:`      Configuration to filter out bots via useragent string pattern match.
 
@@ -34,7 +34,7 @@ The page views module runs the standard web page views model. It takes the `even
 
 `:skip_derived:`       Default false. Set to true to skip insert to production page views table.
 
-**Note:** `upsert_lookback` can produce duplicates if set to too short a window.
+**Note:** `upsert_lookback_days` can produce duplicates if set to too short a window.
 
 ### 99-page-views-complete
 

@@ -20,19 +20,19 @@ The Base module applies incremental logic to the atomic data, and produces dedup
 
 `:start_date:`         Start date, used to seed manifest.
 
-`:lookback_window:`    Defaults to 6. Period of time (in hours) to look before the latest event in manifest - to account for late arriving data, which comes out of order.
+`:lookback_window_hours:`    Defaults to 6. Period of time (in hours) to look before the latest event in manifest - to account for late arriving data, which comes out of order.
 
 `:days_late_allowed:`  Defaults to 3.  Period of time (in days) for which we should include late data. If the difference between collector tstamps for the session start and new event is greater than this value, data for that session will not be processed.
 
-`:update_cadence:`     Defaults to 7. Period of time (in days) in the future (from the latest event in manifest) to look for new events.
+`:update_cadence_days:`     Defaults to 7. Period of time (in days) in the future (from the latest event in manifest) to look for new events.
 
-`:session_lookback:`   Defaults to 365. Period of time (in days) to limit scan on session manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.
+`:session_lookback_days:`   Defaults to 365. Period of time (in days) to limit scan on session manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.
 
 **Notes:**
 
 `days_late_allowed` can be extended in order to account for incidents which cause very late data - for example downtime on the front end.
 
-`session_lookback` can cause incorrect data or duplicates if misconfigured - if events arrive with existing session_ids for sessions which pre-date the session_lookback, this will cause an issue. However this is very unlikely as the lookback should be far greater than what can be reasonably expected for this behaviour from non-bot activity.
+`session_lookback_days` can cause incorrect data or duplicates if misconfigured - if events arrive with existing session_ids for sessions which pre-date the `session_lookback_days`, this will cause an issue. However this is very unlikely as the lookback should be far greater than what can be reasonably expected for this behaviour from non-bot activity.
 
 ### 99-base-complete
 
