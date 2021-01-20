@@ -37,8 +37,6 @@ AS(
 	FROM {{.scratch_schema}}.events_staged{{.entropy}} AS ev
 
 	WHERE ev.event_name = 'page_ping'
-    AND ev.collector_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.pv_run_limits{{.entropy}})
-    AND ev.collector_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.pv_run_limits{{.entropy}})
 
   GROUP BY 1
 
