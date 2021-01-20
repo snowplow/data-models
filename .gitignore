@@ -10,6 +10,7 @@ tmp/
 .test/include/
 .test/.Python
 .test/pip-selfcheck.json
+.test/share
 
 # great expectations related:
 .test/great_expectations/results

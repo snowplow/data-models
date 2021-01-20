@@ -1,0 +1,60 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:         bigquery/web/1.0.0
+  :scratch_schema:        scratch_prod1
+  :output_schema:         derived_prod1
+  :entropy:               ""
+  :minimumVisitLength:    5
+  :heartbeat:             10
+  :ua_bot_filter:         true
+  :iab:                   false
+  :ua_parser:             false
+  :yauaa:                 false
+  :upsert_lookback_days:
+  :skip_derived:
+  :stage_next:            true
+:steps:
+- :name: 01-functions-and-procedures
+  :queries:
+    - :name: 01-functions-and-procedures
+      :file: standard/00-setup/01-main/01-functions-and-procedures.sql
+      :template: true
+- :name: 00-setup
+  :queries:
+    - :name: 00-setup
+      :file: standard/02-page-views/01-main/00-setup-page-views.sql
+      :template: true
+- :name: 01-page-view-events
+  :queries:
+    - :name: 01-page-view-events
+      :file: standard/02-page-views/01-main/01-page-view-events.sql
+      :template: true
+- :name: 02-engaged-time
+  :queries:
+    - :name: 02-engaged-time
+      :file: standard/02-page-views/01-main/02-engaged-time.sql
+      :template: true
+- :name: 03-scroll-depth
+  :queries:
+    - :name: 03-scroll-depth
+      :file: standard/02-page-views/01-main/03-scroll-depth.sql
+      :template: true
+- :name: 04-page-views
+  :queries:
+    - :name: 04-page-views
+      :file: standard/02-page-views/01-main/04-page-views.sql
+      :template: true
+- :name: 05-page-views-metadata
+  :queries:
+    - :name: 05-page-views-metadata
+      :file: standard/02-page-views/01-main/05-page-views-metadata.sql
+      :template: true
+- :name: 06-commit-page-views
+  :queries:
+    - :name: 06-commit-page-views
+      :file: standard/02-page-views/01-main/06-commit-page-views.sql
+      :template: true

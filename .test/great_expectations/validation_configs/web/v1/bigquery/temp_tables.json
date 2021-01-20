@@ -1,0 +1,59 @@
+{
+  "validation_operator_name": "action_list_operator",
+  "batches": [
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.events_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_events_this_run"
+      },
+      "expectation_suite_names": ["web.v1.base"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.events_staged",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_events_staged"
+      },
+      "expectation_suite_names": ["web.v1.base"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.page_views_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_pv_this_run"
+      },
+      "expectation_suite_names": ["web.v1.page_views"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.page_views_staged",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_pv_staged"
+      },
+      "expectation_suite_names": ["web.v1.page_views"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.sessions_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_sess_this_run"
+      },
+      "expectation_suite_names": ["web.v1.sessions"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.users_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_usr_this_run"
+      },
+      "expectation_suite_names": ["web.v1.users"]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "page_view_in_session_index",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "dist_pvis_values",
+        "value_set": [1]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "all_minus_dist_pvisi",
+        "value_set": [0]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "all_minus_dist_pvids",
+        "value_set": [0]
+      }
+    }
+  ],
+  "meta": {
+    "versions": {
+      "test_suite_version": "1.1.0",
+      "redshift_model_version": "1.1.0",
+      "bigquery_model_version": "1.0.0"
+    },
+    "great_expectations.__version__": "0.12.0"
+  }
+}

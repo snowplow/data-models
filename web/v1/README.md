@@ -14,7 +14,7 @@ Each module comes with a `99-{module}-complete` playbook, which marks that modul
 
 ![module-structure](../../media/web_model_module.jpg)
 
-More detail on each module can be found in the 'Modules detail' section below.
+More detail on each module can be found in the README of each individual model's `sql-runner` directory.
 
 Custom modules can fit into the incremental structure by consuming the same inputs, and running before the `99-{module}-complete` playbook runs.
 
@@ -31,9 +31,9 @@ As an introductory example, if there is a requirement to include data from custo
 If the playbook for this custom module is called `AA-my-custom-page-views-level-module.yml.tmpl`, then we would run the playbooks as follows:
 
 1. standard/01-base/01-base-main.yml.tmpl
-2. standard/01-base/99-base-complete.yml.tmpl
-3. standard/02-page-views/01-page-views-main.yml.tmpl
-4. custom/AA-my-custom-page-views-level-module.yml.tmpl
+2. standard/02-page-views/01-page-views-main.yml.tmpl
+3. custom/AA-my-custom-page-views-level-module.yml.tmpl
+4. standard/01-base/99-base-complete.yml.tmpl
 5. standard/02-page-views/99-page-views-complete.yml.tmpl
 
 Custom modules can also be created with their own independent manifesting logic, in which case they are more complex, but don't rely on the standard modules.
