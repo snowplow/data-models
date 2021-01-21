@@ -14,4 +14,4 @@
    limitations under the License.
 */
 
-DROP TABLE IF EXISTS {{.output_schema}}.web_model_run_metadata{{.entropy}};
+DROP TABLE IF EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}};

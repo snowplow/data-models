@@ -39,7 +39,7 @@
         "datasource": "bigquery",
         "bigquery_temp_table": "ge_test_derived_metadata"
       },
-      "expectation_suite_names": ["web.v1.metadata_2"]
+      "expectation_suite_names": ["web.v1.metadata"]
     }
   ]
 }

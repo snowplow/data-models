@@ -27,12 +27,12 @@ BEGIN;
   {{end}}
 
   -- Commit metadata
-  INSERT INTO {{.output_schema}}.web_model_run_metadata{{.entropy}} (
+  INSERT INTO {{.output_schema}}.datamodel_metadata{{.entropy}} (
     SELECT
       run_id,
       model_version,
-      module_name,
-      step_name,
+      model,
+      module,
       run_start_tstamp,
       GETDATE() AS run_end_tstamp,
       rows_this_run,

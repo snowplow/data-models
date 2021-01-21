@@ -8,8 +8,8 @@
         "column_list": [
           "run_id",
           "model_version",
-          "module_name",
-          "step_name",
+          "model",
+          "module",
           "run_start_tstamp",
           "run_end_tstamp",
           "rows_this_run",
@@ -39,13 +39,13 @@
     {
       "expectation_type": "expect_column_values_to_not_be_null",
       "kwargs": {
-        "column": "module_name"
+        "column": "model"
       }
     },
     {
       "expectation_type": "expect_column_values_to_not_be_null",
       "kwargs": {
-        "column": "step_name"
+        "column": "module"
       }
     },
     {
