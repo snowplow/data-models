@@ -11,10 +11,10 @@
     },
     {
       "batch_kwargs": {
-        "query": "SELECT domain_sessionid, page_view_in_session_index, count(*) AS nrow, count(DISTINCT page_view_id) AS dist_pvs FROM derived.page_views GROUP BY 1,2",
+        "query": "SELECT domain_sessionid, count(DISTINCT page_views_in_session) AS dist_pvis_values, count(*) - count(DISTINCT page_view_in_session_index)  AS all_minus_dist_pvisi, count(*) - count(DISTINCT page_view_id) AS all_minus_dist_pvids FROM derived.page_views GROUP BY 1",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["web.v1.page_view_in_session_index"]
+      "expectation_suite_names": ["web.v1.page_view_in_session_values"]
     },
     {
       "batch_kwargs": {
