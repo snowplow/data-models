@@ -18,8 +18,8 @@ script_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 # Set credentials via env vars
 export BIGQUERY_CREDS=${BIGQUERY_CREDS:-$CREDENTIALS}
-export REDSHIFT_PASSWORD=$CREDENTIALS
-export SNOWFLAKE_PASSWORD=$CREDENTIALS
+export REDSHIFT_PASSWORD=${REDSHIFT_PASSWORD:-$CREDENTIALS}
+export SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD:-$CREDENTIALS}
 
 echo "pr_check: Starting 10 e2e iterations"
 

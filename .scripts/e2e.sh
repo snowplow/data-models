@@ -16,11 +16,12 @@ done
 
 # Set credentials via env vars
 export BIGQUERY_CREDS=${BIGQUERY_CREDS:-$CREDENTIALS}
-export REDSHIFT_PASSWORD=$CREDENTIALS
-export SNOWFLAKE_PASSWORD=$CREDENTIALS
+export REDSHIFT_PASSWORD=${REDSHIFT_PASSWORD:-$CREDENTIALS}
+export SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD:-$CREDENTIALS}
 
-script_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-config_dir=$script_path/../web/v1/$DATABASE/sql-runner/configs
+repo_root_path=$( cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd -P )
+script_path="${repo_root_path}/.scripts"
+config_dir="${repo_root_path}/web/v1/$DATABASE/sql-runner/configs"
 
 echo "e2e: Running all modules";
 

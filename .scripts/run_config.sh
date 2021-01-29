@@ -22,12 +22,12 @@ do
   esac
 done
 
-root_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )/..
+root_path=$( cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd -P )
 
 # Use jq to grab playbooks into a bash array in order of appearance, and database target into a var.
 playbooks=($(cat $CONFIG_PATH | jq -r '.data.playbooks[].playbook | @sh' | tr -d \'))
 target=$(cat $CONFIG_PATH | jq -r '.data.storage')
-model_path="$(dirname "${CONFIG_PATH}")/.."
+model_path=$( cd "$(dirname "$(dirname "${CONFIG_PATH}")")" && pwd -P )
 
 set -e
 
@@ -37,9 +37,18 @@ cleanup() {
 }
 trap cleanup EXIT
 
+mkdir -p "${root_path}/tmp"
+
 if [ $target == "Default" ]; then
 
-  PASSWORD=${DB_PASSWORD:-$CREDENTIALS}
+  storage_target=$(basename $(dirname "${model_path}"))
+  if [ "${storage_target}" = "redshift" ] ; then
+    PASSWORD=${REDSHIFT_PASSWORD:-$CREDENTIALS}
+  elif [ "${storage_target}" = "snowflake" ] ; then
+    PASSWORD=${SNOWFLAKE_PASSWORD:-$CREDENTIALS}
+  else
+    echo "Storage target mismatch!" >&2 ; exit 1;
+  fi
 
 elif [ "$target" == "BigQuery" ]; then
 
@@ -98,7 +107,7 @@ do
 
   # If printing sql to file, comment out metadata strings in the SQL
   if [ ! -z "$OUTPUT_PATH" ]; then
-    sed -E -i '' '/^([0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9] Step name:|Query name: |Query path: )/ s/^/-- /' $OUTPUT_FILE
+    perl -i -pe 's/^([0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9] Step name:|Query name: |Query path: )/-- \1/' "$OUTPUT_FILE"
   fi
 
   set -e
@@ -106,4 +115,4 @@ do
   echo "run_config: done with playbook: $i";
 
   echo $OUTPUT_PATH
-done;
+done
