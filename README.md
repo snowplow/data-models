@@ -19,7 +19,7 @@ The Snowplow atomic data acts as an immutable log of all the actions that occurr
 - [Web (v1)](web/v1)
   - [Redshift](web/v1/redshift) [![actively-maintained]][tracker-classificiation]
   - [BigQuery](web/v1/bigquery) [![actively-maintained]][tracker-classificiation]
-  - Snowflake (coming soon)
+  - [Snowflake](web/v1/snowflake) [![actively-maintained]][tracker-classificiation]
 - Mobile (coming soon)
   - Redshift (coming soon)
   - BigQuery (coming soon)

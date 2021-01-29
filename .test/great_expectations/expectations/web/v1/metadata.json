@@ -104,7 +104,8 @@
     "versions": {
       "test_suite_version": "1.1.0",
       "redshift_model_version": "1.2.0",
-      "bigquery_model_version": "1.0.0"
+      "bigquery_model_version": "1.0.0",
+      "snowflake_model_version": "1.0.0"
     },
     "great_expectations.__version__": "0.12.0"
   }
