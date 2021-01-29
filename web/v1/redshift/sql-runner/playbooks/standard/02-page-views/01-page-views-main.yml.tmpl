@@ -8,7 +8,7 @@
   :password:
   :ssl:
 :variables:
-  :model_version:      redshift/web/1.1.0
+  :model_version:      redshift/web/1.2.0
   :input_schema:       atomic
   :scratch_schema:     scratch
   :output_schema:      derived
@@ -19,19 +19,19 @@
   :iab:                false
   :ua_parser:          false
   :yauaa:              false
-  :upsert_lookback:
+  :upsert_lookback_days:
   :skip_derived:
   :stage_next:         true
 :steps:
 - :name: 00-setup
   :queries:
-    - :name: 00-setup
-      :file: standard/02-page-views/01-main/00-setup.sql
+    - :name: 00-setup-page-views
+      :file: standard/02-page-views/01-main/00-setup-page-views.sql
       :template: true
 - :name: 01-limits
   :queries:
-    - :name: 01-limits
-      :file: standard/02-page-views/01-main/01-limits.sql
+    - :name: 01-page-view-limits
+      :file: standard/02-page-views/01-main/01-page-view-limits.sql
       :template: true
 - :name: 02-page-view-events
   :queries:

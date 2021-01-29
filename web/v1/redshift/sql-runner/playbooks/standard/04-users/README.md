@@ -6,29 +6,40 @@ The users module runs the standard web sessions model - it takes the `sessions_u
 
 ## Configuration quick reference
 
-`01-users-main`
+### 01-users-main
 
 `:scratch_schema:`     name of scratch schema  
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables (eg. `_test` produces tables like `users_test`). Must match entropy value used for all other modules in a given run.
+
 `:skip_derived:`       Default false. Set to true to skip insert to production users table.
 
-**Note:** upsert_lookback can produce duplicates if set to too short a window.
+**Note:** `upsert_lookback_days` can produce duplicates if set to too short a window.
 
-`99-users-complete`
+### 99-users-complete
 
 `:scratch_schema:`     name of scratch schema
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables. Must match entropy value used for all other modules in a given run.
+
 `:cleanup_mode:`       Options: `debug` - only keeps main tables. `trace` - keeps all tables. `all` - cleans up everything.
+
 `:ends_run:`           set to true if there are no subsequent modules in the run, false otherwise.
 
-`XX-destroy-users`
+### XX-destroy-users
 
 `:scratch_schema:`     name of scratch schema
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables. Must match entropy value used for all other modules in a given run.
+
 `:cleanup_mode:`       Should be set to `all` for a destroy.
+
 `:ends_run:`           Should be set to true for a destroy.
 
 ## Order of execution

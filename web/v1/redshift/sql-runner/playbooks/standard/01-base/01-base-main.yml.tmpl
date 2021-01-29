@@ -8,16 +8,17 @@
   :password:
   :ssl:
 :variables:
-  :model_version:      redshift/web/1.1.0
+  :model_version:      redshift/web/1.2.0
   :input_schema:       atomic
   :scratch_schema:     scratch
   :output_schema:      derived
   :entropy:            ""
   :stage_next:         true
   :start_date:         2020-01-01
-  :lookback_window:
+  :lookback_window_hours:
   :days_late_allowed:
-  :update_cadence:
+  :update_cadence_days:
+  :session_lookback_days:
 :steps:
 - :name: 00-setup-base
   :queries:

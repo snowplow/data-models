@@ -1,5 +1,5 @@
 /*
-   Copyright 2020 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2020-2021 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,4 +14,4 @@
    limitations under the License.
 */
 
-DROP TABLE IF EXISTS {{.output_schema}}.web_model_run_metadata{{.entropy}};
+DROP TABLE IF EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}};

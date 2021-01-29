@@ -1,5 +1,5 @@
 /*
-   Copyright 2020 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2020-2021 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -97,6 +97,7 @@ AS(
   FROM {{.scratch_schema}}.events_staged{{.entropy}} AS ev
 
   WHERE ev.event_name = 'page_view'
+  AND ev.page_view_id IS NOT NULL
 
   {{if eq .ua_bot_filter true}}
     AND ev.useragent NOT SIMILAR TO '%(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)%'

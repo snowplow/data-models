@@ -1,5 +1,5 @@
 /*
-   Copyright 2020 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2020-2021 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -28,11 +28,11 @@ INSERT INTO {{.scratch_schema}}.metadata_run_id{{.entropy}} (
 );
 
 -- Permanent metadata table
-CREATE TABLE IF NOT EXISTS {{.output_schema}}.web_model_run_metadata{{.entropy}} (
+CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
   run_id TIMESTAMP,
   model_version VARCHAR(64),
-  module_name VARCHAR(64),
-  step_name VARCHAR(64),
+  model VARCHAR(64),
+  module VARCHAR(64),
   run_start_tstamp TIMESTAMP,
   run_end_tstamp TIMESTAMP,
   rows_this_run INT,
@@ -52,8 +52,8 @@ CREATE TABLE {{.scratch_schema}}.base_metadata_this_run{{.entropy}} (
   id VARCHAR(64),
   run_id TIMESTAMP,
   model_version VARCHAR(64),
-  module_name VARCHAR(64),
-  step_name VARCHAR(64),
+  model VARCHAR(64),
+  module VARCHAR(64),
   run_start_tstamp TIMESTAMP,
   run_end_tstamp TIMESTAMP,
   rows_this_run INT,
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.events_staged{{.entropy}} (
 	event_fingerprint VARCHAR(128) ENCODE ZSTD,
 	true_tstamp TIMESTAMP ENCODE ZSTD,
 
-  page_view_id CHAR(36) ENCODE RAW NOT NULL
+  page_view_id CHAR(36) ENCODE ZSTD
 
 )
 DISTSTYLE KEY

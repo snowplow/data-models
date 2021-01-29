@@ -18,12 +18,12 @@ Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment vari
 
 Variables in each module's playbook can also optionally be configured also. See each playbook directory's README for more detail on configuration of each module.
 
-### Run using the `run_playbooks.sh` script
+### Run using the `run_config.sh` script
 
-To run the entire model, end to end:
+To run the entire standard model, end to end:
 
 ```bash
-bash data-models/.scripts/run_playbooks.sh {path_to_sql_runner} redshift v1 'standard/01-base/01-base-main,standard/02-page-views/01-page-views-main,standard/03-sessions/01-sessions-main,standard/04-users/01-users-main,standard/01-base/99-base-complete,standard/02-page-views/99-page-views-complete,standard/03-sessions/99-sessions-complete,standard/04-users/99-users-complete' {credentials (optional)};
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/redshift/sql-runner/configs/datamodeling.json;
 ```
 
 See the README in the `.scripts/` directory for more details.
@@ -167,7 +167,7 @@ Detail on configuring the users module's playbook can be found [in the relevant 
 
 ## A note on duplicates
 
-This version of the model (1.1.0) excludes duplicated event_ids and page_view_ids. Ideally in the future it will provide standard options for handling them, however because customisations of this model involve queries on federated atomic tables, the safest option for a first version is to exclude them.
+This version of the model (1.2.0) excludes duplicated event_ids and page_view_ids. Ideally in the future it will provide standard options for handling them, however because customisations of this model involve queries on federated atomic tables, the safest option for a first version is to exclude them.
 
 If there is a need to handle duplicates, this can be done by adding a custom module to the base level of aggregation - take good care to manage the possibility of introducing duplicates downstream if doing so.
 

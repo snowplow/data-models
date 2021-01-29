@@ -1,5 +1,5 @@
 /*
-   Copyright 2020 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2020-2021 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,4 +24,5 @@ CREATE TABLE {{.scratch_schema}}.pv_run_limits{{.entropy}} AS(
 
   FROM
     {{.scratch_schema}}.events_staged{{.entropy}}
+  WHERE page_view_id IS NOT NULL
 );

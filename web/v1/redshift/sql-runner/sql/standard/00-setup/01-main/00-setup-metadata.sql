@@ -1,5 +1,5 @@
 /*
-   Copyright 2020 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2020-2021 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 */
 
 -- Permanent metadata table
-CREATE TABLE IF NOT EXISTS {{.output_schema}}.web_model_run_metadata{{.entropy}} (
+CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
   run_id TIMESTAMP,
   model_version VARCHAR(64),
-  module_name VARCHAR(64),
-  step_name VARCHAR(64),
+  model VARCHAR(64),
+  module VARCHAR(64),
   run_start_tstamp TIMESTAMP,
   run_end_tstamp TIMESTAMP,
   rows_this_run INT,

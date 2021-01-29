@@ -6,31 +6,44 @@ The sessions module runs the standard web sessions model - it takes the `page_vi
 
 ## Configuration quick reference
 
-`01-sessions-main`
+### 01-sessions-main
 
 `:scratch_schema:`     name of scratch schema  
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables (eg. `_test` produces tables like `sessions_test`). Must match entropy value used for all other modules in a given run.
+
 `:stage_next:`         update staging tables - set to true if running the next module. If true, make sure that the next module includes a 'complete' step.
-`:upsert_lookback:`    Default 30. Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible.
+
+`:upsert_lookback_days:`    Default 30. Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible.
+
 `:skip_derived:`       Default false. Set to true to skip insert to production sessions table.
 
-**Note:** upsert_lookback can produce duplicates if set to too short a window.
+**Note:** `upsert_lookback_days` can produce duplicates if set to too short a window.
 
-`99-sessions-complete`
+### 99-sessions-complete
 
 `:scratch_schema:`     name of scratch schema
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables. Must match entropy value used for all other modules in a given run.
+
 `:cleanup_mode:`       Options: `debug` - only keeps main tables. `trace` - keeps all tables. `all` - cleans up everything.
+
 `:ends_run:`           set to true if there are no subsequent modules in the run, false otherwise.
 
-`XX-destroy-sessions`
+### XX-destroy-sessions
 
 `:scratch_schema:`     name of scratch schema
+
 `:output_schema:`      name of derived schema
+
 `:entropy:`            string to append to all tables, to test without affecting prod tables. Must match entropy value used for all other modules in a given run.
+
 `:cleanup_mode:`       Should be set to `all` for a destroy.
+
 `:ends_run:`           Should be set to true for a destroy.
 
 ## Order of execution

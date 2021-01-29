@@ -1,5 +1,5 @@
 /*
-   Copyright 2020 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2020-2021 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS {{.scratch_schema}}.sessions_upsert_limit{{.entropy}};
 
 CREATE TABLE {{.scratch_schema}}.sessions_upsert_limit{{.entropy}} AS (
   SELECT
-    DATEADD(DAY, -{{or .upsert_lookback 30}}, min(start_tstamp)) AS lower_limit
+    DATEADD(DAY, -{{or .upsert_lookback_days 30}}, min(start_tstamp)) AS lower_limit
   FROM {{.scratch_schema}}.sessions_this_run{{.entropy}}
 );
 
@@ -45,12 +45,12 @@ BEGIN;
   {{end}}
 
   -- Commit metadata
-  INSERT INTO {{.output_schema}}.web_model_run_metadata{{.entropy}} (
+  INSERT INTO {{.output_schema}}.datamodel_metadata{{.entropy}} (
     SELECT
       run_id,
       model_version,
-      module_name,
-      step_name,
+      model,
+      module,
       run_start_tstamp,
       GETDATE() AS run_end_tstamp,
       rows_this_run,
