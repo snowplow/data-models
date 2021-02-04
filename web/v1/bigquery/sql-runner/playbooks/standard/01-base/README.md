@@ -28,7 +28,9 @@ The Base module applies incremental logic to the atomic data, and produces dedup
 
 `:session_lookback_days:`   Defaults to 1095. Period of time (in days) to limit scan on session manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.
 
-`:upsert_lookback_days:`    Default 30. Period of time (in days) to look back over the target table in order to find rows to delete when committing data to a table. Where performance is not a concern, should be set to as long a value as possible.
+`:upsert_lookback_days:`    Defaults to 30. Period of time (in days) to look back over the target table in order to find rows to delete when committing data to a table. Where performance is not a concern, should be set to as long a value as possible.
+
+`:derived_tstamp_partitioned:` Defaults to false. For use on legacy pipelines whose partition key is the derived_tstamp. Note that this affects the incremental logic somewhat, as derived_tstamp isn't closely tied to when data was received and so it is recommended to extend the `lookback_window_hours` if the events table is partitioned by derived_tstamp.
 
 **Notes:**
 

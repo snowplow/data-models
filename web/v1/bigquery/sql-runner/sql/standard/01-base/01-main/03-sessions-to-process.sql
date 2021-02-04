@@ -40,5 +40,13 @@ AS(
     AND a.domain_sessionid IS NOT NULL
     AND TIMESTAMP_DIFF(a.dvce_sent_tstamp, a.dvce_created_tstamp, DAY) <= {{or .days_late_allowed 3}}
     -- don't process data that's too late
+
+    {{if eq (or .derived_tstamp_partitioned false) true}}
+
+      AND a.derived_tstamp >= LOWER_LIMIT
+      AND a.derived_tstamp >= UPPER_LIMIT
+
+    {{end}}
+
   GROUP BY 1
 );
