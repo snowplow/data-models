@@ -164,6 +164,7 @@ AS(
 
     FROM {{.scratch_schema}}.events_staged{{.entropy}} e
     WHERE e.event_name = 'page_view'
+    AND e.page_view_id IS NOT NULL
     GROUP BY e.page_view_id
   )
 
