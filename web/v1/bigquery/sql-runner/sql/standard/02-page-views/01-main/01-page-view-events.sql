@@ -128,7 +128,7 @@ AS(
     -- yauaa enrichment fields: set yauaa variable to true to enable
     {{if eq .yauaa true}}
 
-      contexts_nl_basjes_yauaa_context_1_0_0[SAFE_OFFSET(0)].*,
+      ev.contexts_nl_basjes_yauaa_context_1_0_0[SAFE_OFFSET(0)].*,
 
     {{else}}
 
