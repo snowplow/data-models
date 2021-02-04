@@ -37,6 +37,14 @@ AS(
     WHERE
       a.collector_tstamp >= LOWER_LIMIT
       AND a.collector_tstamp <= UPPER_LIMIT
+
+      {{if eq (or .derived_tstamp_partitioned false) true}}
+
+        AND a.derived_tstamp >= LOWER_LIMIT
+        AND a.derived_tstamp <= UPPER_LIMIT
+
+      {{end}}
+
   ) e
   GROUP BY
     e.event_id
