@@ -16,5 +16,5 @@
 
 DROP TABLE IF EXISTS {{.output_schema}}.sessions{{.entropy}};
 DROP TABLE IF EXISTS {{.scratch_schema}}.sessions_userid_manifest_staged{{.entropy}};
-DROP FUNCTION IF EXISTS  {{.output_schema}}.columnCheckQuerycolumnCheckQuery;
+DROP FUNCTION IF EXISTS  {{.output_schema}}.columnCheckQuery;
 DROP PROCEDURE IF EXISTS {{.output_schema}}.commit_table;

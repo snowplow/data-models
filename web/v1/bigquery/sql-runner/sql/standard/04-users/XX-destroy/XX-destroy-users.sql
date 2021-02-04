@@ -16,5 +16,5 @@
 
 DROP TABLE IF EXISTS {{.output_schema}}.users{{.entropy}};
 DROP TABLE IF EXISTS {{.output_schema}}.users_manifest{{.entropy}};
-DROP FUNCTION IF EXISTS  {{.output_schema}}.columnCheckQuerycolumnCheckQuery;
+DROP FUNCTION IF EXISTS  {{.output_schema}}.columnCheckQuery;
 DROP PROCEDURE IF EXISTS {{.output_schema}}.commit_table;
