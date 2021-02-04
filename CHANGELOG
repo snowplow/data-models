@@ -1,3 +1,8 @@
+BigQuery Web Version 1.0.0 (2021-02-08)
+---------------------------
+release/bigquery/web/1.0.1 (web/v1/bigquery/CHANGELOG)
+Add top-level CHANGELOG (close #42)
+
 Redshift Web Version 1.2.0 (2021-01-25)
 ---------------------------
 release/redshift/web/1.2.0 (web/v1/redshift/CHANGELOG)
