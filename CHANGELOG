@@ -1,4 +1,9 @@
-Version 1.2.0 (2021-01-25)
+Snowflake Web Version 1.0.0 (2021-02-11)
+--------------------------
+Add Snowflake web model v1 (#31)
+Fix bug in credentials handling for pr_check and e2e scripts (#35)
+
+Redshift Web Version 1.2.0 (2021-01-25)
 ---------------------------
 Redshift: Add config (#12)
 Redshift: Update test on page_view_in_session_index (#13)
@@ -11,7 +16,16 @@ Redshift: Fix table definitions (#10)
 Redshift: Remove or replace second example customisation (#14)
 Redshift: Update copyright notices (#19)
 Add CHANGELOG (#6)
+Fix readme formatting (#7)
 
-Version 1.1.0 (2020-11-05)
+BigQuery Web Version 1.0.0 (2021-01-20)
+---------------------------
+Resolve issues in testing flow (#29)
+Add and update READMEs for BigQuery v1 (#30)
+Extend and update great expectations for BigQuery v1 (#28)
+Update and improve scripts (#27)
+Add BigQuery web model v1 (#26)
+
+Redshift Web Version 1.1.0 (2020-11-05)
 ---------------------------
 Add Redshift web model v1 (#4)

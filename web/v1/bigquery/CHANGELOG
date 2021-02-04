@@ -1,7 +1,5 @@
 Version 1.0.0 (2021-01-20)
 ---------------------------
-Resolve issues in testing flow (#29)
 Add and update READMEs for BigQuery v1 (#30)
 Extend and update great expectations for BigQuery v1 (#28)
-Update and improve scripts (#27)
 Add BigQuery web model v1 (#26)
