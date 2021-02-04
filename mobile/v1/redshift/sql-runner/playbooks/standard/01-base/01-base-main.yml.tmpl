@@ -1,0 +1,101 @@
+:targets:
+- :name: 
+  :type:     redshift
+  :host: 
+  :database: 
+  :port: 
+  :username: 
+  :password: 
+  :ssl: 
+:variables:
+  :model_version:      redshift/mobile/1.0.0
+  :model:              mobile
+  :input_schema:       atomic
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :stage_next:         true
+  :start_date:         2020-01-01
+  :lookback_window_hours:
+  :days_late_allowed:
+  :update_cadence_days: 
+  :session_lookback_days:
+  :mobile_context: false
+  :geolocation_context: false
+  :application_context: false
+  :screen_context: false
+  :platform_filters: []
+  :app_id_filters: []
+:steps:
+- :name: 00-setup-base
+  :queries:
+    - :name: 00-setup-base
+      :file: standard/01-base/01-main/00-setup-base.sql
+      :template: true
+- :name: 01-new-events-limits
+  :queries:
+    - :name: 01-new-events-limits
+      :file: standard/01-base/01-main/01-new-events-limits.sql
+      :template: true
+- :name: 02-run-manifest
+  :queries:
+    - :name: 02-run-manifest
+      :file: standard/01-base/01-main/02-run-manifest.sql
+      :template: true
+- :name: 03-sessions-to-process
+  :queries:
+    - :name: 03-sessions-to-process
+      :file: standard/01-base/01-main/03-sessions-to-process.sql
+      :template: true
+- :name: 04-sessions-to-include
+  :queries:
+    - :name: 04-sessions-to-include
+      :file: standard/01-base/01-main/04-sessions-to-include.sql
+      :template: true
+- :name: 05-batch-limits
+  :queries:
+    - :name: 05-batch-limits
+      :file: standard/01-base/01-main/05-batch-limits.sql
+      :template: true
+- :name: 06-events-to-process
+  :queries:
+    - :name: 06-events-to-process
+      :file: standard/01-base/01-main/06-events-to-process.sql
+      :template: true
+- :name: 07-duplicates
+  :queries:
+    - :name: 07-duplicates
+      :file: standard/01-base/01-main/07-duplicates.sql
+      :template: true
+- :name: 08-contexts-to-include
+  :queries:
+    - :name: 08a-page-context
+      :file: standard/01-base/01-main/08a-page-context.sql
+      :template: true
+    - :name: 08b-mobile-context
+      :file: standard/01-base/01-main/08b-mobile-context.sql
+      :template: true
+    - :name: 08c-geolocation-context
+      :file: standard/01-base/01-main/08c-geolocation-context.sql
+      :template: true
+    - :name: 08d-application-context
+      :file: standard/01-base/01-main/08d-application-context.sql
+      :template: true
+    - :name: 08e-screen-context
+      :file: standard/01-base/01-main/08e-screen-context.sql
+      :template: true
+- :name: 09-events-this-run
+  :queries:
+    - :name: 09-events-this-run
+      :file: standard/01-base/01-main/09-events-this-run.sql
+      :template: true
+- :name: 10-metadata
+  :queries:
+    - :name: 10-metadata
+      :file: standard/01-base/01-main/10-metadata.sql
+      :template: true
+- :name: 11-commit-base
+  :queries:
+    - :name: 11-commit-base
+      :file: standard/01-base/01-main/11-commit-base.sql
+      :template: true

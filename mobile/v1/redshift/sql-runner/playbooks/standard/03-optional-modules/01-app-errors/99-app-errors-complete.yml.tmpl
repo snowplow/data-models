@@ -1,0 +1,22 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/mobile/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           false
+:steps:
+- :name: 99-app-errors-cleanup
+  :queries:
+    - :name: 99-app-errors-cleanup
+      :file: standard/03-optional-modules/01-app-errors/99-complete/99-app-errors-cleanup.sql
+      :template: true

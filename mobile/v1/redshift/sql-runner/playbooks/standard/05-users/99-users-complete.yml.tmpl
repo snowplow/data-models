@@ -1,0 +1,27 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/mobile/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 98-manifest-and-truncate
+  :queries:
+    - :name: 98-manifest-and-truncate
+      :file: standard/05-users/99-complete/98-manifest-and-truncate.sql
+      :template: true
+- :name: 99-users-cleanup
+  :queries:
+    - :name: 99-users-cleanup
+      :file: standard/05-users/99-complete/99-users-cleanup.sql
+      :template: true
