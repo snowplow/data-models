@@ -1,0 +1,20 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "mobile_sessions_screen_view_details",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "row_count",
+        "value_set": [0]
+      }
+    }
+  ],
+  "meta": {
+    "versions": {
+      "test_suite_version": "1.0.0",
+      "redshift_model_version": "1.0.0"
+    },
+    "great_expectations.__version__": "0.12.0"
+  }
+}

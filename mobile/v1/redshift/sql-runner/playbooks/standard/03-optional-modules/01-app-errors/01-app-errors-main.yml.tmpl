@@ -1,0 +1,50 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/mobile/1.0.0
+  :input_schema:       atomic
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :enabled:            true
+  :entropy:            ""
+  :upsert_lookback_days:
+  :skip_derived:
+  :stage_next:         true
+:steps:
+- :name: 00-setup-app-errors
+  :queries:
+    - :name: 00-setup-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/00-setup-app-errors.sql
+      :template: true
+- :name: 01-app-errors-limits
+  :queries:
+    - :name: 01-app-errors-limits
+      :file: standard/03-optional-modules/01-app-errors/01-main/01-app-errors-limits.sql
+      :template: true
+- :name: 02-app-errors-context
+  :queries:
+    - :name: 02-app-errors-context
+      :file: standard/03-optional-modules/01-app-errors/01-main/02-app-errors-context.sql
+      :template: true
+- :name: 03-app-errors
+  :queries:
+    - :name: 03-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/03-app-errors.sql
+      :template: true
+- :name: 04-app-errors-metadata
+  :queries:
+    - :name: 04-app-errors-metadata
+      :file: standard/03-optional-modules/01-app-errors/01-main/04-app-errors-metadata.sql
+      :template: true
+- :name: 05-commit-app-errors
+  :queries:
+    - :name: 05-commit-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/05-commit-app-errors.sql
+      :template: true

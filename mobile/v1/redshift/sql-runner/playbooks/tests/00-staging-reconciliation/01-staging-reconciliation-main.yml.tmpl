@@ -1,0 +1,22 @@
+:targets:
+- :name: 
+  :type:     redshift
+  :host: 
+  :database: 
+  :port: 
+  :username: 
+  :password: 
+  :ssl: 
+:variables:
+  :model_version:      redshift/mobile/1.0.0
+  :model:              mobile
+  :input_schema:       atomic
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 00-staging-reconciliation
+  :queries:
+    - :name: 00-staging-reconciliation
+      :file: tests/00-staging-reconciliation/01-main/00-staging-reconciliation.sql
+      :template: true
