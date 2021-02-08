@@ -44,7 +44,7 @@ AS(
     {{if eq (or .derived_tstamp_partitioned false) true}}
 
       AND a.derived_tstamp >= LOWER_LIMIT
-      AND a.derived_tstamp >= UPPER_LIMIT
+      AND a.derived_tstamp <= UPPER_LIMIT
 
     {{end}}
 
