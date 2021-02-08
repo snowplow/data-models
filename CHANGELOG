@@ -1,7 +1,8 @@
-BigQuery Web Version 1.0.0 (2021-02-08)
+BigQuery Web Version 1.0.0 (2021-02-09)
 ---------------------------
 release/bigquery/web/1.0.1 (web/v1/bigquery/CHANGELOG)
-Add top-level CHANGELOG (close #42)
+Add top-level CHANGELOG (#42)
+Add link to try-snowplow (#39)
 
 Redshift Web Version 1.2.0 (2021-01-25)
 ---------------------------

@@ -1,10 +1,10 @@
-Version 1.0.1 (2021-02-08)
+Version 1.0.1 (2021-02-09)
 -------------------------
-BigQuery: Patch default schemas in setup playbook (close #41)
-BigQuery: Add backwards compatibility for derived_tstamp partitioned tables (close #38)
-BigQuery: Fix typo in `XX-destroy` steps (close #40)
-BigQuery: ensure non-null page_view_id in page_views (close #37)
-BigQuery: Fix error for yauaa context (close #33)
+BigQuery: Revert default schemas to use `atomic`, `scratch`, `derived` (#41)
+BigQuery: Add backwards compatibility for derived_tstamp partitioned tables (#38)
+BigQuery: Fix typo in `XX-destroy` steps (#40)
+BigQuery: ensure non-null page_view_id in page_views (#37)
+BigQuery: Fix error for yauaa context (#33)
 
 Version 1.0.0 (2021-01-20)
 ---------------------------
