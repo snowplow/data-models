@@ -1,12 +1,18 @@
-BigQuery Web Version 1.0.0 (2021-02-09)
+BigQuery Web Version 1.0.0 (2021-02-XX)
 ---------------------------
 release/bigquery/web/1.0.1 (web/v1/bigquery/CHANGELOG)
 Add top-level CHANGELOG (#42)
 Add link to try-snowplow (#39)
 
+Snowflake Web Version 1.0.0 (2021-02-11)
+--------------------------
+release/snowflake/web/1.0.0 (web/v1/snowflake/CHANGELOG)
+Fix bug in credentials handling for pr_check and e2e scripts (#35)
+
 Redshift Web Version 1.2.0 (2021-01-25)
 ---------------------------
 release/redshift/web/1.2.0 (web/v1/redshift/CHANGELOG)
+Fix readme formatting (#7)
 
 BigQuery Web Version 1.0.0 (2021-01-20)
 ---------------------------

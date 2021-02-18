@@ -1,4 +1,4 @@
-Version 1.0.1 (2021-02-09)
+Version 1.0.1 (2021-02-XX)
 -------------------------
 BigQuery: Revert default schemas to use `atomic`, `scratch`, `derived` (#41)
 BigQuery: Add backwards compatibility for derived_tstamp partitioned tables (#38)
