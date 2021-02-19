@@ -58,15 +58,15 @@ Note that this script does not enforce dependencies, rather runs the playbooks i
 **Examples:**
 
 ```bash
-bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/datamodeling.json;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/sql-runner/configs/datamodeling.json;
 
 # Runs the standard bigquery web model end to end.
 
-bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/datamodeling.json -d;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/sql-runner/configs/datamodeling.json -d;
 
 # Dry-runs the standard bigquery web model end to end.
 
-bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/example_with_custom.json -t -o tmp/sql;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/sql-runner/configs/example_with_custom.json -p -o tmp/sql;
 
 # Prints pure sql for the bigquery model and example custom steps to files in `tmp/sql` - with all templates filled in.
 ```

@@ -79,7 +79,7 @@ For local use, the `.scripts/run_config.sh` script can be used to run a config -
 For those who wish to use other tools, one may configure playbooks and config JSON files for the desired model, then use the `.scripts/run_configs.sh` script's `-p` and `-o` flags to fill templates and output pure SQL to file:
 
 ```bash
-bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/example_with_custom.json -t -o tmp/sql;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/sql-runner/configs/example_with_custom.json -p -o tmp/sql;
 ```
 
 This SQL can then be used directly or amended to suit the relevant tool.
