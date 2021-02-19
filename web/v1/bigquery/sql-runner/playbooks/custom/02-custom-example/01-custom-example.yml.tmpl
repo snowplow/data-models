@@ -1,0 +1,30 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 01-link-clicks
+  :queries:
+    - :name: 01-link-clicks
+      :file: custom/02-custom-example/01-link-clicks.sql
+      :template: true
+- :name: 02-channel-engagement
+  :queries:
+    - :name: 02-channel-engagement
+      :file: custom/02-custom-example/02-channel-engagement.sql
+      :template: true
+- :name: 03-commit
+  :queries:
+    - :name: 03-commit
+      :file: custom/02-custom-example/03-commit.sql
+      :template: true
+- :name: 99-custom-example-cleanup
+  :queries:
+    - :name: 99-custom-example-cleanup
+      :file: custom/02-custom-example/99-custom-example-cleanup.sql
+      :template: true

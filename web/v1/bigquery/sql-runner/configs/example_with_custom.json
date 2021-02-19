@@ -14,7 +14,7 @@
         "dependsOn": ["standard/01-base/01-base-main"]
       },
       {
-        "playbook": "custom/02-page-views-join/01-page-views-join",
+        "playbook": "custom/02-custom-example/01-custom-example",
         "dependsOn": ["standard/01-base/01-base-main", "standard/02-page-views/01-page-views-main"]
       },
       {
@@ -32,10 +32,6 @@
       {
         "playbook": "standard/02-page-views/99-page-views-complete",
         "dependsOn": ["standard/02-page-views/01-page-views-main", "standard/03-sessions/01-sessions-main"]
-      },
-      {
-        "playbook": "custom/02-page-views-join/99-page-views-join-complete",
-        "dependsOn": ["custom/02-page-views-join/01-page-views-join"]
       },
       {
         "playbook": "standard/03-sessions/99-sessions-complete",
