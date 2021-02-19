@@ -1,3 +1,12 @@
+Version 1.0.1 (2021-02-24)
+-------------------------
+BigQuery: Revert default schemas to use `atomic`, `scratch`, `derived` (#41)
+BigQuery: Add backwards compatibility for derived_tstamp partitioned tables (#38)
+BigQuery: Fix typo in `XX-destroy` steps (#40)
+BigQuery: ensure non-null page_view_id in page_views (#37)
+BigQuery: Fix error for yauaa context (#33)
+BigQuery: Replace example customisation (#46)
+
 Version 1.0.0 (2021-01-20)
 ---------------------------
 Add and update READMEs for BigQuery v1 (#30)
