@@ -107,7 +107,8 @@ do
 
   # If printing sql to file, comment out metadata strings in the SQL
   if [ ! -z "$OUTPUT_PATH" ]; then
-    perl -i -pe 's/^([0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9] Step name:|Query name: |Query path: )/-- \1/' "$OUTPUT_FILE"
+    mkdir -p $OUTPUT_PATH
+    perl -i -pe 's/^([0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9] (Step name: |WARNING: )|Query name: |Query path: )/-- \1/' "$OUTPUT_FILE"
   fi
 
   set -e
