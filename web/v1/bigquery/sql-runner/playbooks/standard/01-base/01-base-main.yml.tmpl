@@ -4,10 +4,10 @@
   :project:
   :region:
 :variables:
-  :model_version:           bigquery/web/1.0.0
-  :input_schema:            rt_pipeline_prod1
-  :scratch_schema:          scratch_prod1
-  :output_schema:           derived_prod1
+  :model_version:           bigquery/web/1.0.1
+  :input_schema:            atomic
+  :scratch_schema:          scratch
+  :output_schema:           derived
   :entropy:                 ""
   :stage_next:              true
   :start_date:              2020-01-01
@@ -16,6 +16,7 @@
   :session_lookback_days:
   :update_cadence_days:
   :upsert_lookback_days:
+  :derived_tstamp_partitioned:
 :steps:
 - :name: 01-functions-and-procedures
   :queries:

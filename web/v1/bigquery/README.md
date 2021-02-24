@@ -12,7 +12,7 @@ To customise the model, we recommend following the guidance found in the README 
 
 ### Configuration
 
-First, fill in the connection details for the target database in the relevant template in `.scripts/template/redshift_template.yml.tmpl`.
+First, fill in the connection details for the target database in the relevant template in `.scripts/template/bigquery.yml.tmpl`.
 
 Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment variable or passed as an argument to the run_playbooks script. See the README in `.scripts` for more detail.
 
@@ -23,7 +23,7 @@ Variables in each module's playbook can also optionally be configured also. See 
 To run the entire standard model, end to end:
 
 ```bash
-bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/datamodeling.json;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/sql-runner/configs/datamodeling.json -t .scripts/templates/bigquery.yml.tmpl;
 ```
 
 See the README in the `.scripts/` directory for more details.

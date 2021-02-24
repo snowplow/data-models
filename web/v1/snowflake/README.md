@@ -59,7 +59,7 @@ playbooks/
 To run the entire standard model, end to end:
 
 ```bash
-bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/snowflake/sql-runner/configs/datamodeling.json;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/snowflake/sql-runner/configs/datamodeling.json -t .scripts/templates/snowflake.yml.tmpl;
 ```
 
 See the README in the `.scripts/` directory for more details.

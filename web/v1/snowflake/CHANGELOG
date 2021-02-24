@@ -1,4 +1,3 @@
 Version 1.0.0 (2021-02-11)
 --------------------------
-Fix bug in credentials handling for pr_check and e2e scripts (#35)
 Add Snowflake web model v1 (#31)

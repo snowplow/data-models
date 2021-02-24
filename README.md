@@ -14,6 +14,12 @@ This data is then made available in-stream for real-time processing, and can als
 
 The Snowplow atomic data acts as an immutable log of all the actions that occurred across your digital products. The data model takes that data and transforms it into a set of derived tables optimized for analysis. [Visit our documentation site][docs-what-is-dm] for further explanation on the data modeling process.
 
+# Try Snowplow
+
+This repo contains data models which are relevant to users who already have a full Snowplow pipeline running (which can be done Open Source or via our [Snowplow Insights](https://snowplowanalytics.com/snowplow-insights/) service).
+
+If you don't have a pipeline yet, you might be interested in finding out what Snowplow can do by setting up [Try Snowplow](https://try.snowplowanalytics.com/?utm_source=github&utm_medium=post&utm_campaign=try-snowplow).
+
 # Repo Contents
 
 - [Web (v1)](web/v1)
@@ -70,10 +76,10 @@ For local use, the `.scripts/run_config.sh` script can be used to run a config -
 
 ## Using other tools
 
-For those who wish to use other tools, one may configure playbooks and config JSON files for the desired model, then use the `.scripts/run_configs.sh` script's `-t` and `-o` flags to fill templates and output pure SQL to file:
+For those who wish to use other tools, one may configure playbooks and config JSON files for the desired model, then use the `.scripts/run_configs.sh` script's `-p` and `-o` flags to fill templates and output pure SQL to file:
 
 ```bash
-bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/configs/example_with_custom.json -t -o tmp/sql;
+bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c web/v1/bigquery/sql-runner/configs/example_with_custom.json -p -o tmp/sql;
 ```
 
 This SQL can then be used directly or amended to suit the relevant tool.
