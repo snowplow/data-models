@@ -35,7 +35,7 @@ Documentation for the data models can be found on [our documentation site][docs-
 
 # Prerequisites
 
-These models are written in a format that is runnable via [SQL-runner][sql-runner] - available for download from [Bintray][sql-runner-bintray]. The bigquery model requires >= v0.9.2 of sql-runner.
+These models are written in a format that is runnable via [SQL-runner][sql-runner] - available for download as a zip file from [Github Releases][sql-runner-github]. The bigquery model requires >= v0.9.2, and the Snowflake model requires >= v0.9.3 of sql-runner.
 
 Those who don't wish to use sql-runner to run models can use the -t and -o flags of the run_config.sh script to output the pure sql for a model according to how it has been configured for sql-runner.
 
@@ -107,4 +107,4 @@ limitations under the License.
 [docs-data-models]: https://docs.snowplowanalytics.com/docs/modeling-your-data/
 
 [sql-runner]: https://github.com/snowplow/sql-runner
-[sql-runner-bintray]: https://bintray.com/snowplow/snowplow-generic/sql-runner#files
+[sql-runner-github]: https://github.com/snowplow/sql-runner/releases/
