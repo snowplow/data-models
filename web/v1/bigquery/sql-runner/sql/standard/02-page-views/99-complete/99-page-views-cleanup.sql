@@ -20,6 +20,9 @@
   DROP TABLE IF EXISTS {{.scratch_schema}}.pv_scroll_depth{{.entropy}};
   DROP TABLE IF EXISTS {{.scratch_schema}}.pv_metadata_this_run{{.entropy}};
   DROP TABLE IF EXISTS {{.scratch_schema}}.pv_run_metadata_temp{{.entropy}};
+  DROP TABLE IF EXISTS {{.scratch_schema}}.contexts_com_iab_snowplow_spiders_and_robots_1{{.entropy}};
+  DROP TABLE IF EXISTS {{.scratch_schema}}.contexts_com_snowplowanalytics_snowplow_ua_parser_context_1{{.entropy}};
+  DROP TABLE IF EXISTS {{.scratch_schema}}.contexts_nl_basjes_yauaa_context_1{{.entropy}};
 
 {{end}}
 

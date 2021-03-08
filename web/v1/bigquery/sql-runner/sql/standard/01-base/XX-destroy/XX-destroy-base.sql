@@ -19,3 +19,4 @@ DROP TABLE IF EXISTS {{.output_schema}}.base_session_id_manifest{{.entropy}};
 DROP TABLE IF EXISTS {{.scratch_schema}}.events_staged{{.entropy}};
 DROP FUNCTION IF EXISTS  {{.output_schema}}.columnCheckQuery;
 DROP PROCEDURE IF EXISTS {{.output_schema}}.commit_table;
+DROP PROCEDURE IF EXISTS {{.output_schema}}.combine_context_versions;

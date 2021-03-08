@@ -100,6 +100,30 @@ derived.commit_table(
 
 If `automigrate` is TRUE, tables which don't exist will be created, and new columns will be added to the target table. If FALSE, the query will fail without committing unless the target table exists and columns match exactly.
 
+### Handling schema migrations
+
+The BigQuery loader for the Snowplow pipeline is unique in that it creates a new column for every new schema for an event or entity, rather than just for major version changes.
+
+The model uses a separate stored procedure to solve this problem internally, which might be useful for custom implementations too:
+
+```SQL
+CALL {{.output_schema}}.combine_context_versions('contexts_com_iab_snowplow_spiders_and_robots_1')
+```
+
+The `combine_context_versions` stored procedure will find all fields within the context across multiple versions of a context column, and create a new table which coalesces each top-level field, except for arrays or structs.
+
+It is limited at present, as the current implementation was designed to serve a specific purpose internally - so it will only take the first item in the array of contexts, and it will ignore any field that is an array or struct. So, it is not suitable for contexts with a 1:many relationship to events, or with complex datatypes.
+
+However, if the context has a 1:1 relationship to the event, and the interesting fields are basic top-level datatypes within the context, then provide it a string argument containing the beginning of the context column name.
+
+The procedure will look up metadata for the column, and COALESCE the data it finds in the `events_staged` table, creating a new table, named as the string which was provided.
+
+These tables can be used in downstream logic without fear that introducing a new schema version will require manual changes.
+
+Later context versions take priority - so if both a `1_0_0` and a `1_0_1` version exist, the values found in `1_0_1` (ignoring nulls) are preferred.
+
+Currently custom events, 1:many contexts and complex datatypes must still be manually handled.
+
 ## Advanced usage - variable scheduling and non-standard requirements
 
 As mentioned above, the model's structure allows for some more complex use cases which may require a nuanced approach. Where this is required, it is advisable to begin by setting up the model in a standard way first, iterate upon it insofar as possible, and move to more complex requirements once the nuance is well understood.
