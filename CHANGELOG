@@ -1,5 +1,10 @@
+BigQuery Web Version 1.0.2 (2021-03-11)
+---------------------------------------
+BigQuery: Handle schema evolution in core contexts (close #52)
+Update SQL Runner download link to point to Github releases (close #51)
+
 BigQuery Web Version 1.0.1 (2021-02-24)
----------------------------
+---------------------------------------
 BigQuery: Revert default schemas to use `atomic`, `scratch`, `derived` (#41)
 BigQuery: Add backwards compatibility for derived_tstamp partitioned tables (#38)
 BigQuery: Fix typo in `XX-destroy` steps (#40)
@@ -13,12 +18,12 @@ Fix example command for `run_config.sh` in scripts README (#34)
 Fix typos in README (#44)
 
 Snowflake Web Version 1.0.0 (2021-02-11)
---------------------------
+----------------------------------------
 Add Snowflake web model v1 (#31)
 Fix bug in credentials handling for pr_check and e2e scripts (#35)
 
 Redshift Web Version 1.2.0 (2021-01-25)
----------------------------
+---------------------------------------
 Redshift: Add config (#12)
 Redshift: Update test on page_view_in_session_index (#13)
 Redshift: Rename 02-page-views/setup.sql and /limits.sql to include module name (#8)
@@ -33,7 +38,7 @@ Add CHANGELOG (#6)
 Fix readme formatting (#7)
 
 BigQuery Web Version 1.0.0 (2021-01-20)
----------------------------
+---------------------------------------
 Resolve issues in testing flow (#29)
 Add and update READMEs for BigQuery v1 (#30)
 Extend and update great expectations for BigQuery v1 (#28)
