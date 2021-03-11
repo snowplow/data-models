@@ -100,44 +100,49 @@ AS(
 
     ev.os_timezone,
 
-    ev.category,
-    ev.primary_impact,
-    ev.reason,
-    ev.spider_or_robot,
+    -- Optional contexts, only populated if enabled
 
-    ev.useragent_family,
-    ev.useragent_major,
-    ev.useragent_minor,
-    ev.useragent_patch,
-    ev.useragent_version,
-    ev.os_family,
-    ev.os_major,
-    ev.os_minor,
-    ev.os_patch,
-    ev.os_patch_minor,
-    ev.os_version,
-    ev.device_family,
+    -- iab enrichment fields: set iab variable to true to enable
+    iab.category,
+    iab.primary_impact,
+    iab.reason,
+    iab.spider_or_robot,
 
-    ev.device_class,
-    ev.agent_class,
-    ev.agent_name,
-    ev.agent_name_version,
-    ev.agent_name_version_major,
-    ev.agent_version,
-    ev.agent_version_major,
-    ev.device_brand,
-    ev.device_name,
-    ev.device_version,
-    ev.layout_engine_class,
-    ev.layout_engine_name,
-    ev.layout_engine_name_version,
-    ev.layout_engine_name_version_major,
-    ev.layout_engine_version,
-    ev.layout_engine_version_major,
-    ev.operating_system_class,
-    ev.operating_system_name,
-    ev.operating_system_name_version,
-    ev.operating_system_version
+    -- ua parser enrichment fields: set ua_parser variable to true to enable
+    uap.useragent_family,
+    uap.useragent_major,
+    uap.useragent_minor,
+    uap.useragent_patch,
+    uap.useragent_version,
+    uap.os_family,
+    uap.os_major,
+    uap.os_minor,
+    uap.os_patch,
+    uap.os_patch_minor,
+    uap.os_version,
+    uap.device_family,
+
+    -- yauaa enrichment fields: set yauaa variable to true to enable
+    yauaa.device_class,
+    yauaa.agent_class,
+    yauaa.agent_name,
+    yauaa.agent_name_version,
+    yauaa.agent_name_version_major,
+    yauaa.agent_version,
+    yauaa.agent_version_major,
+    yauaa.device_brand,
+    yauaa.device_name,
+    yauaa.device_version,
+    yauaa.layout_engine_class,
+    yauaa.layout_engine_name,
+    yauaa.layout_engine_name_version,
+    yauaa.layout_engine_name_version_major,
+    yauaa.layout_engine_version,
+    yauaa.layout_engine_version_major,
+    yauaa.operating_system_class,
+    yauaa.operating_system_name,
+    yauaa.operating_system_name_version,
+    yauaa.operating_system_version
 
   FROM {{.scratch_schema}}.pv_page_view_events{{.entropy}} ev
 
@@ -147,4 +152,15 @@ AS(
   LEFT JOIN {{.scratch_schema}}.pv_scroll_depth{{.entropy}} sd
   ON ev.page_view_id = sd.page_view_id
 
+  LEFT JOIN {{.scratch_schema}}.contexts_com_iab_snowplow_spiders_and_robots_1{{.entropy}} iab
+  ON ev.page_view_id = iab.page_view_id
+  AND ev.event_id = iab.event_id
+
+  LEFT JOIN {{.scratch_schema}}.contexts_com_snowplowanalytics_snowplow_ua_parser_context_1{{.entropy}} uap
+  ON ev.page_view_id = uap.page_view_id
+  AND ev.event_id = uap.event_id
+
+  LEFT JOIN {{.scratch_schema}}.contexts_nl_basjes_yauaa_context_1{{.entropy}} yauaa
+  ON ev.page_view_id = yauaa.page_view_id
+  AND ev.event_id = yauaa.event_id
 );
