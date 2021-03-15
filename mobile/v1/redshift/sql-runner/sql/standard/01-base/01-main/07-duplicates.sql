@@ -39,6 +39,7 @@ BEGIN;
 
   -- Remove duplicates from the table
   DELETE FROM {{.scratch_schema}}.{{.model}}_base_events_this_run_tmp{{.entropy}} 
-  WHERE event_id IN (SELECT event_id FROM {{.scratch_schema}}.{{.model}}_base_duplicates_this_run{{.entropy}});
+  WHERE event_id IN (SELECT event_id FROM {{.scratch_schema}}.{{.model}}_base_duplicates_this_run{{.entropy}})
+  OR event_id_dedupe_index > 1;
 
 END;

@@ -160,9 +160,6 @@ AS(
     {{.scratch_schema}}.web_events_addon_pv_context{{.entropy}} b
   ON a.event_id = b.root_id
   AND a.collector_tstamp = b.root_tstamp
-
-  WHERE
-    a.event_id_dedupe_index = 1
   
 {{end}}
 
@@ -287,7 +284,5 @@ AS(
   ON events.event_id = app_context.root_id
   AND events.collector_tstamp = app_context.root_tstamp
   
-  WHERE
-    events.event_id_dedupe_index = 1
 {{end}}
 );
