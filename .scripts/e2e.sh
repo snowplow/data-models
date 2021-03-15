@@ -11,7 +11,7 @@ do
     b) SQL_RUNNER_PATH=$OPTARG ;;
     d) DATABASE=$OPTARG ;;
     a) CREDENTIALS=$OPTARG ;;
-		m) MODEL=$OPTARG ;;
+    m) MODEL=$OPTARG ;;
   esac
 done
 
