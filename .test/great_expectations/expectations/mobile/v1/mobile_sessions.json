@@ -25,7 +25,7 @@
           "network_userid",
           "has_install",
           "screen_views",
-          "unique_screen_views",
+          "screen_names_viewed",
           "app_errors",
           "fatal_app_errors",
           "first_event_name",

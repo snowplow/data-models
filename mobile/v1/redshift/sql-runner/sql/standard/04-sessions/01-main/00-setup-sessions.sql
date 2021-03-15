@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_sessions{{.entropy}} (
   network_userid VARCHAR(128) ENCODE ZSTD,
   has_install BOOLEAN ENCODE ZSTD,
   screen_views INT ENCODE ZSTD,
-  unique_screen_views INT ENCODE ZSTD,
+  screen_names_viewed INT ENCODE ZSTD,
   app_errors INT ENCODE ZSTD,
   fatal_app_errors INT ENCODE ZSTD,
   first_event_name VARCHAR(1000) ENCODE ZSTD,

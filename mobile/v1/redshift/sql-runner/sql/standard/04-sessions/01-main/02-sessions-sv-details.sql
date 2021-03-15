@@ -25,7 +25,7 @@ AS (
 	SELECT
 		sv.session_id,
 		COUNT(DISTINCT sv.screen_view_id) AS screen_views,
-		COUNT(DISTINCT sv.screen_view_name) AS unique_screen_views,
+		COUNT(DISTINCT sv.screen_view_name) AS screen_names_viewed,
 		--Could split below into first/last scratch tables. Trying to minimise joins to sessions.
 		MAX(CASE WHEN sv.screen_view_in_session_index = 1 THEN sv.screen_view_name END) AS first_screen_view_name,
 		MAX(CASE WHEN sv.screen_view_in_session_index = 1 THEN sv.screen_view_transition_type END) AS first_screen_view_transition_type,

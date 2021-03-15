@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_users{{.entropy}} (
   end_tstamp TIMESTAMP ENCODE ZSTD,
 
   screen_views INT ENCODE ZSTD,
-  unique_screen_views INT ENCODE ZSTD,
+  screen_names_viewed INT ENCODE ZSTD,
   sessions INT ENCODE ZSTD,
   sessions_duration_s INT ENCODE ZSTD,
   active_days INT ENCODE ZSTD,

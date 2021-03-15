@@ -32,7 +32,7 @@ AS (
 
     -- engagement fields
     b.screen_views,
-    b.unique_screen_views,
+    b.screen_names_viewed,
     b.sessions,
     b.sessions_duration_s,
     b.active_days,

@@ -40,7 +40,7 @@ AS (
 
 		sa.has_install,
 		sv.screen_views,
-		sv.unique_screen_views,
+		sv.screen_names_viewed,
 		sa.app_errors,
 		sa.fatal_app_errors,
 

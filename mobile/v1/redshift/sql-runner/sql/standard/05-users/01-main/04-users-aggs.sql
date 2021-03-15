@@ -29,7 +29,7 @@ AS(
       MAX(end_tstamp) AS end_tstamp,
       -- engagement
       SUM(screen_views) AS screen_views,
-      SUM(unique_screen_views) AS unique_screen_views, --Unsure of best name as isn't unique at this level.
+      SUM(screen_names_viewed) AS screen_names_viewed,
       COUNT(DISTINCT session_id) AS sessions,
       SUM(DATEDIFF('s',start_tstamp, end_tstamp)) AS sessions_duration_s,
       COUNT(DISTINCT DATE_TRUNC('d', start_tstamp)) AS active_days,
@@ -49,7 +49,7 @@ AS(
     end_tstamp,
     -- engagement
     screen_views,
-    unique_screen_views,
+    screen_names_viewed,
     sessions,
     sessions_duration_s,
     active_days,

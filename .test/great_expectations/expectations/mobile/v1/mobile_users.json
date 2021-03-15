@@ -18,7 +18,7 @@
           "start_tstamp",
           "end_tstamp",
           "screen_views",
-          "unique_screen_views",
+          "screen_names_viewed",
           "sessions",
           "sessions_duration_s",
           "active_days",
