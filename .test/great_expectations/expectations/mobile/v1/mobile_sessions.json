@@ -5,7 +5,7 @@
     {
       "expectation_type": "expect_table_column_count_to_equal",
       "kwargs": {
-        "value": 61
+        "value": 62
       }
     },
     {
@@ -23,6 +23,7 @@
           "user_id",
           "device_user_id",
           "network_userid",
+          "session_duration_s",
           "has_install",
           "screen_views",
           "screen_names_viewed",

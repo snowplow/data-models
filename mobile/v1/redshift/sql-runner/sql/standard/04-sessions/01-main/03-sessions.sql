@@ -38,6 +38,7 @@ AS (
 		es.device_user_id,
 		es.network_userid,
 
+		sa.session_duration_s,
 		sa.has_install,
 		sv.screen_views,
 		sv.screen_names_viewed,

@@ -31,7 +31,7 @@ AS(
       SUM(screen_views) AS screen_views,
       SUM(screen_names_viewed) AS screen_names_viewed,
       COUNT(DISTINCT session_id) AS sessions,
-      SUM(DATEDIFF('s',start_tstamp, end_tstamp)) AS sessions_duration_s,
+      SUM(session_duration_s) AS sessions_duration_s,
       COUNT(DISTINCT DATE_TRUNC('d', start_tstamp)) AS active_days,
       --errors
       SUM(app_errors) AS app_errors,

@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_sessions{{.entropy}} (
   user_id VARCHAR(255) ENCODE ZSTD,
   device_user_id VARCHAR(4096) ENCODE ZSTD,
   network_userid VARCHAR(128) ENCODE ZSTD,
+  session_duration_s INT ENCODE ZSTD,
   has_install BOOLEAN ENCODE ZSTD,
   screen_views INT ENCODE ZSTD,
   screen_names_viewed INT ENCODE ZSTD,

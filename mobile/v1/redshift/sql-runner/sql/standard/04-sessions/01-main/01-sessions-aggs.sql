@@ -76,6 +76,7 @@ AS(
     sa.session_last_event_id,
     sa.start_tstamp,
     sa.end_tstamp,
+    DATEDIFF('s', sa.start_tstamp, sa.end_tstamp) session_duration_s,
     sa.has_install,
     ae.app_errors,
     ae.fatal_app_errors
