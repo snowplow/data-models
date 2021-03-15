@@ -43,16 +43,16 @@
 			es.derived_tstamp,
 
 			--Error contexts
-			ae.error_message,
+			ae.message,
 			ae.programming_language,
 			ae.class_name,
-			ae.error_exception_name,
+			ae.exception_name,
 			ae.is_fatal,
 			ae.line_number,
 			ae.stack_trace,
 			ae.thread_id,
 			ae.thread_name,
-			ae.error_file_name,
+			ae.file_name,
 			ae.line_column,
 			ae.cause_stack_trace,
 

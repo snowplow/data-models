@@ -20,16 +20,16 @@
   CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.mobile_app_errors_context{{.entropy}} (
     root_id CHAR(36),
     root_tstamp TIMESTAMP ENCODE ZSTD,
-    error_message VARCHAR(2048) ENCODE ZSTD,
+    message VARCHAR(2048) ENCODE ZSTD,
     programming_language VARCHAR(12) ENCODE ZSTD,
     class_name VARCHAR(1024) ENCODE ZSTD,
-    error_exception_name VARCHAR(1024) ENCODE ZSTD,
+    exception_name VARCHAR(1024) ENCODE ZSTD,
     is_fatal BOOLEAN ENCODE ZSTD,
     line_number INT ENCODE ZSTD,
     stack_trace VARCHAR(8192) ENCODE ZSTD,
     thread_id INT ENCODE ZSTD,
     thread_name VARCHAR(1024) ENCODE ZSTD,
-    error_file_name VARCHAR(1024) ENCODE ZSTD,
+    file_name VARCHAR(1024) ENCODE ZSTD,
     line_column INT ENCODE ZSTD,
     cause_stack_trace VARCHAR(8192) ENCODE ZSTD
   )
@@ -41,16 +41,16 @@
     SELECT
       ae.root_id,
       ae.root_tstamp,
-      ae.message AS error_message,
+      ae.message,
       ae.programming_language,
       ae.class_name,
-      ae.exception_name AS error_exception_name,
+      ae.exception_name,
       ae.is_fatal,
       ae.line_number,
       ae.stack_trace,
       ae.thread_id,
       ae.thread_name,
-      ae.file_name AS error_file_name,
+      ae.file_name,
       ae.line_column,
       ae.cause_stack_trace
 
