@@ -75,9 +75,15 @@ AS (
     NVL(e.sessions_rows,0) - NVL(s.sessions_rows,0) AS ev_to_sess_session_rows,
     NVL(e.distinct_session_ids,0) - NVL(s.distinct_session_ids,0) AS ev_to_sess_distinct_session_ids,
     NVL(e.distinct_session_ids_w_screen_view,0) - NVL(sv.distinct_session_ids,0) AS ev_to_sv_distinct_session_ids,
+    {{if eq (or .app_errors false) true}}
+    --Only evaluate if module enabled
     NVL(e.app_error_distinct_event_ids,0) - NVL(ae.distinct_app_errors_event_id,0) AS ev_to_ae_distinct_event_ids,
-    NVL(sv.distinct_screen_view_ids,0) -NVL(s.distinct_screen_view_ids,0) AS sv_to_sess_sv_distinct_screen_view_ids,
     NVL(e.app_error_row_count,0) - NVL(ae.app_error_rows,0) AS ev_to_ae_row_count,
+    {{else}}
+    0 AS ev_to_ae_distinct_event_ids,
+    0 AS ev_to_ae_row_count,
+    {{end}}
+    NVL(sv.distinct_screen_view_ids,0) -NVL(s.distinct_screen_view_ids,0) AS sv_to_sess_sv_distinct_screen_view_ids,
     NVL(ae.distinct_app_errors_event_id,0) - NVL(s.app_errors,0) AS ae_to_sess_app_errors
 
 	FROM events e
