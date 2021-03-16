@@ -22,7 +22,7 @@
   DROP TABLE IF EXISTS {{.scratch_schema}}.{{.model}}_base_run_metadata_temp{{.entropy}};
   DROP TABLE IF EXISTS {{.scratch_schema}}.{{.model}}_base_run_dupe_metadata_temp{{.entropy}};
   DROP TABLE IF EXISTS {{.scratch_schema}}.{{.model}}_base_session_id_run_manifest{{.entropy}};
-  DROP TABLE IF EXISTS {{.scratch_schema}}.{{.model}}_base_events_this_run_tmp{{.entropy}};
+  DROP TABLE IF EXISTS {{.scratch_schema}}.{{.model}}_base_events_to_process{{.entropy}};
   DROP TABLE IF EXISTS {{.scratch_schema}}.{{.model}}_base_event_ids_this_run{{.entropy}};
   {{if eq .model "web"}}
     DROP TABLE IF EXISTS {{.scratch_schema}}.web_events_addon_pv_context{{.entropy}};

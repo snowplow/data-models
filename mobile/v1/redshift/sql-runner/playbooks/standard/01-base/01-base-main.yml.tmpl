@@ -18,7 +18,7 @@
   :start_date:         2020-11-25
   :lookback_window_hours:
   :days_late_allowed:
-  :update_cadence_days: 
+  :update_cadence_days:
   :session_lookback_days:
   :mobile_context: false
   :geolocation_context: false
@@ -57,10 +57,10 @@
     - :name: 05-batch-limits
       :file: standard/01-base/01-main/05-batch-limits.sql
       :template: true
-- :name: 06-events-this-run
+- :name: 06-events-to-process
   :queries:
-    - :name: 06-events-this-run
-      :file: standard/01-base/01-main/06-events-this-run.sql
+    - :name: 06-events-to-process
+      :file: standard/01-base/01-main/06-events-to-process.sql
       :template: true
 - :name: 07-duplicates
   :queries:
@@ -84,10 +84,10 @@
     - :name: 08e-screen-context
       :file: standard/01-base/01-main/08e-screen-context.sql
       :template: true
-- :name: 09-add-contexts
+- :name: 09-events-this-run
   :queries:
-    - :name: 09-add-contexts
-      :file: standard/01-base/01-main/09-add-contexts.sql
+    - :name: 09-events-this-run
+      :file: standard/01-base/01-main/09-events-this-run.sql
       :template: true
 - :name: 10-metadata
   :queries:

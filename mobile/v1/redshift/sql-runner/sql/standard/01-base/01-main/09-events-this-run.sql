@@ -155,7 +155,7 @@ AS(
     b.id AS page_view_id
 
   FROM
-    {{.scratch_schema}}.{{.model}}_base_events_this_run_tmp{{.entropy}} a
+    {{.scratch_schema}}.{{.model}}_base_events_to_process{{.entropy}} a
   LEFT JOIN
     {{.scratch_schema}}.web_events_addon_pv_context{{.entropy}} b
   ON a.event_id = b.root_id
@@ -164,7 +164,8 @@ AS(
 {{end}}
 
 {{if eq .model "mobile"}} 
-
+-- base_events_to_process for mobile is a deduped table of event_ids and session_ids rather than full atomic events table.
+-- Inner join atomic events to base events to produce fully deduped wide events table
   SELECT
     events.app_id,
     events.platform,
@@ -231,11 +232,11 @@ AS(
     events.event_fingerprint,
     events.event_vendor || '/' || events.event_name || '/' || events.event_format || '/' || events.event_version AS event_schema,
     events.true_tstamp,
-    events.session_id,
-    events.session_index,
-    events.previous_session_id,
-    events.device_user_id,
-    events.session_first_event_id,
+    be.session_id,
+    be.session_index,
+    be.previous_session_id,
+    be.device_user_id,
+    be.session_first_event_id,
     screen_context.screen_id,
     screen_context.screen_name,
     screen_context.screen_activity,
@@ -263,10 +264,14 @@ AS(
     geo_context.device_speed,
     app_context.build,
     app_context.version,
-    ROW_NUMBER() OVER(PARTITION BY events.session_id ORDER BY events.derived_tstamp) AS event_index_in_session
+    ROW_NUMBER() OVER(PARTITION BY be.session_id ORDER BY events.derived_tstamp) AS event_index_in_session
 
   FROM
-    {{.scratch_schema}}.{{.model}}_base_events_this_run_tmp{{.entropy}} events
+    {{.input_schema}}.events AS events
+  INNER JOIN
+    {{.scratch_schema}}.{{.model}}_base_events_to_process{{.entropy}} AS be --deduped events
+  ON events.event_id = be.event_id
+  AND events.collector_tstamp = be.collector_tstamp
   LEFT JOIN
     {{.scratch_schema}}.mobile_events_addon_screen_context{{.entropy}} AS screen_context
   ON events.event_id = screen_context.root_id
@@ -283,6 +288,15 @@ AS(
     {{.scratch_schema}}.mobile_events_addon_application_context{{.entropy}} AS app_context
   ON events.event_id = app_context.root_id
   AND events.collector_tstamp = app_context.root_tstamp
+  
+  WHERE
+    events.collector_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.{{.model}}_base_run_limits{{.entropy}})
+    AND events.collector_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.{{.model}}_base_run_limits{{.entropy}})
+    AND events.platform IN ( {{range $i, $platform := .platform_filters}} {{if $i}}, {{end}} '{{$platform}}' {{else}} 'mob' {{end}} )
+    {{if .app_id_filters}}
+    -- Filter by app_id. Ignore if not specified. 
+    AND events.app_id IN ( {{range $i, $app_id := .app_id_filters}} {{if $i}}, {{end}} '{{$app_id}}' {{end}} )
+    {{end}}
   
 {{end}}
 );

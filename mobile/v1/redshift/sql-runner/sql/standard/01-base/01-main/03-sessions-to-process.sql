@@ -48,24 +48,17 @@ AS(
     AND a.collector_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.{{.model}}_base_new_events_limits{{.entropy}})
     AND DATEDIFF(DAY, a.dvce_created_tstamp, a.dvce_sent_tstamp) <= {{or .days_late_allowed 3}}
     -- don't process data that's too late
-    {{if eq .model "web"}}
-    AND a.domain_sessionid IS NOT NULL
-    {{else if eq .model "mobile"}}
-    AND mob_session.session_id IS NOT NULL
-    {{end}}
+    AND {{if eq .model "web"}} a.domain_sessionid {{else if eq .model "mobile"}} mob_session.session_id {{end}} IS NOT NULL
     -- Filter by platform. Required.
     AND a.platform IN (
-      {{range $i, $platform := .platform_filters}} 
-      {{if $i}}, {{end}} '{{$platform}}'  -- User defined platforms if specified
+      {{range $i, $platform := .platform_filters}} {{if $i}}, {{end}} '{{$platform}}'  -- User defined platforms if specified
       {{else}}
       {{if eq .model "web"}} 'web' {{else if eq .model "mobile"}} 'mob' {{end}} --default values
       {{end}}
       )
     {{if .app_id_filters}}
     -- Filter by app_id. Ignore if not specified.
-    AND a.app_id IN (
-      {{range $i, $app_id := .app_id_filters}} {{if $i}}, {{end}} '{{$app_id}}' {{end}}
-      )
+    AND a.app_id IN ( {{range $i, $app_id := .app_id_filters}} {{if $i}}, {{end}} '{{$app_id}}' {{end}} )
     {{end}}
   GROUP BY 1
 );
