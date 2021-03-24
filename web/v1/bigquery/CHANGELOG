@@ -1,3 +1,8 @@
+Version 1.0.3 (2021-03-24)
+--------------------------
+BigQuery: Change session lookback to use days rather than hours (#60)
+BigQuery: Fix typo in stored procedure (#61)
+
 Version 1.0.2 (2021-03-11)
 --------------------------
 BigQuery: Handle schema evolution in core contexts (close #52)
