@@ -6,7 +6,7 @@ Snowplow is a scalable open-source platform for rich, high quality, low-latency 
 
 # Snowplow Pipeline Overview
 
-![snowplow-pipeline](media/snowplow_pipeline.png)
+![snowplow-pipeline](media/snowplow_architecture.png)
 
 The [Snowplow trackers][tracker-docs] enable highly customisable collection of raw, unopinionated event data. The pipeline validates these events against a JSONSchema - to guarantee a high quality dataset - and adds information via both standard and custom enrichments.
 
