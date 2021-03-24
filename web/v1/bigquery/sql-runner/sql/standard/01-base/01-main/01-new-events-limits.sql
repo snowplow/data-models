@@ -20,8 +20,7 @@ AS(
   SELECT
     TIMESTAMP_SUB(MAX(collector_tstamp), INTERVAL {{or .lookback_window_hours 6}} HOUR) AS lower_limit,
     TIMESTAMP_ADD(MAX(collector_tstamp), INTERVAL {{or .update_cadence_days 7}} DAY) AS upper_limit,
-    TIMESTAMP_SUB(MAX(collector_tstamp), INTERVAL {{or .session_lookback_days 1095}} HOUR) AS session_limit
-    -- increased session limit default as vastly improved performance expected from BQ
+    TIMESTAMP_SUB(MAX(collector_tstamp), INTERVAL {{or .session_lookback_days 365}} DAY) AS session_limit
 
   FROM
     {{.output_schema}}.base_event_id_manifest{{.entropy}}
