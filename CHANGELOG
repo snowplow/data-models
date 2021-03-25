@@ -1,3 +1,8 @@
+Redshift Mobile Version 1.0.0 (2021-03-25)
+---------------------------------------
+Update scripts for mobile model (#66)
+Add Redshift mobile model v1 (#65)
+
 BigQuery Web Version 1.0.3 (2021-03-24)
 ---------------------------------------
 BigQuery: Change session lookback to use days rather than hours (#60)
