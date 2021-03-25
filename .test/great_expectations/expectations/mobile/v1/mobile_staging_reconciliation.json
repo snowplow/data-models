@@ -1,0 +1,94 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "mobile_staging_reconciliation",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ev_to_sv_sv_rows",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ev_to_sv_distinct_event_ids",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ev_to_sess_session_rows",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ev_to_sess_distinct_session_ids",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ev_to_sv_distinct_session_ids",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ev_to_ae_distinct_event_ids",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "sv_to_sess_sv_distinct_screen_view_ids",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ev_to_ae_row_count",
+        "value_set": [
+          0
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "ae_to_sess_app_errors",
+        "value_set": [
+          0
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations.__version__": "0.12.0",
+    "versions": {
+      "redshift_model_version": "1.0.0",
+      "test_suite_version": "1.0.0"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-[![License][license-image]][license]
+[![actively-maintained]][tracker-classificiation] [![License][license-image]][license]
 
 ![snowplow-logo](media/snowplow_logo.png)
 
@@ -23,11 +23,11 @@ If you don't have a pipeline yet, you might be interested in finding out what Sn
 # Repo Contents
 
 - [Web (v1)](web/v1)
-  - [Redshift](web/v1/redshift) [![actively-maintained]][tracker-classificiation]
-  - [BigQuery](web/v1/bigquery) [![actively-maintained]][tracker-classificiation]
-  - [Snowflake](web/v1/snowflake) [![actively-maintained]][tracker-classificiation]
-- Mobile (coming soon)
-  - Redshift (coming soon)
+  - [Redshift](web/v1/redshift)
+  - [BigQuery](web/v1/bigquery)
+  - [Snowflake](web/v1/snowflake)
+- [Mobile (v1)](mobile/v1)
+  - [Redshift](mobile/v1/redshift)
   - BigQuery (coming soon)
   - Snowflake (coming soon)
 

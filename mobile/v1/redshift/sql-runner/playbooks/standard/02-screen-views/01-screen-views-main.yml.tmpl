@@ -1,0 +1,54 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/mobile/1.0.0
+  :input_schema:       atomic
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :upsert_lookback_days:
+  :skip_derived:
+  :stage_next:         true
+:steps:
+- :name: 00-setup
+  :queries:
+    - :name: 00-setup-screen-views
+      :file: standard/02-screen-views/01-main/00-setup-screen-views.sql
+      :template: true
+- :name: 01-screen-view-limits
+  :queries:
+    - :name: 01-screen-view-limits
+      :file: standard/02-screen-views/01-main/01-screen-view-limits.sql
+      :template: true
+- :name: 02-screen-view-ids
+  :queries:
+    - :name: 02-screen-view-ids
+      :file: standard/02-screen-views/01-main/02-screen-view-ids.sql
+      :template: true
+- :name: 03-screen-view-events
+  :queries:
+    - :name: 03-screen-view-events
+      :file: standard/02-screen-views/01-main/03-screen-view-events.sql
+      :template: true
+- :name: 04-screen-views
+  :queries:
+    - :name: 04-screen-views
+      :file: standard/02-screen-views/01-main/04-screen-views.sql
+      :template: true
+- :name: 05-screen-views-metadata
+  :queries:
+    - :name: 05-screen-views-metadata
+      :file: standard/02-screen-views/01-main/05-screen-views-metadata.sql
+      :template: true
+- :name: 06-commit-screen-views
+  :queries:
+    - :name: 06-commit-screen-views
+      :file: standard/02-screen-views/01-main/06-commit-screen-views.sql
+      :template: true

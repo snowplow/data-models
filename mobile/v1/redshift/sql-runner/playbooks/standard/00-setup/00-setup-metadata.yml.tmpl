@@ -1,0 +1,21 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :model_version:      redshift/mobile/1.0.0
+  :model:              mobile
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 00-setup-metadata
+  :queries:
+    - :name: 00-setup-metadata
+      :file: standard/00-setup/01-main/00-setup-metadata.sql
+      :template: true

@@ -25,7 +25,7 @@ These scripts also require setting up a great_expectations datasource. To do so,
 
 These scripts allow for handling passwords via two means which reduce the risk of committing credentials to source control.
 
-1. Set the `DB_PASSWORD` environment variable for Redshift and Snowflake, or the `BIGQUERY_CREDS` environment variable for Bigquery.
+1. Set the `REDSHIFT_PASSWORD` or `SNOWFLAKE_PASSWORD` environment variables for Redshift and Snowflake respectively, or the `BIGQUERY_CREDS` environment variable for Bigquery.
 
 2. Pass the relevant credential to the relevant argument of the script in question.
 
@@ -97,12 +97,13 @@ pip3 install -r requirements.txt
 -d (database) target database for expectations [required]
 -c (config) expectation config name [required]
 -a (auth) optional credentials for database target
+-m (model) target model to run i.e. web or mobile [required]
 ```
 
 **Examples:**
 
 ```bash
-bash .scripts/run_test.sh -d bigquery -c perm_tables;
+bash .scripts/run_test.sh -d bigquery -c perm_tables -m web;
 
 # runs the perm_tables validation config against bigquery
 ```
@@ -131,12 +132,13 @@ pip3 install -r requirements.txt
 -b (binary) path to sql-runner binary [required]
 -d (database) target database for expectations [required]
 -a (auth) optional credentials for database target
+-m (model) target model to run i.e. web or mobile [required]
 ```
 
 **Examples:**
 
 ```bash
-bash .scripts/e2e.sh -b ~/pathTo/sql-runner -d bigquery;
+bash .scripts/e2e.sh -b ~/pathTo/sql-runner -d bigquery -m web;
 
 # Runs the end to end testing script against bigquery
 ```
@@ -165,12 +167,13 @@ pip3 install -r requirements.txt
 -b (binary) path to sql-runner binary [required]
 -d (database) target database for expectations [required]
 -a (auth) optional credentials for database target
+-m (model) target model to run i.e. web or mobile [required]
 ```
 
 **Examples:**
 
 ```bash
-bash .scripts/pr_check.sh -b ~/pathTo/sql-runner -d bigquery;
+bash .scripts/pr_check.sh -b ~/pathTo/sql-runner -d bigquery -m web;
 
 # Runs the pr check testing script against bigquery
 ```

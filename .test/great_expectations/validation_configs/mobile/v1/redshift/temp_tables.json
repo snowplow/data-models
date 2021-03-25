@@ -1,0 +1,62 @@
+{
+  "validation_operator_name": "action_list_operator",
+  "batches": [
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "mobile_events_this_run",
+        "datasource": "redshift"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_base_redshift"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "mobile_events_staged",
+        "datasource": "redshift"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_base_redshift"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "mobile_screen_views_this_run",
+        "datasource": "redshift"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_screen_views"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "mobile_screen_views_staged",
+        "datasource": "redshift"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_screen_views"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "mobile_sessions_this_run",
+        "datasource": "redshift"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_sessions"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "mobile_users_this_run",
+        "datasource": "redshift"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_users"]
+    },
+    {
+      "batch_kwargs": {
+        "schema": "scratch",
+        "table": "mobile_staging_reconciliation",
+        "datasource": "redshift"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_staging_reconciliation"]
+    }
+
+  ]
+}

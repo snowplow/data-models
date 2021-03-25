@@ -1,0 +1,256 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "base_redshift",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_column_count_to_equal",
+      "kwargs": {
+        "value": 98
+      }
+    },
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "app_id",
+          "platform",
+          "etl_tstamp",
+          "collector_tstamp",
+          "dvce_created_tstamp",
+          "event",
+          "event_id",
+          "name_tracker",
+          "v_tracker",
+          "v_collector",
+          "v_etl",
+          "user_id",
+          "user_ipaddress",
+          "network_userid",
+          "geo_country",
+          "geo_region",
+          "geo_city",
+          "geo_zipcode",
+          "geo_latitude",
+          "geo_longitude",
+          "geo_region_name",
+          "ip_isp",
+          "ip_organization",
+          "ip_domain",
+          "ip_netspeed",
+          "se_category",
+          "se_action",
+          "se_label",
+          "se_property",
+          "se_value",
+          "tr_orderid",
+          "tr_affiliation",
+          "tr_total",
+          "tr_tax",
+          "tr_shipping",
+          "tr_city",
+          "tr_state",
+          "tr_country",
+          "ti_orderid",
+          "ti_sku",
+          "ti_name",
+          "ti_category",
+          "ti_price",
+          "ti_quantity",
+          "useragent",
+          "dvce_screenwidth",
+          "dvce_screenheight",
+          "tr_currency",
+          "tr_total_base",
+          "tr_tax_base",
+          "tr_shipping_base",
+          "ti_currency",
+          "ti_price_base",
+          "base_currency",
+          "geo_timezone",
+          "etl_tags",
+          "dvce_sent_tstamp",
+          "derived_tstamp",
+          "event_vendor",
+          "event_name",
+          "event_format",
+          "event_version",
+          "event_fingerprint",
+          "event_schema",
+          "true_tstamp",
+          "session_id",
+          "session_index",
+          "previous_session_id",
+          "device_user_id",
+          "session_first_event_id",
+          "screen_id",
+          "screen_name",
+          "screen_activity",
+          "screen_fragment",
+          "screen_top_view_controller",
+          "screen_type",
+          "screen_view_controller",
+          "device_manufacturer",
+          "device_model",
+          "os_type",
+          "os_version",
+          "android_idfa",
+          "apple_idfa",
+          "apple_idfv",
+          "carrier",
+          "open_idfa",
+          "network_technology",
+          "network_type",
+          "device_latitude",
+          "device_longitude",
+          "device_latitude_longitude_accuracy",
+          "device_altitude",
+          "device_altitude_accuracy",
+          "device_bearing",
+          "device_speed",
+          "build",
+          "version",
+          "event_index_in_session"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "platform"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "etl_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "collector_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "dvce_created_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "name_tracker"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "v_tracker"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "v_collector"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "v_etl"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "device_user_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "network_userid"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "dvce_sent_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "session_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "session_index"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "derived_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_vendor"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_format"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_version"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "event_id"
+      }
+    }
+  ],
+  "meta": {
+    "versions": {
+      "test_suite_version": "1.0.0",
+      "redshift_model_version": "1.0.0"
+    },
+    "great_expectations.__version__": "0.12.0"
+  }
+}

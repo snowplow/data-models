@@ -1,0 +1,29 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 01-session-goals-setup
+  :queries:
+    - :name: 01-session-goals-setup
+      :file: custom/04-session-goals/01-session-goals-setup.sql
+      :template: true
+- :name: 02-session-goals-staged
+  :queries:
+    - :name: 02-session-goals-staged
+      :file: custom/04-session-goals/02-session-goals-staged.sql
+      :template: true
+- :name: 03-session-goals-upsert
+  :queries:
+    - :name: 03-session-goals-upsert
+      :file: custom/04-session-goals/03-session-goals-upsert.sql
+      :template: true
