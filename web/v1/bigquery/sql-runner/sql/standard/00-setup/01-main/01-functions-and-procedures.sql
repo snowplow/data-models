@@ -144,7 +144,7 @@ BEGIN
         ARRAY_AGG(CONCAT(column_name, '[SAFE_OFFSET(0)].', SPLIT(field_path, '.')[SAFE_OFFSET(1)]) ORDER BY column_name DESC) AS paths
 
       FROM {{.scratch_schema}}.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
-      WHERE table_name = 'events_staged{{.entropy}'
+      WHERE table_name = 'events_staged{{.entropy}}'
       AND column_name LIKE CONCAT(columns_prefix, '%')
       AND ARRAY_LENGTH(SPLIT(field_path, '.')) = 2 -- Only first-order fields
       AND data_type NOT LIKE 'STRUCT%' -- No structs

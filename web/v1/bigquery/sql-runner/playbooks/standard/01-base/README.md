@@ -26,7 +26,7 @@ The Base module applies incremental logic to the atomic data, and produces dedup
 
 `:update_cadence_days:`     Defaults to 7. Period of time (in days) in the future (from the latest event in manifest) to look for new events.
 
-`:session_lookback_days:`   Defaults to 1095. Period of time (in days) to limit scan on session manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.
+`:session_lookback_days:`   Defaults to 365. Period of time (in days) to limit scan on session manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.
 
 `:upsert_lookback_days:`    Defaults to 30. Period of time (in days) to look back over the target table in order to find rows to delete when committing data to a table. Where performance is not a concern, should be set to as long a value as possible.
 
