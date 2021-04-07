@@ -5,7 +5,7 @@
     {
       "expectation_type": "expect_table_column_count_to_equal",
       "kwargs": {
-        "value": 40
+        "value": 41
       }
     },
     {
@@ -17,6 +17,7 @@
           "network_userid",
           "start_tstamp",
           "end_tstamp",
+          "model_tstamp",
           "screen_views",
           "screen_names_viewed",
           "sessions",
@@ -82,6 +83,12 @@
     {
       "expectation_type": "expect_column_values_to_not_be_null",
       "kwargs": {
+        "column": "model_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
         "column": "sessions"
       }
     },
@@ -106,8 +113,8 @@
   ],
   "meta": {
     "versions": {
-      "test_suite_version": "1.0.0",
-      "redshift_model_version": "1.0.0"
+      "test_suite_version": "1.0.1",
+      "bigquery_model_version": "1.0.0"
     },
     "great_expectations.__version__": "0.12.0"
   }

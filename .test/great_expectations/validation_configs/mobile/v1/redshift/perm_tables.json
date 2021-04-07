@@ -7,7 +7,7 @@
         "table": "mobile_screen_views",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["mobile.v1.mobile_screen_views"]
+      "expectation_suite_names": ["mobile.v1.mobile_screen_views_redshift"]
     },
     {
       "batch_kwargs": {
@@ -22,7 +22,7 @@
         "table": "mobile_sessions",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["mobile.v1.mobile_sessions"]
+      "expectation_suite_names": ["mobile.v1.mobile_sessions_redshift"]
     },
     {
       "batch_kwargs": {
@@ -30,7 +30,7 @@
         "table": "mobile_users",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["mobile.v1.mobile_users"]
+      "expectation_suite_names": ["mobile.v1.mobile_users_redshift"]
     },
     {
       "batch_kwargs": {

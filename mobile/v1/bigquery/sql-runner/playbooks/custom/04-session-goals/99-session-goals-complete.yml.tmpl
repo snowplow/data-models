@@ -1,0 +1,15 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project: 
+  :region:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 99-session-goals-cleanup
+  :queries:
+    - :name: 99-session-goals-cleanup
+      :file: custom/04-session-goals/99-session-goals-cleanup.sql
+      :template: true

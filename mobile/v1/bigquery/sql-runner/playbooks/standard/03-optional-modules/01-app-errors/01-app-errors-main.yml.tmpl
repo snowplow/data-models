@@ -1,0 +1,41 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:         bigquery/mobile/1.0.0
+  :scratch_schema:        scratch
+  :output_schema:         derived
+  :enabled:               false
+  :entropy:               ""
+  :upsert_lookback_days:
+  :skip_derived:
+  :stage_next:            true
+  :cluster_by:            []
+:steps:
+- :name: 01-functions-and-procedures
+  :queries:
+    - :name: 01-functions-and-procedures
+      :file: standard/00-setup/01-main/01-functions-and-procedures.sql
+      :template: true
+- :name: 00-setup-app-errors
+  :queries:
+    - :name: 00-setup-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/00-setup-app-errors.sql
+      :template: true
+- :name: 01-app-errors
+  :queries:
+    - :name: 01-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/01-app-errors.sql
+      :template: true
+- :name: 02-app-errors-metadata
+  :queries:
+    - :name: 02-app-errors-metadata
+      :file: standard/03-optional-modules/01-app-errors/01-main/02-app-errors-metadata.sql
+      :template: true
+- :name: 03-commit-app-errors
+  :queries:
+    - :name: 03-commit-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/03-commit-app-errors.sql
+      :template: true

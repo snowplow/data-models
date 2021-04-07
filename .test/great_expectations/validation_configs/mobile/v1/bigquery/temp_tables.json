@@ -1,0 +1,59 @@
+{
+  "validation_operator_name": "action_list_operator",
+  "batches": [
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.mobile_events_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_mobile_events_this_run"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_base"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.mobile_events_staged",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_mobile_events_staged"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_base"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.mobile_screen_views_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_mobile_sv_this_run"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_screen_views"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.mobile_screen_views_staged",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_mobile_sv_staged"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_screen_views"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.mobile_sessions_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_mobile_sess_this_run"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_sessions"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.mobile_users_this_run",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_mobile_usr_this_run"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_users"]
+    }
+  ]
+}
