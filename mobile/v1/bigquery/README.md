@@ -16,7 +16,7 @@ To customise the model, we recommend following the guidance found in the README 
 
 First, fill in the connection details for the target database in the relevant template in `.scripts/template/bigquery.yml.tmpl`.
 
-Set an environment variable, `BIGQUERY_CREDS`, to the path of your GBQ json credential file. See the README in `.scripts` for more detail.
+Set an environment variable, `GOOGLE_APPLICATION_CREDENTIALS`, to the path of your GBQ json credential file. See the README in `.scripts` for more detail.
 
 #### Contexts
 
