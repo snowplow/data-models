@@ -1,0 +1,44 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:        snowflake/mobile/1.0.0
+  :model:                mobile
+  :scratch_schema:       scratch
+  :output_schema:        derived
+  :entropy:              ""
+  :enabled:              false
+  :stage_next:           true
+  :upsert_lookback_days:
+  :skip_derived:
+:steps:
+- :name: 01-stored-procedures
+  :queries:
+    - :name: 01-stored-procedures
+      :file: standard/00-setup/01-main/01-stored-procedures.sql
+      :template: true
+- :name: 00-setup-app-errors
+  :queries:
+    - :name: 00-setup-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/00-setup-app-errors.sql
+      :template: true
+- :name: 01-app-errors
+  :queries:
+    - :name: 01-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/01-app-errors.sql
+      :template: true
+- :name: 02-app-errors-metadata
+  :queries:
+    - :name: 02-app-errors-metadata
+      :file: standard/03-optional-modules/01-app-errors/01-main/02-app-errors-metadata.sql
+      :template: true
+- :name: 03-commit-app-errors
+  :queries:
+    - :name: 03-commit-app-errors
+      :file: standard/03-optional-modules/01-app-errors/01-main/03-commit-app-errors.sql
+      :template: true

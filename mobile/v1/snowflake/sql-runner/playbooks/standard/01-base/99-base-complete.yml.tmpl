@@ -1,0 +1,27 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/mobile/1.0.0
+  :model:              mobile
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           false
+:steps:
+- :name: 98-base-manifest
+  :queries:
+    - :name: 98-base-manifest
+      :file: standard/01-base/99-complete/98-base-manifest.sql
+      :template: true
+- :name: 99-base-cleanup
+  :queries:
+    - :name: 99-base-cleanup
+      :file: standard/01-base/99-complete/99-base-cleanup.sql
+      :template: true

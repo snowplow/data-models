@@ -1,0 +1,26 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/mobile/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 99-users-cleanup
+  :queries:
+    - :name: 99-users-cleanup
+      :file: standard/05-users/99-complete/99-users-cleanup.sql
+      :template: true
+- :name: XX-destroy-users
+  :queries:
+    - :name: XX-destroy-users
+      :file: standard/05-users/XX-destroy/XX-destroy-users.sql
+      :template: true

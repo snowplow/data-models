@@ -1,0 +1,20 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/mobile/1.0.0
+  :model:              mobile
+  :scratch_schema:     scratch
+  :entropy:            ""
+  :app_errors:         false
+:steps:
+- :name: 00-staging-reconciliation
+  :queries:
+    - :name: 00-staging-reconciliation
+      :file: tests/00-staging-reconciliation/01-main/00-staging-reconciliation.sql
+      :template: true

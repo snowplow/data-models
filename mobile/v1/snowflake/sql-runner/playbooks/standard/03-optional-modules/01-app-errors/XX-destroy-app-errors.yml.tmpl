@@ -1,0 +1,26 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/mobile/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 99-app-errors-cleanup
+  :queries:
+    - :name: 99-app-errors-cleanup
+      :file: standard/03-optional-modules/01-app-errors/99-complete/99-app-errors-cleanup.sql
+      :template: true
+- :name: XX-destroy-app-errors
+  :queries:
+    - :name: XX-destroy-app-errors
+      :file: standard/03-optional-modules/01-app-errors/XX-destroy/XX-destroy-app-errors.sql
+      :template: true

@@ -1,0 +1,66 @@
+:targets:
+- :name:
+  :type:      snowflake
+  :account:
+  :database:
+  :warehouse:
+  :username:
+  :password:
+:variables:
+  :model_version:      snowflake/mobile/1.0.0
+  :model:              mobile
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :skip_derived:
+:steps:
+- :name: 01-stored-procedures
+  :queries:
+    - :name: 01-stored-procedures
+      :file: standard/00-setup/01-main/01-stored-procedures.sql
+      :template: true
+- :name: 00-setup-users
+  :queries:
+    - :name: 00-setup-users
+      :file: standard/05-users/01-main/00-setup-users.sql
+      :template: true
+- :name: 01-userids-this-run
+  :queries:
+    - :name: 01-userids-this-run
+      :file: standard/05-users/01-main/01-userids-this-run.sql
+      :template: true
+- :name: 02-users-limits
+  :queries:
+    - :name: 02-users-limits
+      :file: standard/05-users/01-main/02-users-limits.sql
+      :template: true
+- :name: 03-users-sessions-this-run
+  :queries:
+    - :name: 03-users-sessions-this-run
+      :file: standard/05-users/01-main/03-users-sessions-this-run.sql
+      :template: true
+- :name: 04-users-aggs
+  :queries:
+    - :name: 04-users-aggs
+      :file: standard/05-users/01-main/04-users-aggs.sql
+      :template: true
+- :name: 05-users-lasts
+  :queries:
+    - :name: 05-users-lasts
+      :file: standard/05-users/01-main/05-users-lasts.sql
+      :template: true
+- :name: 06-users
+  :queries:
+    - :name: 06-users
+      :file: standard/05-users/01-main/06-users.sql
+      :template: true
+- :name: 07-users-metadata
+  :queries:
+    - :name: 07-users-metadata
+      :file: standard/05-users/01-main/07-users-metadata.sql
+      :template: true
+- :name: 08-commit-users
+  :queries:
+    - :name: 08-commit-users
+      :file: standard/05-users/01-main/08-commit-users.sql
+      :template: true
