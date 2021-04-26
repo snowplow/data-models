@@ -1,0 +1,20 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project: 
+  :region:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 01-session-goals-staged
+  :queries:
+    - :name: 01-session-goals-staged
+      :file: custom/04-session-goals/01-session-goals-staged.sql
+      :template: true
+- :name: 02-session-goals-upsert
+  :queries:
+    - :name: 02-session-goals-upsert
+      :file: custom/04-session-goals/02-session-goals-upsert.sql
+      :template: true

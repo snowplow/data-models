@@ -1,0 +1,22 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:      bigquery/mobile/1.0.0
+  :model:              mobile
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 01-cleanup-metadata
+  :queries:
+    - :name: 01-cleanup-metadata
+      :file: standard/00-setup/99-complete/01-cleanup-metadata.sql
+      :template: true
+- :name: XX-destroy-metadata
+  :queries:
+    - :name: XX-destroy-metadata
+      :file: standard/00-setup/XX-destroy/XX-destroy-metadata.sql
+      :template: true

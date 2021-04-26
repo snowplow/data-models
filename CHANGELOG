@@ -1,3 +1,9 @@
+BigQuery Mobile Version 1.0.0 (2021-04-26)
+---------------------------------------
+Update licence (Close #79)
+Fix credential loading in scripts (close #72)
+Mobile: Add BigQuery mobile model v1 (close #73)
+
 Redshift Mobile Version 1.0.0 (2021-03-25)
 ---------------------------------------
 Update scripts for mobile model (#66)

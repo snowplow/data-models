@@ -25,7 +25,7 @@ These scripts also require setting up a great_expectations datasource. To do so,
 
 These scripts allow for handling passwords via two means which reduce the risk of committing credentials to source control.
 
-1. Set the `REDSHIFT_PASSWORD` or `SNOWFLAKE_PASSWORD` environment variables for Redshift and Snowflake respectively, or the `BIGQUERY_CREDS` environment variable for Bigquery.
+1. Set the `REDSHIFT_PASSWORD` or `SNOWFLAKE_PASSWORD` environment variables for Redshift and Snowflake respectively, or for BigQuery set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to path of your JSON service account key file.
 
 2. Pass the relevant credential to the relevant argument of the script in question.
 

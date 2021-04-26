@@ -52,23 +52,8 @@ if [ $target == "Default" ]; then
 
 elif [ "$target" == "BigQuery" ]; then
 
-  BIGQUERY_CREDS=${BIGQUERY_CREDS:-$CREDENTIALS}
-  export GOOGLE_APPLICATION_CREDENTIALS=$root_path/tmp/bq_creds.json
+  export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS:-$CREDENTIALS}
 
-  if [ -n "$BIGQUERY_CREDS" ]; then
-
-    # If creds provided via env var or argument, set trap to clean up, then create creds file.
-    cleanup() {
-      echo "run_config: Removing playbook file"
-      rm -f $root_path/tmp/current_playbook.yml
-      echo "run_config: Removing credentials file"
-      rm -f $root_path/tmp/bq_creds.json
-    }
-
-    echo "run_config: writing bq creds to file"
-    echo $BIGQUERY_CREDS > $root_path/tmp/bq_creds.json
-
-  fi
 fi
 
 for i in "${playbooks[@]}";

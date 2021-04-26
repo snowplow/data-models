@@ -1,0 +1,18 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:      bigquery/mobile/1.0.0
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           false
+:steps:
+- :name: 99-screen-views-cleanup
+  :queries:
+    - :name: 99-screen-views-cleanup
+      :file: standard/02-screen-views/99-complete/99-screen-views-cleanup.sql
+      :template: true

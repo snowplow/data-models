@@ -1,0 +1,168 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "mobile_screen_views",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_column_count_to_equal",
+      "kwargs": {
+        "value": 57
+      }
+    },
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "screen_view_id",
+          "event_id",
+          "app_id",
+          "user_id",
+          "device_user_id",
+          "network_userid",
+          "session_id",
+          "session_index",
+          "previous_session_id",
+          "session_first_event_id",
+          "screen_view_in_session_index",
+          "screen_views_in_session",
+          "dvce_created_tstamp",
+          "collector_tstamp",
+          "derived_tstamp",
+          "screen_view_name",
+          "screen_view_transition_type",
+          "screen_view_type",
+          "screen_fragment",
+          "screen_top_view_controller",
+          "screen_view_controller",
+          "screen_view_previous_id",
+          "screen_view_previous_name",
+          "screen_view_previous_type",
+          "platform",
+          "dvce_screenwidth",
+          "dvce_screenheight",
+          "device_manufacturer",
+          "device_model",
+          "os_type",
+          "os_version",
+          "android_idfa",
+          "apple_idfa",
+          "apple_idfv",
+          "open_idfa",
+          "device_latitude",
+          "device_longitude",
+          "device_latitude_longitude_accuracy",
+          "device_altitude",
+          "device_altitude_accuracy",
+          "device_bearing",
+          "device_speed",
+          "geo_country",
+          "geo_region",
+          "geo_city",
+          "geo_zipcode",
+          "geo_latitude",
+          "geo_longitude",
+          "geo_region_name",
+          "geo_timezone",
+          "user_ipaddress",
+          "useragent",
+          "carrier",
+          "network_technology",
+          "network_type",
+          "build",
+          "version"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "screen_view_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "device_user_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "network_userid"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "session_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "session_index"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "screen_view_in_session_index"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "screen_views_in_session"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "dvce_created_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "collector_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "derived_tstamp"
+      }
+    },
+
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "screen_view_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "event_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "screen_view_id"
+      }
+    }
+  ],
+  "meta": {
+    "versions": {
+      "test_suite_version": "1.0.1",
+      "redshift_model_version": "1.0.0"
+    },
+    "great_expectations.__version__": "0.12.0"
+  }
+}

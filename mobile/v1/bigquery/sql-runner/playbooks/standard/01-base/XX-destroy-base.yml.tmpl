@@ -1,0 +1,24 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:      bigquery/mobile/1.0.0
+  :model:              mobile
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+  :cleanup_mode:       all
+  :ends_run:           true
+:steps:
+- :name: 99-base-cleanup
+  :queries:
+    - :name: 99-base-cleanup
+      :file: standard/01-base/99-complete/99-base-cleanup.sql
+      :template: true
+- :name: XX-destroy-base
+  :queries:
+    - :name: XX-destroy-base
+      :file: standard/01-base/XX-destroy/XX-destroy-base.sql
+      :template: true

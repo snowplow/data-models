@@ -1,0 +1,55 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :model_version:         bigquery/mobile/1.0.0
+  :scratch_schema:        scratch
+  :output_schema:         derived
+  :entropy:               ""
+  :upsert_lookback_days:
+  :stage_next:            true
+  :skip_derived:
+  :cluster_by:            []
+:steps:
+- :name: 01-functions-and-procedures
+  :queries:
+    - :name: 01-functions-and-procedures
+      :file: standard/00-setup/01-main/01-functions-and-procedures.sql
+      :template: true
+- :name: 00-setup-sessions
+  :queries:
+    - :name: 00-setup-sessions
+      :file: standard/04-sessions/01-main/00-setup-sessions.sql
+      :template: true
+- :name: 01-sessions-aggs
+  :queries:
+    - :name: 01-sessions-aggs
+      :file: standard/04-sessions/01-main/01-sessions-aggs.sql
+      :template: true
+- :name: 02-sessions-sv-details
+  :queries:
+    - :name: 02-sessions-sv-details
+      :file: standard/04-sessions/01-main/02-sessions-sv-details.sql
+      :template: true
+- :name: 03-sessions
+  :queries:
+    - :name: 03-sessions
+      :file: standard/04-sessions/01-main/03-sessions.sql
+      :template: true
+- :name: 04-sessions-metadata
+  :queries:
+    - :name: 04-sessions-metadata
+      :file: standard/04-sessions/01-main/04-sessions-metadata.sql
+      :template: true
+- :name: 05-sessions-prep-manifest
+  :queries:
+    - :name: 05-sessions-prep-manifest
+      :file: standard/04-sessions/01-main/05-sessions-prep-manifest.sql
+      :template: true
+- :name: 06-commit-sessions
+  :queries:
+    - :name: 06-commit-sessions
+      :file: standard/04-sessions/01-main/06-commit-sessions.sql
+      :template: true
