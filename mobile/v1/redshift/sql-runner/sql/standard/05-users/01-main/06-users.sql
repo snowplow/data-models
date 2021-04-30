@@ -29,6 +29,7 @@ AS (
 
     b.start_tstamp,
     b.end_tstamp,
+    CURRENT_TIMESTAMP AS model_tstamp,
 
     -- engagement fields
     b.screen_views,

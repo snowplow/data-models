@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_users{{.entropy}} (
 
   start_tstamp TIMESTAMP ENCODE RAW, --raw for sk
   end_tstamp TIMESTAMP ENCODE ZSTD,
+  model_tstamp TIMESTAMP ENCODE ZSTD,
 
   screen_views INT ENCODE ZSTD,
   screen_names_viewed INT ENCODE ZSTD,

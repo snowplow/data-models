@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.mobile_app_errors_staged{{.entrop
   dvce_created_tstamp TIMESTAMP ENCODE ZSTD,
   collector_tstamp TIMESTAMP ENCODE ZSTD,
   derived_tstamp TIMESTAMP ENCODE RAW, --raw for sort key
+  model_tstamp TIMESTAMP ENCODE ZSTD,
   platform VARCHAR(255) ENCODE ZSTD,
   dvce_screenwidth INT ENCODE ZSTD,
   dvce_screenheight INT ENCODE ZSTD,

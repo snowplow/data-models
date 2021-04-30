@@ -23,7 +23,7 @@
         "table": "mobile_screen_views_this_run",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["mobile.v1.mobile_screen_views_redshift"]
+      "expectation_suite_names": ["mobile.v1.mobile_screen_views"]
     },
     {
       "batch_kwargs": {
@@ -31,7 +31,7 @@
         "table": "mobile_screen_views_staged",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["mobile.v1.mobile_screen_views_redshift"]
+      "expectation_suite_names": ["mobile.v1.mobile_screen_views"]
     },
     {
       "batch_kwargs": {
@@ -39,7 +39,7 @@
         "table": "mobile_sessions_this_run",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["mobile.v1.mobile_sessions_redshift"]
+      "expectation_suite_names": ["mobile.v1.mobile_sessions"]
     },
     {
       "batch_kwargs": {
@@ -47,7 +47,7 @@
         "table": "mobile_users_this_run",
         "datasource": "redshift"
       },
-      "expectation_suite_names": ["mobile.v1.mobile_users_redshift"]
+      "expectation_suite_names": ["mobile.v1.mobile_users"]
     },
     {
       "batch_kwargs": {

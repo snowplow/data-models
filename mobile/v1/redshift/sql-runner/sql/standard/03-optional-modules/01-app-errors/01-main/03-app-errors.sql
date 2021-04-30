@@ -41,6 +41,7 @@
       es.dvce_created_tstamp,
       es.collector_tstamp,
       es.derived_tstamp,
+      CURRENT_TIMESTAMP AS model_tstamp,
 
       es.platform,
       es.dvce_screenwidth,

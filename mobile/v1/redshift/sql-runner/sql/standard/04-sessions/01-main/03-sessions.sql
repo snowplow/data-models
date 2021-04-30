@@ -33,6 +33,7 @@ AS (
 
     sa.start_tstamp,
     sa.end_tstamp,
+    CURRENT_TIMESTAMP AS model_tstamp,
 
     es.user_id,
     es.device_user_id,
