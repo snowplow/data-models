@@ -21,42 +21,22 @@ CREATE TABLE {{.scratch_schema}}.mobile_users_aggregates{{.entropy}}
   DISTKEY (device_user_id)
   SORTKEY (device_user_id)
 AS(
-  WITH prep AS (
-    SELECT
-      device_user_id,
-      -- time
-      MIN(start_tstamp) AS start_tstamp,
-      MAX(end_tstamp) AS end_tstamp,
-      -- engagement
-      SUM(screen_views) AS screen_views,
-      SUM(screen_names_viewed) AS screen_names_viewed,
-      COUNT(DISTINCT session_id) AS sessions,
-      SUM(session_duration_s) AS sessions_duration_s,
-      COUNT(DISTINCT DATE_TRUNC('d', start_tstamp)) AS active_days,
-      --errors
-      SUM(app_errors) AS app_errors,
-      SUM(fatal_app_errors) AS fatal_app_errors
-
-    FROM {{.scratch_schema}}.mobile_users_sessions_this_run{{.entropy}}
-
-    GROUP BY 1
-  )
-
   SELECT
     device_user_id,
     -- time
-    start_tstamp,
-    end_tstamp,
+    MIN(start_tstamp) AS start_tstamp,
+    MAX(end_tstamp) AS end_tstamp,
     -- engagement
-    screen_views,
-    screen_names_viewed,
-    sessions,
-    sessions_duration_s,
-    active_days,
+    SUM(screen_views) AS screen_views,
+    SUM(screen_names_viewed) AS screen_names_viewed,
+    COUNT(DISTINCT session_id) AS sessions,
+    SUM(session_duration_s) AS sessions_duration_s,
+    COUNT(DISTINCT DATE_TRUNC('d', start_tstamp)) AS active_days,
     --errors
-    app_errors,
-    fatal_app_errors
+    SUM(app_errors) AS app_errors,
+    SUM(fatal_app_errors) AS fatal_app_errors
 
-  FROM prep
+  FROM {{.scratch_schema}}.mobile_users_sessions_this_run{{.entropy}}
 
+  GROUP BY 1
 );
