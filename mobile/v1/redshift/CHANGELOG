@@ -1,3 +1,12 @@
+Version 1.1.0 (2021-05-17)
+--------------------------
+Redshift Mobile: Increase session_id character limit in manifest (Close #93)
+Redshift Mobile: Add simplified configs (Close #89)
+Redshift Mobile: Set app errors module to disabled by default (Close #88)
+Redshift Mobile: Add model_tstamp to derived tables (Close #82)
+Redshift Mobile: Move app errors columns to end of table (Close #83)
+Redshift Mobile: Remove CTE from user-aggs (Close #80)
+
 Version 1.0.0 (2021-03-25)
 --------------------------
 Update scripts for mobile model (#66)

@@ -8,24 +8,24 @@
   :password: 
   :ssl: 
 :variables:
-  :model_version:      redshift/mobile/1.0.0
-  :model:              mobile
-  :input_schema:       atomic
-  :scratch_schema:     scratch
-  :output_schema:      derived
-  :entropy:            ""
-  :stage_next:         true
-  :start_date:         2020-01-01
+  :model_version:         redshift/mobile/1.1.0
+  :model:                 mobile
+  :input_schema:          atomic
+  :scratch_schema:        scratch
+  :output_schema:         derived
+  :entropy:               ""
+  :stage_next:            true
+  :start_date:            2020-01-01
   :lookback_window_hours:
   :days_late_allowed:
   :update_cadence_days: 
   :session_lookback_days:
-  :mobile_context: false
-  :geolocation_context: false
-  :application_context: false
-  :screen_context: false
-  :platform_filters: []
-  :app_id_filters: []
+  :mobile_context:        false
+  :geolocation_context:   false
+  :application_context:   false
+  :screen_context:        false
+  :platform_filters:      []
+  :app_id_filters:        []
 :steps:
 - :name: 00-setup-base
   :queries:
