@@ -29,7 +29,7 @@ If you don't have a pipeline yet, you might be interested in finding out what Sn
 - [Mobile (v1)](mobile/v1)
   - [Redshift](mobile/v1/redshift)
   - [BigQuery](mobile/v1/bigquery)
-  - Snowflake (coming soon)
+  - [Snowflake](mobile/v1/snowflake)
 
 Documentation for the data models can be found on [our documentation site][docs-data-models].
 
