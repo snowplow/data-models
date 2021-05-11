@@ -110,7 +110,7 @@ INSERT INTO {{.output_schema}}.{{.model}}_base_event_id_manifest{{.entropy}} (
 );
 
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.{{.model}}_base_session_id_manifest{{.entropy}} (
-  session_id VARCHAR(36),
+  session_id VARCHAR(128),
   min_tstamp TIMESTAMP
 )
 DISTSTYLE KEY
@@ -119,7 +119,7 @@ SORTKEY (min_tstamp);
 
 INSERT INTO {{.output_schema}}.{{.model}}_base_session_id_manifest{{.entropy}} (
   SELECT
-    'seed'::VARCHAR(36),
+    'seed'::VARCHAR(128),
     '{{.start_date}}'::TIMESTAMP
 
   WHERE
