@@ -30,6 +30,11 @@ AS(
 
   WHERE
     a.session_id IS NOT NULL
-    AND TIMESTAMP_DIFF(a.max_tstamp, COALESCE(b.min_tstamp, a.max_tstamp), DAY) <= {{or .days_late_allowed 3}}
-    -- Compares the max_tstamp of new data to the min_tstamp for its existing session, if one exists.
+    AND TIMESTAMP_DIFF(a.min_tstamp, COALESCE(b.min_tstamp, a.min_tstamp), DAY) <= {{or .days_late_allowed 3}}
+    /* if this is the first time the session is seen, process irrespective of length. 'events_this_run' will only process events up until 3 days from session start.
+       if we have processed the session before and either:
+          a) if all new events for that session are > 3 days since the session start then dont process
+          b) if some events fall <=3 days and some > 3 days, process the session and filter out the later events in 'events_this_run'
+    */
 );
+

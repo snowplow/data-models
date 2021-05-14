@@ -37,6 +37,7 @@ AS(
     WHERE
       a.collector_tstamp >= LOWER_LIMIT
       AND a.collector_tstamp <= UPPER_LIMIT
+      AND TIMESTAMP_DIFF(a.collector_tstamp, b.min_tstamp, DAY) <= {{or .days_late_allowed 3}}
 
       {{if eq (or .derived_tstamp_partitioned false) true}}
 
