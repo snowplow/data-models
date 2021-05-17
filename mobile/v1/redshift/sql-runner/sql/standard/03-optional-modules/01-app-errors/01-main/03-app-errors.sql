@@ -41,17 +41,7 @@
       es.dvce_created_tstamp,
       es.collector_tstamp,
       es.derived_tstamp,
-
-      --Error contexts
-      ae.message,
-      ae.programming_language,
-      ae.class_name,
-      ae.exception_name,
-      ae.is_fatal,
-      ae.line_number,
-      ae.stack_trace,
-      ae.thread_id,
-      ae.thread_name,
+      CURRENT_TIMESTAMP AS model_tstamp,
 
       es.platform,
       es.dvce_screenwidth,
@@ -98,7 +88,18 @@
 
       es.build,
       es.version,
-      es.event_index_in_session
+      es.event_index_in_session,
+
+      --Error details
+      ae.message,
+      ae.programming_language,
+      ae.class_name,
+      ae.exception_name,
+      ae.is_fatal,
+      ae.line_number,
+      ae.stack_trace,
+      ae.thread_id,
+      ae.thread_name
 
     FROM
       {{.scratch_schema}}.mobile_events_staged{{.entropy}} es

@@ -106,15 +106,7 @@ CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.mobile_app_errors_staged{{.entrop
   dvce_created_tstamp TIMESTAMP ENCODE ZSTD,
   collector_tstamp TIMESTAMP ENCODE ZSTD,
   derived_tstamp TIMESTAMP ENCODE RAW, --raw for sort key
-  message VARCHAR(2048) ENCODE ZSTD,
-  programming_language VARCHAR(12) ENCODE ZSTD,
-  class_name VARCHAR(1024) ENCODE ZSTD,
-  exception_name VARCHAR(1024) ENCODE ZSTD,
-  is_fatal BOOLEAN ENCODE ZSTD,
-  line_number INT ENCODE ZSTD,
-  stack_trace VARCHAR(8192) ENCODE ZSTD,
-  thread_id INT ENCODE ZSTD,
-  thread_name VARCHAR(1024) ENCODE ZSTD,
+  model_tstamp TIMESTAMP ENCODE ZSTD,
   platform VARCHAR(255) ENCODE ZSTD,
   dvce_screenwidth INT ENCODE ZSTD,
   dvce_screenheight INT ENCODE ZSTD,
@@ -155,7 +147,16 @@ CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.mobile_app_errors_staged{{.entrop
   network_type VARCHAR(7) ENCODE ZSTD,
   build VARCHAR(255) ENCODE ZSTD,
   version VARCHAR(255) ENCODE ZSTD,
-  event_index_in_session INT ENCODE ZSTD
+  event_index_in_session INT ENCODE ZSTD,
+  message VARCHAR(2048) ENCODE ZSTD,
+  programming_language VARCHAR(12) ENCODE ZSTD,
+  class_name VARCHAR(1024) ENCODE ZSTD,
+  exception_name VARCHAR(1024) ENCODE ZSTD,
+  is_fatal BOOLEAN ENCODE ZSTD,
+  line_number INT ENCODE ZSTD,
+  stack_trace VARCHAR(8192) ENCODE ZSTD,
+  thread_id INT ENCODE ZSTD,
+  thread_name VARCHAR(1024) ENCODE ZSTD
 )
 DISTSTYLE KEY
 DISTKEY (event_id)

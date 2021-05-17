@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_sessions{{.entropy}} (
   session_last_event_id CHAR(36) ENCODE ZSTD,
   start_tstamp TIMESTAMP ENCODE RAW, --raw for sk
   end_tstamp TIMESTAMP ENCODE ZSTD,
+  model_tstamp TIMESTAMP ENCODE ZSTD,
   user_id VARCHAR(255) ENCODE ZSTD,
   device_user_id VARCHAR(4096) ENCODE ZSTD,
   network_userid VARCHAR(128) ENCODE ZSTD,

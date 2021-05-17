@@ -10,30 +10,34 @@
       },
       {
         "playbook": "standard/02-screen-views/01-screen-views-main",
-        "dependsOn": ["standard/01-base/01-base-main"]
+        "dependsOn": [
+          "standard/01-base/01-base-main"
+        ]
       },
       {
         "playbook": "standard/03-optional-modules/01-app-errors/01-app-errors-main",
-        "dependsOn": ["standard/01-base/01-base-main"]
+        "dependsOn": [
+          "standard/01-base/01-base-main"
+        ]
       },
       {
         "playbook": "standard/04-sessions/01-sessions-main",
-        "dependsOn": ["standard/01-base/01-base-main",
-                      "standard/02-screen-views/01-screen-views-main",
-                      "standard/03-optional-modules/01-app-errors/01-app-errors-main"
-                     ]
+        "dependsOn": [
+          "standard/02-screen-views/01-screen-views-main",
+          "standard/03-optional-modules/01-app-errors/01-app-errors-main"
+        ]
       },
       {
         "playbook": "standard/05-users/01-users-main",
-        "dependsOn": ["standard/04-sessions/01-sessions-main"]
+        "dependsOn": [
+          "standard/04-sessions/01-sessions-main"
+        ]
       },
       {
         "playbook": "tests/00-staging-reconciliation/01-staging-reconciliation-main",
-        "dependsOn": ["standard/01-base/01-base-main",
-                      "standard/02-screen-views/01-screen-views-main",
-                      "standard/03-optional-modules/01-app-errors/01-app-errors-main",
-                      "standard/04-sessions/01-sessions-main"
-                     ]
+        "dependsOn": [
+          "standard/04-sessions/01-sessions-main"
+        ]
       }
     ],
     "lockType": "hard",

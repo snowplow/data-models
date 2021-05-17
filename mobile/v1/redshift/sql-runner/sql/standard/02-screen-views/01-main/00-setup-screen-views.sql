@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_screen_views{{.entropy}} (
   dvce_created_tstamp TIMESTAMP ENCODE ZSTD,
   collector_tstamp TIMESTAMP ENCODE ZSTD,
   derived_tstamp TIMESTAMP ENCODE RAW, --raw for sort key
+  model_tstamp TIMESTAMP ENCODE ZSTD,
   screen_view_name VARCHAR(4096) ENCODE ZSTD,
   screen_view_transition_type VARCHAR(4096) ENCODE ZSTD,
   screen_view_type VARCHAR(4096) ENCODE ZSTD,

@@ -58,6 +58,7 @@ AS(
     ev.dvce_created_tstamp,
     ev.collector_tstamp,
     ev.derived_tstamp,
+    CURRENT_TIMESTAMP AS model_tstamp,
 
     ev.screen_view_name,
     ev.screen_view_transition_type,
