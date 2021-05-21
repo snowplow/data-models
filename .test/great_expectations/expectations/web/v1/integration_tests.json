@@ -1,0 +1,69 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "integration_tests",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "long_session"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "null_page_view_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "null_domain_userid"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "null_domain_sessionid"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "dupe_event_id_same_collector_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "dupe_event_id_diff_collector_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "dupe_page_view_id_diff_derived_tstamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "late_arriving_dvc_created_sent"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_null",
+      "kwargs": {
+        "column": "clean_session"
+      }
+    }
+  ],
+  "meta": {
+    "versions": {
+      "test_suite_version": "1.1.0",
+      "bigquery_model_version": "1.0.3"
+    },
+    "__comment__": "expect_column_values_to_be_null on column stray_page_ping has been removed as it is a known issue (https://github.com/snowplow/data-models/issues/92)",
+    "great_expectations.__version__": "0.12.0"
+  }
+}
+

@@ -4,6 +4,7 @@
 # -d (database) target database for expectations
 # -c (config) expectation config name
 # -a (auth) optional credentials for database target
+# -m (model) target model to run i.e. web or mobile
 
 while getopts 'd:c:a:m:' v
 do

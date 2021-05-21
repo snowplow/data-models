@@ -8,17 +8,19 @@
 # -d (dryRun) use sql-runner dry run
 # -o (output path) path to store output of sql-runner to sql file (to be used in conjunction with p)
 # -t (target template) path to target template to use (minimizes risk of credential leak)
+# -v (varialbles template) path to variables template to use
 
-while getopts 'pdb:c:a:o:t:' v
+while getopts 'pdb:c:a:o:t:v:' opt
 do
-  case $v in
+  case $opt in
     b) SQL_RUNNER_PATH=$OPTARG ;;
     c) CONFIG_PATH=$OPTARG ;;
     a) CREDENTIALS=$OPTARG ;;
     p) FILL_TEMPLATES='-fillTemplates' ;;
     d) DRY_RUN='-dryRun' ;;
     o) OUTPUT_PATH=$OPTARG ;;
-    t) TARGET_TEMPLATE=$OPTARG
+    t) TARGET_TEMPLATE=$OPTARG ;;
+    v) VARIABLES_TEMPLATE=$OPTARG
   esac
 done
 
@@ -69,6 +71,13 @@ do
 
     # sub in credentials only if target template not provided
     sed "s/PASSWORD_PLACEHOLDER/$PASSWORD/" $model_path/playbooks/$i.yml.tmpl > $root_path/tmp/current_playbook.yml
+
+  fi
+
+  if [ ! -z "$VARIABLES_TEMPLATE" ]; then
+
+    # Sub in any variables if specified
+    awk -F':' 'NR==FNR{a[$2]=$0;next} /:variables:/{flag=1} /:steps:/{flag=0} a[$2]&&flag{$0=a[$2]}1' $root_path/$VARIABLES_TEMPLATE $root_path/tmp/current_playbook.yml > $root_path/tmp/current_playbook.tmp && mv $root_path/tmp/current_playbook.tmp $root_path/tmp/current_playbook.yml
 
   fi
 
