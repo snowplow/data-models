@@ -59,7 +59,7 @@
   ],
   "meta": {
     "versions": {
-      "test_suite_version": "1.1.0",
+      "test_suite_version": "1.1.1",
       "bigquery_model_version": "1.0.3"
     },
     "__comment__": "expect_column_values_to_be_null on column stray_page_ping has been removed as it is a known issue (https://github.com/snowplow/data-models/issues/92)",
