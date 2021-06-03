@@ -1,0 +1,63 @@
+:targets:
+  - :name:
+    :type:    bigquery
+    :project: com-snplow-eng-gcp
+    :region:  EU
+:variables:
+  :model_version:               bigquery/web/2.0.0-hackathon.test
+  :input_schema:                rt_pipeline_dev1
+  :scratch_schema:              scratch_dev1
+  :output_schema:               derived_dev1
+  :entropy:                     ""
+  :derived_tstamp_partitioned:  true
+:steps:
+- :name: 00-setup-base
+  :queries:
+    - :name: 00-setup-base
+      :file: hackathon/01-base/01-main/00-setup-base.sql
+      :template: true
+- :name: 01-new-events-limits
+  :queries:
+    - :name: 01-new-events-limits
+      :file: hackathon/01-base/01-main/01-new-events-limits.sql
+      :template: true
+- :name: 02-run-manifest
+  :queries:
+    - :name: 02-run-manifest
+      :file: hackathon/01-base/01-main/02-run-manifest.sql
+      :template: true
+- :name: 03-sessions-to-process
+  :queries:
+    - :name: 03-sessions-to-process
+      :file: hackathon/01-base/01-main/03-sessions-to-process.sql
+      :template: true
+- :name: 04-sessions-to-include
+  :queries:
+    - :name: 04-sessions-to-include
+      :file: hackathon/01-base/01-main/04-sessions-to-include.sql
+      :template: true
+- :name: 05-batch-limits
+  :queries:
+    - :name: 05-batch-limits
+      :file: hackathon/01-base/01-main/05-batch-limits.sql
+      :template: true
+- :name: 06-events-this-run
+  :queries:
+    - :name: 06-events-this-run
+      :file: hackathon/01-base/01-main/06-events-this-run.sql
+      :template: true
+- :name: 08-commit-base
+  :queries:
+    - :name: 08-commit-base
+      :file: hackathon/01-base/01-main/08-commit-base.sql
+      :template: true
+- :name: 99-base-model
+  :queries:
+    - :name: 99-base-model
+      :file: hackathon/01-base/01-main/99-base-model.sql
+      :template: true
+- :name: 999-base-complete
+  :queries:
+    - :name: 999-base-complete
+      :file: hackathon/01-base/01-main/999-base-complete.sql
+      :template: true

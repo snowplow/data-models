@@ -1,0 +1,224 @@
+:targets:
+  - :name:
+    :type:    bigquery
+    :project: com-snplow-eng-gcp
+    :region:  EU
+:variables:
+  :model_version:         bigquery/web/2.0.0-hackathon.test
+  :input_schema:          rt_pipeline_dev1
+  :scratch_schema:        scratch_dev1
+  :output_schema:         derived_dev1
+  :entropy:               ""
+  :ua_bot_filter:         true
+  :derived_tstamp_partitioned:
+:steps:
+- :name: cleanup_procedures
+  :queries:
+    - :name: cleanup_procedures
+      :file: hackathon/00-common/cleanup_procedures.sql
+      :template: true
+- :name: commit_proceduers
+  :queries:
+    - :name: commit_proceduers
+      :file: hackathon/00-common/commit_proceduers.sql
+      :template: true
+- :name: metadata_procedures
+  :queries:
+    - :name: metadata_procedures
+      :file: hackathon/00-common/metadata_procedures.sql
+      :template: true
+- :name: utility_procedures
+  :queries:
+    - :name: utility_procedures
+      :file: hackathon/00-common/utility_procedures.sql
+      :template: true
+- :name: destructive_procedures
+  :queries:
+    - :name: destructive_procedures
+      :file: hackathon/00-common/destructive_procedures.sql
+      :template: true
+- :name: 00-setup-base
+  :queries:
+    - :name: 00-setup-base
+      :file: hackathon/01-base/01-main/00-setup-base.sql
+      :template: true
+- :name: 01-new-events-limits
+  :queries:
+    - :name: 01-new-events-limits
+      :file: hackathon/01-base/01-main/01-new-events-limits.sql
+      :template: true
+- :name: 02-run-manifest
+  :queries:
+    - :name: 02-run-manifest
+      :file: hackathon/01-base/01-main/02-run-manifest.sql
+      :template: true
+- :name: 03-sessions-to-process
+  :queries:
+    - :name: 03-sessions-to-process
+      :file: hackathon/01-base/01-main/03-sessions-to-process.sql
+      :template: true
+- :name: 04-sessions-to-include
+  :queries:
+    - :name: 04-sessions-to-include
+      :file: hackathon/01-base/01-main/04-sessions-to-include.sql
+      :template: true
+- :name: 05-batch-limits
+  :queries:
+    - :name: 05-batch-limits
+      :file: hackathon/01-base/01-main/05-batch-limits.sql
+      :template: true
+- :name: 06-events-this-run
+  :queries:
+    - :name: 06-events-this-run
+      :file: hackathon/01-base/01-main/06-events-this-run.sql
+      :template: true
+- :name: 08-commit-base
+  :queries:
+    - :name: 08-commit-base
+      :file: hackathon/01-base/01-main/08-commit-base.sql
+      :template: true
+- :name: 99-base-model
+  :queries:
+    - :name: 99-base-model
+      :file: hackathon/01-base/01-main/99-base-model.sql
+      :template: true
+- :name: 999-base-complete
+  :queries:
+    - :name: 999-base-complete
+      :file: hackathon/01-base/01-main/999-base-complete.sql
+      :template: true
+- :name: 00-setup
+  :queries:
+    - :name: 00-setup
+      :file: hackathon/02-page-views/01-main/00-setup-page-views.sql
+      :template: true
+- :name: 01-page-view-events
+  :queries:
+    - :name: 01-page-view-events
+      :file: hackathon/02-page-views/01-main/01-page-view-events.sql
+      :template: true
+- :name: 02-engaged-time
+  :queries:
+    - :name: 02-engaged-time
+      :file: hackathon/02-page-views/01-main/02-engaged-time.sql
+      :template: true
+- :name: 03-scroll-depth
+  :queries:
+    - :name: 03-scroll-depth
+      :file: hackathon/02-page-views/01-main/03-scroll-depth.sql
+      :template: true
+- :name: 04-contexts
+  :queries:
+    - :name: 04-contexts
+      :file: hackathon/02-page-views/01-main/04-contexts.sql
+      :template: true
+- :name: 05-page-views
+  :queries:
+    - :name: 05-page-views
+      :file: hackathon/02-page-views/01-main/05-page-views.sql
+      :template: true
+- :name: 07-commit-page-views
+  :queries:
+    - :name: 07-commit-page-views
+      :file: hackathon/02-page-views/01-main/07-commit-page-views.sql
+      :template: true
+- :name: 99-page-views-model
+  :queries:
+    - :name: 99-page-views-model
+      :file: hackathon/02-page-views/01-main/99-page-views-model.sql
+      :template: true
+- :name: 999-page-views-complete
+  :queries:
+    - :name: 999-page-views-complete
+      :file: hackathon/02-page-views/01-main/999-page-views-complete.sql
+      :template: true
+- :name: 00-setup-sessions
+  :queries:
+    - :name: 00-setup-sessions
+      :file: hackathon/03-sessions/01-main/00-setup-sessions.sql
+      :template: true
+- :name: 01-sessions-aggs
+  :queries:
+    - :name: 01-sessions-aggs
+      :file: hackathon/03-sessions/01-main/01-sessions-aggs.sql
+      :template: true
+- :name: 02-sessions-lasts
+  :queries:
+    - :name: 02-sessions-lasts
+      :file: hackathon/03-sessions/01-main/02-sessions-lasts.sql
+      :template: true
+- :name: 03-sessions
+  :queries:
+    - :name: 03-sessions
+      :file: hackathon/03-sessions/01-main/03-sessions.sql
+      :template: true
+- :name: 05-sessions-prep-manifest
+  :queries:
+    - :name: 05-sessions-prep-manifest
+      :file: hackathon/03-sessions/01-main/05-sessions-prep-manifest.sql
+      :template: true
+- :name: 06-commit-sessions
+  :queries:
+    - :name: 06-commit-sessions
+      :file: hackathon/03-sessions/01-main/06-commit-sessions.sql
+      :template: true
+- :name: 99-sessions-model
+  :queries:
+    - :name: 99-sessions-model
+      :file: hackathon/03-sessions/01-main/99-sessions-model.sql
+      :template: true
+- :name: 999-sessions-complete
+  :queries:
+    - :name: 999-sessions-complete
+      :file: hackathon/03-sessions/01-main/999-sessions-complete.sql
+      :template: true
+- :name: 00-setup-users
+  :queries:
+    - :name: 00-setup-users
+      :file: hackathon/04-users/01-main/00-setup-users.sql
+      :template: true
+- :name: 01-userids-this-run
+  :queries:
+    - :name: 01-userids-this-run
+      :file: hackathon/04-users/01-main/01-userids-this-run.sql
+      :template: true
+- :name: 02-users-limits
+  :queries:
+    - :name: 02-users-limits
+      :file: hackathon/04-users/01-main/02-users-limits.sql
+      :template: true
+- :name: 03-users-sessions-this-run
+  :queries:
+    - :name: 03-users-sessions-this-run
+      :file: hackathon/04-users/01-main/03-users-sessions-this-run.sql
+      :template: true
+- :name: 04-users-aggs
+  :queries:
+    - :name: 04-users-aggs
+      :file: hackathon/04-users/01-main/04-users-aggs.sql
+      :template: true
+- :name: 05-users-lasts
+  :queries:
+    - :name: 05-users-lasts
+      :file: hackathon/04-users/01-main/05-users-lasts.sql
+      :template: true
+- :name: 06-users
+  :queries:
+    - :name: 06-users
+      :file: hackathon/04-users/01-main/06-users.sql
+      :template: true
+- :name: 08-commit-users
+  :queries:
+    - :name: 08-commit-users
+      :file: hackathon/04-users/01-main/08-commit-users.sql
+      :template: true
+- :name: 99-users-model
+  :queries:
+    - :name: 99-users-model
+      :file: hackathon/04-users/01-main/99-users-model.sql
+      :template: true
+- :name: 999-users-complete
+  :queries:
+    - :name: 999-users-complete
+      :file: hackathon/04-users/01-main/999-users-complete.sql
+      :template: true

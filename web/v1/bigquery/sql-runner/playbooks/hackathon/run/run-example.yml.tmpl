@@ -1,0 +1,25 @@
+:targets:
+  - :name:
+    :type:    bigquery
+    :project: com-snplow-eng-gcp
+    :region:  EU
+:variables:
+  :model_version:               bigquery/web/2.0.0-hackathon.test
+  :input_schema:                rt_pipeline_dev1
+  :scratch_schema:              scratch_dev1
+  :output_schema:               derived_dev1
+  :entropy:                     ""
+  :stage_next:                  true
+  :start_date:                  2020-01-01
+  :lookback_window_hours:
+  :days_late_allowed:
+  :session_lookback_days:
+  :update_cadence_days:
+  :upsert_lookback_days:
+  :derived_tstamp_partitioned:  true
+:steps:
+- :name: usage_example
+  :queries:
+    - :name: usage_example
+      :file: hackathon/99-example/usage_example.sql
+      :template: true

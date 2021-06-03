@@ -1,0 +1,51 @@
+:targets:
+  - :name:
+    :type:    bigquery
+    :project: com-snplow-eng-gcp
+    :region:  EU
+:variables:
+  :model_version:         bigquery/web/2.0.0-hackathon.test
+  :scratch_schema:        scratch_dev1
+  :output_schema:         derived_dev1
+  :entropy:               ""
+:steps:
+- :name: 00-setup-sessions
+  :queries:
+    - :name: 00-setup-sessions
+      :file: hackathon/03-sessions/01-main/00-setup-sessions.sql
+      :template: true
+- :name: 01-sessions-aggs
+  :queries:
+    - :name: 01-sessions-aggs
+      :file: hackathon/03-sessions/01-main/01-sessions-aggs.sql
+      :template: true
+- :name: 02-sessions-lasts
+  :queries:
+    - :name: 02-sessions-lasts
+      :file: hackathon/03-sessions/01-main/02-sessions-lasts.sql
+      :template: true
+- :name: 03-sessions
+  :queries:
+    - :name: 03-sessions
+      :file: hackathon/03-sessions/01-main/03-sessions.sql
+      :template: true
+- :name: 05-sessions-prep-manifest
+  :queries:
+    - :name: 05-sessions-prep-manifest
+      :file: hackathon/03-sessions/01-main/05-sessions-prep-manifest.sql
+      :template: true
+- :name: 06-commit-sessions
+  :queries:
+    - :name: 06-commit-sessions
+      :file: hackathon/03-sessions/01-main/06-commit-sessions.sql
+      :template: true
+- :name: 99-sessions-model
+  :queries:
+    - :name: 99-sessions-model
+      :file: hackathon/03-sessions/01-main/99-sessions-model.sql
+      :template: true
+- :name: 999-sessions-complete
+  :queries:
+    - :name: 999-sessions-complete
+      :file: hackathon/03-sessions/01-main/999-sessions-complete.sql
+      :template: true

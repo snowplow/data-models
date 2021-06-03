@@ -1,0 +1,57 @@
+:targets:
+  - :name:
+    :type:    bigquery
+    :project: com-snplow-eng-gcp
+    :region:  EU
+:variables:
+  :model_version:         bigquery/web/2.0.0-hackathon.test
+  :scratch_schema:        scratch_dev1
+  :output_schema:         derived_dev1
+  :entropy:               ""
+  :ua_bot_filter:         true
+:steps:
+- :name: 00-setup
+  :queries:
+    - :name: 00-setup
+      :file: hackathon/02-page-views/01-main/00-setup-page-views.sql
+      :template: true
+- :name: 01-page-view-events
+  :queries:
+    - :name: 01-page-view-events
+      :file: hackathon/02-page-views/01-main/01-page-view-events.sql
+      :template: true
+- :name: 02-engaged-time
+  :queries:
+    - :name: 02-engaged-time
+      :file: hackathon/02-page-views/01-main/02-engaged-time.sql
+      :template: true
+- :name: 03-scroll-depth
+  :queries:
+    - :name: 03-scroll-depth
+      :file: hackathon/02-page-views/01-main/03-scroll-depth.sql
+      :template: true
+- :name: 04-contexts
+  :queries:
+    - :name: 04-contexts
+      :file: hackathon/02-page-views/01-main/04-contexts.sql
+      :template: true
+- :name: 05-page-views
+  :queries:
+    - :name: 05-page-views
+      :file: hackathon/02-page-views/01-main/05-page-views.sql
+      :template: true
+- :name: 07-commit-page-views
+  :queries:
+    - :name: 07-commit-page-views
+      :file: hackathon/02-page-views/01-main/07-commit-page-views.sql
+      :template: true
+- :name: 99-page-views-model
+  :queries:
+    - :name: 99-page-views-model
+      :file: hackathon/02-page-views/01-main/99-page-views-model.sql
+      :template: true
+- :name: 999-page-views-complete
+  :queries:
+    - :name: 999-page-views-complete
+      :file: hackathon/02-page-views/01-main/999-page-views-complete.sql
+      :template: true

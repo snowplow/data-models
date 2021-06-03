@@ -1,0 +1,36 @@
+:targets:
+  - :name:
+    :type:    bigquery
+    :project: com-snplow-eng-gcp
+    :region:  EU
+:variables:
+  :model_version:         bigquery/web/2.0.0-hackathon.test
+  :scratch_schema:        scratch_dev1
+  :output_schema:         derived_dev1
+  :entropy:               ""
+:steps:
+- :name: cleanup_procedures
+  :queries:
+    - :name: cleanup_procedures
+      :file: hackathon/00-common/cleanup_procedures.sql
+      :template: true
+- :name: commit_proceduers
+  :queries:
+    - :name: commit_proceduers
+      :file: hackathon/00-common/commit_proceduers.sql
+      :template: true
+- :name: metadata_procedures
+  :queries:
+    - :name: metadata_procedures
+      :file: hackathon/00-common/metadata_procedures.sql
+      :template: true
+- :name: utility_procedures
+  :queries:
+    - :name: utility_procedures
+      :file: hackathon/00-common/utility_procedures.sql
+      :template: true
+- :name: destructive_procedures
+  :queries:
+    - :name: destructive_procedures
+      :file: hackathon/00-common/destructive_procedures.sql
+      :template: true
