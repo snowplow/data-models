@@ -1,3 +1,8 @@
+BigQuery Mobile Version 1.1.0 (2021-06-15)
+---------------------------------------
+BigQuery Mobile: Add mobile_staging_reconcilition to temp tables validation config (Close #100)
+BigQuery Mobile: Fix column order in events_this_run to allow for events_staged table migration (Close #99)
+
 Redshift Mobile Version 1.1.0 (2021-05-17)
 ---------------------------------------
 Redshift Mobile: Increase session_id character limit in manifest (Close #93)

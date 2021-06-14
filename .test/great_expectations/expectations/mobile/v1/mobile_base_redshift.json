@@ -248,7 +248,7 @@
   ],
   "meta": {
     "versions": {
-      "test_suite_version": "1.0.2",
+      "test_suite_version": "1.0.3",
       "redshift_model_version": "1.1.0"
     },
     "great_expectations.__version__": "0.12.0"
