@@ -170,9 +170,9 @@ SET (LOWER_LIMIT, UPPER_LIMIT) = (SELECT AS STRUCT lower_limit, upper_limit FROM
         e.event_id
       )
 
-    SELECT 
-      *,
-      ROW_NUMBER() OVER(PARTITION BY d.session_id ORDER BY d.derived_tstamp) AS event_index_in_session
+    SELECT
+      ROW_NUMBER() OVER(PARTITION BY d.session_id ORDER BY d.derived_tstamp) AS event_index_in_session, 
+      d.*
     
     FROM
       deduped_events AS d
