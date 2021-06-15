@@ -54,6 +54,15 @@
         "bigquery_temp_table": "ge_test_scratch_mobile_usr_this_run"
       },
       "expectation_suite_names": ["mobile.v1.mobile_users"]
+    },
+    {
+      "batch_kwargs": {
+
+        "table": "scratch.mobile_staging_reconciliation",
+        "datasource": "bigquery",
+        "bigquery_temp_table": "ge_test_scratch_mobile_stg_recon"
+      },
+      "expectation_suite_names": ["mobile.v1.mobile_staging_reconciliation"]
     }
   ]
 }
