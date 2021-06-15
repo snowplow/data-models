@@ -257,10 +257,10 @@ CREATE OR REPLACE PROCEDURE {{.output_schema}}.commit_table(SOURCE_SCHEMA VARCHA
   [missing_in_source, missing_in_target, columns_to_add] = cols_checker_array.getColumnValue(1);
 
   if (missing_in_source > 0) {
-      return "ERROR: Source table is missing column(s) which exist in target table."
+      throw "ERROR: Source table is missing column(s) which exist in target table.";
   }
   else if (missing_in_target > 0 && !AUTOMIGRATE) {
-      return "ERROR: Target table is missing column(s), but automigrate is disabled."
+      throw "ERROR: Target table is missing column(s), but automigrate is disabled.";
   }
   else if (missing_in_target > 0 && AUTOMIGRATE) {
       /* Alter table if AUTOMIGRATE enabled */
