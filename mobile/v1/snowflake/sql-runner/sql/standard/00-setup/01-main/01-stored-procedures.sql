@@ -68,7 +68,7 @@ CREATE OR REPLACE PROCEDURE {{.output_schema}}.update_manifest(MODULE VARCHAR)
       dmls = [users_manifest_delete, users_manifest_insert, users_manifest_truncate];
   }
   else {
-      return "No manifest updated. Pass either 'base' or 'users' to update the manifests within that module";
+      throw "No manifest updated. Pass either 'base' or 'users' to update the manifests within that module";
   }
 
   snowflake.createStatement({sqlText: `BEGIN;`}).execute();
