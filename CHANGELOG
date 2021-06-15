@@ -1,3 +1,9 @@
+Snowflake Mobile Version 1.1.0 (2021-06-16)
+---------------------------------------
+Snowflake Mobile: Update update_manifest to throw error message (Close #104)
+Snowflake Mobile: Update commit_table procedure to throw error messages (Close #103)
+Snowflake Mobile: Fix column order in events_this_run to allow for events_staged table migration (Close #102)
+
 BigQuery Mobile Version 1.1.0 (2021-06-15)
 ---------------------------------------
 BigQuery Mobile: Add mobile_staging_reconcilition to temp tables validation config (Close #100)
