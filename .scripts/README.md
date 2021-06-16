@@ -53,6 +53,7 @@ Note that this script does not enforce dependencies, rather runs the playbooks i
 -d (dryRun) use sql-runner dry run
 -o (output path) path to store output of sql-runner to sql file (to be used in conjunction with p)
 -t (target template) path to target template to use (minimizes risk of credential leak)
+-v (variable template) path to variable template. Any variables in this template will override any corresponding variables within each playbook for the run.
 ```
 
 **Examples:**
@@ -176,6 +177,41 @@ pip3 install -r requirements.txt
 bash .scripts/pr_check.sh -b ~/pathTo/sql-runner -d bigquery -m web;
 
 # Runs the pr check testing script against bigquery
+```
+
+## integration_test.sh
+
+Runs 4 end to end runs of the standard model in 1 day increments, using the integration test dataset. The actual derived tables are then checked against the expect derived tables. The standard tests are also performed on the derived tables.
+
+We recommend using a virtual environment for python, eg. `pyenv` or `virtualenv` - for example using the latter:
+
+```bash
+virtualenv ~/myenv
+source ~/myenv/bin/activate
+```
+
+Before running, make sure to install python requirements (python3 required):
+
+```bash
+cd data-models/.test
+pip3 install -r requirements.txt
+```
+
+**Arguments:**
+
+```
+-b (binary) path to sql-runner binary [required]
+-d (database) target database for expectations [required]
+-a (auth) optional credentials for database target
+-m (model) target model to run i.e. web or mobile [required]
+```
+
+**Examples:**
+
+```bash
+bash .scripts/integration_test.sh -b ~/pathTo/sql-runner -d bigquery -m web
+
+# Runs the integration testing script against bigquery
 ```
 
 ### `run_playbooks.sh` (deprecated)

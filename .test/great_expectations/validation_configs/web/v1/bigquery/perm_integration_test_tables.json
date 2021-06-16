@@ -1,0 +1,29 @@
+{
+  "validation_operator_name": "action_list_operator",
+  "batches": [
+    {
+      "batch_kwargs": {
+        "datasource": "bigquery",
+        "query": "WITH expected_hashed AS ( SELECT a AS data, FARM_FINGERPRINT(FORMAT( '%%T', a)) AS h FROM dv_test_data.page_views AS a ), actual_hashed AS ( SELECT b AS data, FARM_FINGERPRINT(FORMAT( '%%T', b)) AS h FROM derived_dev1.page_views AS b ), equality_check AS ( SELECT IF(l.h IS NULL, 'New on right', 'New on left') AS Change, IF(l.h IS NULL,r.data,l.data).* FROM expected_hashed l FULL OUTER JOIN actual_hashed r ON l.h = r.h WHERE l.h IS NULL OR r.h IS NULL)SELECT  SUM(CASE WHEN user_id = 'long session' THEN 1 END) AS long_session, SUM(CASE WHEN user_id = 'NULL page_view_id' THEN 1 END) AS null_page_view_id, SUM(CASE WHEN user_id = 'NULL domain_userid' THEN 1 END) AS null_domain_userid, SUM(CASE WHEN user_id = 'NULL domain_sessionid' THEN 1 END) AS null_domain_sessionid, SUM(CASE WHEN user_id = 'dupe: event_id same collector_tstamp' THEN 1 END) AS dupe_event_id_same_collector_tstamp, SUM(CASE WHEN user_id = 'dupe: event_id different collector_tstamp' THEN 1 END) AS dupe_event_id_diff_collector_tstamp, SUM(CASE WHEN user_id = 'dupe: page_view_id same derived_tstamp' THEN 1 END) AS dupe_page_view_id_same_derived_tstamp, SUM(CASE WHEN user_id = 'dupe: page_view_id different derived_tstamp' THEN 1 END) AS dupe_page_view_id_diff_derived_tstamp, SUM(CASE WHEN user_id = 'late arriving: device created/sent >3 days' THEN 1 END) AS late_arriving_dvc_created_sent, SUM(CASE WHEN user_id = 'stray page ping' THEN 1 END) AS stray_page_ping, SUM(CASE WHEN user_id = 'No edge cases' THEN 1 END) AS clean_session FROM equality_check",
+        "bigquery_temp_table": "ge_test_derived_pv_integration"
+      },
+      "expectation_suite_names": ["web.v1.integration_tests"]
+    },
+    {
+      "batch_kwargs": {
+        "datasource": "bigquery",
+        "query": "WITH expected_hashed AS ( SELECT a AS data, FARM_FINGERPRINT(FORMAT( '%%T', a)) AS h FROM dv_test_data.sessions AS a ), actual_hashed AS ( SELECT b AS data, FARM_FINGERPRINT(FORMAT( '%%T', b)) AS h FROM derived_dev1.sessions AS b ), equality_check AS ( SELECT IF(l.h IS NULL, 'New on right', 'New on left') AS Change, IF(l.h IS NULL,r.data,l.data).* FROM expected_hashed l FULL OUTER JOIN actual_hashed r ON l.h = r.h WHERE l.h IS NULL OR r.h IS NULL)SELECT  SUM(CASE WHEN user_id = 'long session' THEN 1 END) AS long_session, SUM(CASE WHEN user_id = 'NULL page_view_id' THEN 1 END) AS null_page_view_id, SUM(CASE WHEN user_id = 'NULL domain_userid' THEN 1 END) AS null_domain_userid, SUM(CASE WHEN user_id = 'NULL domain_sessionid' THEN 1 END) AS null_domain_sessionid, SUM(CASE WHEN user_id = 'dupe: event_id same collector_tstamp' THEN 1 END) AS dupe_event_id_same_collector_tstamp, SUM(CASE WHEN user_id = 'dupe: event_id different collector_tstamp' THEN 1 END) AS dupe_event_id_diff_collector_tstamp, SUM(CASE WHEN user_id = 'dupe: page_view_id same derived_tstamp' THEN 1 END) AS dupe_page_view_id_same_derived_tstamp, SUM(CASE WHEN user_id = 'dupe: page_view_id different derived_tstamp' THEN 1 END) AS dupe_page_view_id_diff_derived_tstamp, SUM(CASE WHEN user_id = 'late arriving: device created/sent >3 days' THEN 1 END) AS late_arriving_dvc_created_sent, SUM(CASE WHEN user_id = 'stray page ping' THEN 1 END) AS stray_page_ping, SUM(CASE WHEN user_id = 'No edge cases' THEN 1 END) AS clean_session FROM equality_check",
+        "bigquery_temp_table": "ge_test_derived_sessions_integration"
+      },
+      "expectation_suite_names": ["web.v1.integration_tests"]
+    },
+    {
+      "batch_kwargs": {
+        "datasource": "bigquery",
+        "query": "WITH expected_hashed AS ( SELECT a AS data, FARM_FINGERPRINT(FORMAT( '%%T', a)) AS h FROM dv_test_data.users AS a ), actual_hashed AS ( SELECT b AS data, FARM_FINGERPRINT(FORMAT( '%%T', b)) AS h FROM derived_dev1.users AS b ), equality_check AS ( SELECT IF(l.h IS NULL, 'New on right', 'New on left') AS Change, IF(l.h IS NULL,r.data,l.data).* FROM expected_hashed l FULL OUTER JOIN actual_hashed r ON l.h = r.h WHERE l.h IS NULL OR r.h IS NULL)SELECT  SUM(CASE WHEN user_id = 'long session' THEN 1 END) AS long_session, SUM(CASE WHEN user_id = 'NULL page_view_id' THEN 1 END) AS null_page_view_id, SUM(CASE WHEN user_id = 'NULL domain_userid' THEN 1 END) AS null_domain_userid, SUM(CASE WHEN user_id = 'NULL domain_sessionid' THEN 1 END) AS null_domain_sessionid, SUM(CASE WHEN user_id = 'dupe: event_id same collector_tstamp' THEN 1 END) AS dupe_event_id_same_collector_tstamp, SUM(CASE WHEN user_id = 'dupe: event_id different collector_tstamp' THEN 1 END) AS dupe_event_id_diff_collector_tstamp, SUM(CASE WHEN user_id = 'dupe: page_view_id same derived_tstamp' THEN 1 END) AS dupe_page_view_id_same_derived_tstamp, SUM(CASE WHEN user_id = 'dupe: page_view_id different derived_tstamp' THEN 1 END) AS dupe_page_view_id_diff_derived_tstamp, SUM(CASE WHEN user_id = 'late arriving: device created/sent >3 days' THEN 1 END) AS late_arriving_dvc_created_sent, SUM(CASE WHEN user_id = 'stray page ping' THEN 1 END) AS stray_page_ping, SUM(CASE WHEN user_id = 'No edge cases' THEN 1 END) AS clean_session FROM equality_check",
+        "bigquery_temp_table": "ge_test_derived_users_integration"
+      },
+      "expectation_suite_names": ["web.v1.integration_tests"]
+    }
+  ]
+}

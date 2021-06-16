@@ -4,6 +4,7 @@
 # -b (binary) path to sql-runner binary
 # -d (database) target database for expectations
 # -a (auth) optional credentials for database target
+# -m (model) target model to run i.e. web or mobile
 
 while getopts 'b:d:a:m:' v
 do
