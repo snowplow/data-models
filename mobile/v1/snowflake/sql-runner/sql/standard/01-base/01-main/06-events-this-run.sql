@@ -143,8 +143,9 @@ AS (
   )
 
   SELECT
+    {{if eq .model "mobile"}} ROW_NUMBER() OVER(PARTITION BY d.session_id ORDER BY d.derived_tstamp) AS event_index_in_session, {{end}}
     d.*
-    {{if eq .model "mobile"}} , ROW_NUMBER() OVER(PARTITION BY d.session_id ORDER BY d.derived_tstamp) AS event_index_in_session {{end}}
+    
 
   FROM
     deduped_events d
