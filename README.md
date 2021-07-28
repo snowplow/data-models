@@ -74,6 +74,10 @@ For open-source users, the JSON files in `configs` folders can't be directly use
 
 For local use, the `.scripts/run_config.sh` script can be used to run a config - note that it does not resolve dependencies but runs the playbooks in order of appearance.
 
+## dbt
+
+For users using dbt we have the [snowplow-web](https://github.com/snowplow/dbt-snowplow-web) dbt package, allowing you to run the web model via dbt. Currently the package only supports Redshift, with BigQuery and Snowflake support to follow soon. Similarly, the mobile model will soon be supported in dbt.
+
 ## Using other tools
 
 For those who wish to use other tools, one may configure playbooks and config JSON files for the desired model, then use the `.scripts/run_configs.sh` script's `-p` and `-o` flags to fill templates and output pure SQL to file:
