@@ -32,7 +32,7 @@ Each standard module also contains a `99-{module}-complete` playbook, which comp
 
 The simplest means of assuring that everything is run in the correct order is to run all relevant `99-complete` steps at the end of the model, in the order demonstrated in the `../../configs/example_with_custom.json` configuration.
 
-Snowplow Insights customers running on orchestration need only ensure that dependencies are specified in the config file.
+Snowplow BDP customers running on orchestration need only ensure that dependencies are specified in the config file.
 
 ## Producing custom tables
 
