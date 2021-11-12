@@ -41,7 +41,7 @@ It's best to avoid committing these to source control - however doing so is less
 
 Runs a config json file (examples found in the `configs` folder of each model) - which specifies a list of playbooks to run.
 
-Note that this script does not enforce dependencies, rather runs the playbooks in order of appearance. Snowplow Insights customers can take advantage of dependency resolution when running jobs on our Orchestration services.
+Note that this script does not enforce dependencies, rather runs the playbooks in order of appearance. Snowplow BDP customers can take advantage of dependency resolution when running jobs on our Orchestration services.
 
 **Arguments:**
 

@@ -2,13 +2,13 @@
 
 ![snowplow-logo](media/snowplow_logo.png)
 
-Snowplow is a scalable open-source platform for rich, high quality, low-latency data collection. It is designed to collect high quality, complete behavioural data for enterprise business.
+Snowplow is a scalable open-source platform for rich, high quality, low-latency data collection. It is designed to collect high quality, complete behavioral data for enterprise business.
 
 # Snowplow Pipeline Overview
 
 ![snowplow-pipeline](media/snowplow_architecture.png)
 
-The [Snowplow trackers][tracker-docs] enable highly customisable collection of raw, unopinionated event data. The pipeline validates these events against a JSONSchema - to guarantee a high quality dataset - and adds information via both standard and custom enrichments.
+The [Snowplow trackers][tracker-docs] enable highly customizable collection of raw, unopinionated event data. The pipeline validates these events against a JSONSchema - to guarantee a high quality dataset - and adds information via both standard and custom enrichments.
 
 This data is then made available in-stream for real-time processing, and can also be loaded to blob storage and data warehouse for analysis.
 
@@ -16,7 +16,7 @@ The Snowplow atomic data acts as an immutable log of all the actions that occurr
 
 # Try Snowplow
 
-This repo contains data models which are relevant to users who already have a full Snowplow pipeline running (which can be done Open Source or via our [Snowplow Insights](https://snowplowanalytics.com/snowplow-insights/) service).
+This repo contains data models which are relevant to users who already have a full Snowplow pipeline running (which can be done Open Source or via [Snowplow BDP](https://snowplowanalytics.com/snowplow-bdp/)).
 
 If you don't have a pipeline yet, you might be interested in finding out what Snowplow can do by setting up [Try Snowplow](https://try.snowplowanalytics.com/?utm_source=github&utm_medium=post&utm_campaign=try-snowplow).
 
@@ -35,7 +35,7 @@ Documentation for the data models can be found on [our documentation site][docs-
 
 # Prerequisites
 
-These models are written in a format that is runnable via [SQL-runner][sql-runner] - available for download as a zip file from [Github Releases][sql-runner-github]. The bigquery model requires >= v0.9.2, and the Snowflake model requires >= v0.9.3 of sql-runner.
+These models are written in a format that is runnable via [SQL-runner][sql-runner] - available for download as a zip file from [Github Releases][sql-runner-github]. The BigQuery model requires >= v0.9.2, and the Snowflake model requires >= v0.9.3 of sql-runner.
 
 Those who don't wish to use sql-runner to run models can use the -t and -o flags of the run_config.sh script to output the pure sql for a model according to how it has been configured for sql-runner.
 
@@ -48,13 +48,13 @@ cd .tests
 pip3 install -r requirements.txt
 ```
 
-# Quickstart
+# Quick start
 
 To run a model and tests end to end, run the `.scripts/e2e.sh` bash script.
 
 ![end-to-end](media/e2e.gif)
 
-For a quickstart guide to each individual model, and specific details on each module, see the README in the model's database-specific folder (eg. `web/v1/redshift`).
+For a quick start guide to each individual model, and specific details on each module, see the README in the model's database-specific folder (eg. `web/v1/redshift`).
 
 For detail on the structure of a model, see the README in the model's main folder (eg. `web/v1`).
 
@@ -64,9 +64,9 @@ For detail on using the helper scripts, see the README in `.scripts/`
 
 ## Using SQL-runner
 
-### Snowplow insights
+### Snowplow BDP
 
-Snowplow Insights customers can configure jobs for SQL-runner in production via configuration files. [See our docs site for details on doing so](https://docs.snowplowanalytics.com/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-insights/). The `configs/datamodeling.json` file in each model is an example configuration for the standard model. The `configs/example_with_custom.json` file is an example configuration with a customisation.
+Snowplow BDP customers can configure jobs for SQL-runner in production via configuration files. [See our docs site for details on doing so](https://docs.snowplowanalytics.com/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/). The `configs/datamodeling.json` file in each model is an example configuration for the standard model. The `configs/example_with_custom.json` file is an example configuration with a customization.
 
 ### Open Source
 
