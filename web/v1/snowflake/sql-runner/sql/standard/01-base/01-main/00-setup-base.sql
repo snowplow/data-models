@@ -103,166 +103,42 @@ AS (
 
 
 -- Create staged table
-CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.events_staged{{.entropy}} (
 
-  page_view_id                VARCHAR(36),
+CREATE OR REPLACE PROCEDURE {{.scratch_schema}}.create_events_staged()
+  RETURNS VARCHAR
+  LANGUAGE JAVASCRIPT
+  AS
+  $$
 
-  app_id                      VARCHAR(255),
-  platform                    VARCHAR(255),
+  var sql_stmt = `
+      SELECT listagg(isc.column_name, ',') WITHIN GROUP (order by isc.ordinal_position)
+      FROM information_schema.columns AS isc
+      WHERE table_schema=UPPER('{{.input_schema}}')
+        AND table_name=UPPER('events')
+        AND column_name != UPPER('contexts_com_snowplowanalytics_snowplow_web_page_1');`;
 
-  etl_tstamp                  TIMESTAMP_NTZ ,
-  collector_tstamp            TIMESTAMP_NTZ    NOT NULL,
-  dvce_created_tstamp         TIMESTAMP_NTZ,
+  var res = snowflake.createStatement({sqlText: sql_stmt}).execute();
+  res.next();
+  var result = res.getColumnValue(1);
 
-  event                       VARCHAR(128),
-  event_id                    VARCHAR(36)      NOT NULL,
-  txn_id                      INTEGER,
+  var new_col = 'contexts_com_snowplowanalytics_snowplow_web_page_1[0]:id::varchar(36) AS page_view_id';
+  if (result !== '') {
+      new_col = new_col + ',';
+  }
 
-  name_tracker                VARCHAR(128),
-  v_tracker                   VARCHAR(100),
-  v_collector                 VARCHAR(100)     NOT NULL,
-  v_etl                       VARCHAR(100)     NOT NULL,
+  var fin_query=`
+    CREATE OR REPLACE TABLE {{.scratch_schema}}.events_staged{{.entropy}}
+    AS
+      SELECT
+        ` + new_col + ` ` + result + `
+      FROM {{.input_schema}}.events AS a
+      WHERE 1=0 ;`;
 
-  user_id                     VARCHAR(255),
-  user_ipaddress              VARCHAR(128),
-  user_fingerprint            VARCHAR(128),
-  domain_userid               VARCHAR(128),
-  domain_sessionidx           INTEGER,
-  network_userid              VARCHAR(128),
+  snowflake.createStatement({sqlText: fin_query}).execute();
 
-  geo_country                 VARCHAR(2),
-  geo_region                  VARCHAR(3),
-  geo_city                    VARCHAR(75),
-  geo_zipcode                 VARCHAR(15),
-  geo_latitude                DOUBLE PRECISION,
-  geo_longitude               DOUBLE PRECISION,
-  geo_region_name             VARCHAR(100),
+  return 'ok. create_events_staged succeeded.';
 
-  ip_isp                      VARCHAR(100),
-  ip_organization             VARCHAR(128),
-  ip_domain                   VARCHAR(128),
-  ip_netspeed                 VARCHAR(100),
+  $$
+;
 
-  page_url                    VARCHAR(4096),
-  page_title                  VARCHAR(2000),
-  page_referrer               VARCHAR(4096),
-
-  page_urlscheme              VARCHAR(16),
-  page_urlhost                VARCHAR(255),
-  page_urlport                INTEGER,
-  page_urlpath                VARCHAR(3000),
-  page_urlquery               VARCHAR(6000),
-  page_urlfragment            VARCHAR(3000),
-
-  refr_urlscheme              VARCHAR(16),
-  refr_urlhost                VARCHAR(255),
-  refr_urlport                INTEGER,
-  refr_urlpath                VARCHAR(6000),
-  refr_urlquery               VARCHAR(6000),
-  refr_urlfragment            VARCHAR(3000),
-
-  refr_medium                 VARCHAR(25),
-  refr_source                 VARCHAR(50),
-  refr_term                   VARCHAR(255),
-
-  mkt_medium                  VARCHAR(255),
-  mkt_source                  VARCHAR(255),
-  mkt_term                    VARCHAR(255),
-  mkt_content                 VARCHAR(500),
-  mkt_campaign                VARCHAR(255),
-
-  se_category                 VARCHAR(1000),
-  se_action                   VARCHAR(1000),
-  se_label                    VARCHAR(1000),
-  se_property                 VARCHAR(1000),
-  se_value                    DOUBLE PRECISION,
-
-  tr_orderid                  VARCHAR(255),
-  tr_affiliation              VARCHAR(255),
-  tr_total                    NUMBER(18,2),
-  tr_tax                      NUMBER(18,2),
-  tr_shipping                 NUMBER(18,2),
-  tr_city                     VARCHAR(255),
-  tr_state                    VARCHAR(255),
-  tr_country                  VARCHAR(255),
-  ti_orderid                  VARCHAR(255),
-  ti_sku                      VARCHAR(255),
-  ti_name                     VARCHAR(255),
-  ti_category                 VARCHAR(255),
-  ti_price                    NUMBER(18,2),
-  ti_quantity                 INTEGER,
-
-  pp_xoffset_min              INTEGER,
-  pp_xoffset_max              INTEGER,
-  pp_yoffset_min              INTEGER,
-  pp_yoffset_max              INTEGER,
-
-  useragent                   VARCHAR(1000),
-
-  br_name                     VARCHAR(50),
-  br_family                   VARCHAR(50),
-  br_version                  VARCHAR(50),
-  br_type                     VARCHAR(50),
-  br_renderengine             VARCHAR(50),
-  br_lang                     VARCHAR(255),
-  br_features_pdf             BOOLEAN,
-  br_features_flash           BOOLEAN,
-  br_features_java            BOOLEAN,
-  br_features_director        BOOLEAN,
-  br_features_quicktime       BOOLEAN,
-  br_features_realplayer      BOOLEAN,
-  br_features_windowsmedia    BOOLEAN,
-  br_features_gears           BOOLEAN,
-  br_features_silverlight     BOOLEAN,
-  br_cookies                  BOOLEAN,
-  br_colordepth               VARCHAR(12),
-  br_viewwidth                INTEGER,
-  br_viewheight               INTEGER,
-
-  os_name                     VARCHAR(50),
-  os_family                   VARCHAR(50),
-  os_manufacturer             VARCHAR(50),
-  os_timezone                 VARCHAR(255),
-
-  dvce_type                   VARCHAR(50),
-  dvce_ismobile               BOOLEAN,
-  dvce_screenwidth            INTEGER,
-  dvce_screenheight           INTEGER,
-
-  doc_charset                 VARCHAR(128),
-  doc_width                   INTEGER,
-  doc_height                  INTEGER,
-
-  tr_currency                 VARCHAR(3),
-  tr_total_base               NUMBER(18,2),
-  tr_tax_base                 NUMBER(18,2),
-  tr_shipping_base            NUMBER(18,2),
-  ti_currency                 VARCHAR(3),
-  ti_price_base               NUMBER(18,2),
-  base_currency               VARCHAR(3),
-
-  geo_timezone                VARCHAR(64),
-
-  mkt_clickid                 VARCHAR(128),
-  mkt_network                 VARCHAR(64),
-
-  etl_tags                    VARCHAR(500),
-
-  dvce_sent_tstamp            TIMESTAMP_NTZ,
-
-  refr_domain_userid          VARCHAR(128),
-  refr_dvce_tstamp            TIMESTAMP_NTZ,
-
-  domain_sessionid            VARCHAR(128),
-
-  derived_tstamp              TIMESTAMP_NTZ,
-
-  event_vendor                VARCHAR(1000),
-  event_name                  VARCHAR(1000),
-  event_format                VARCHAR(128),
-  event_version               VARCHAR(128),
-
-  event_fingerprint           VARCHAR(128),
-
-  true_tstamp                 TIMESTAMP_NTZ
-);
+CALL {{.scratch_schema}}.create_events_staged();
