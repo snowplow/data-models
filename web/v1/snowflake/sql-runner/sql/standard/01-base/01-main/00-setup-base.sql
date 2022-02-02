@@ -127,7 +127,7 @@ CREATE OR REPLACE PROCEDURE {{.scratch_schema}}.create_events_staged()
   }
 
   var fin_query=`
-    CREATE OR REPLACE TABLE {{.scratch_schema}}.events_staged{{.entropy}}
+    CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.events_staged{{.entropy}}
     AS
       SELECT
         ` + new_col + ` ` + result + `
@@ -136,7 +136,7 @@ CREATE OR REPLACE PROCEDURE {{.scratch_schema}}.create_events_staged()
 
   snowflake.createStatement({sqlText: fin_query}).execute();
 
-  return 'ok. create_events_staged succeeded.';
+  return 'ok. procedure has run successfully';
 
   $$
 ;
