@@ -27,5 +27,4 @@ AS (
     ON a.domain_userid = b.domain_userid
 
   WHERE a.start_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.users_limits{{.entropy}})
-    AND a.start_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.users_limits{{.entropy}})
 );
