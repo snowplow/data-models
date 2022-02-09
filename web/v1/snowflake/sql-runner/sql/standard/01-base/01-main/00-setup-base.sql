@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.events_staged{{.entropy}} (
 
   se_category                 VARCHAR(1000),
   se_action                   VARCHAR(1000),
-  se_label                    VARCHAR(1000),
+  se_label                    VARCHAR(4096),
   se_property                 VARCHAR(1000),
   se_value                    DOUBLE PRECISION,
 
