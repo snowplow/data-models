@@ -87,7 +87,7 @@ INSERT INTO {{.scratch_schema}}.users_metadata_this_run{{.entropy}} (
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.users_manifest{{.entropy}}
 AS (
   SELECT
-    'seed'::VARCHAR(36) AS domain_userid,
+    'seed'::VARCHAR(128) AS domain_userid,
     '1970-01-01'::TIMESTAMP_NTZ AS start_tstamp
 );
 

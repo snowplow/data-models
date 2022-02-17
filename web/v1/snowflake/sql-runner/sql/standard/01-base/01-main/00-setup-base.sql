@@ -97,7 +97,7 @@ AS (
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.base_session_id_manifest{{.entropy}}
 AS (
   SELECT
-    'seed'::VARCHAR(36) AS session_id,
+    'seed'::VARCHAR(128) AS session_id,
     '{{.start_date}}'::TIMESTAMP_NTZ AS min_tstamp
 );
 
