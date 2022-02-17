@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.users_manifest{{.entropy}}
 AS (
   SELECT
     'seed'::VARCHAR(36) AS domain_userid,
-    '{{.start_date}}'::TIMESTAMP_NTZ AS start_tstamp
+    '1970-01-01'::TIMESTAMP_NTZ AS start_tstamp
 );
 
 -- Setup Users table
