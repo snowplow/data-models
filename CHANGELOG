@@ -1,3 +1,13 @@
+Snowflake Web Version 1.0.1 (2022-02-24)
+---------------------------------------
+Snowflake Web: Update column check stored procedure (Close #125)
+Snowflake Web: Fix varchar length for pseudonymized fields (Close #122)
+Snowflake Web: Remove start_date variable from users module (Close #123)
+Snowflake Web: Update copyright notices (Close #124)
+Snowflake Web: Fix logic in users_sessions_this_run to account for sparse data (Close #120)
+Snowflake Web: Fix varchar length for yauaa columns (Close #97)
+Snowflake Web: Fix se_label column length in events_staged (Close #109)
+
 Snowflake Mobile Version 1.1.0 (2021-06-16)
 ---------------------------------------
 Snowflake Mobile: Update update_manifest to throw error message (Close #104)
