@@ -1,5 +1,5 @@
 /*
-   Copyright 2021 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2021-2022 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -185,24 +185,24 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.page_views{{.entropy}} (
   -- optional YAUAA fields
   device_class                     VARCHAR,
   agent_class                      VARCHAR,
-  agent_name                       VARCHAR(100),
-  agent_name_version               VARCHAR(200),
-  agent_name_version_major         VARCHAR(120),
-  agent_version                    VARCHAR(100),
-  agent_version_major              VARCHAR(20),
-  device_brand                     VARCHAR(50),
-  device_name                      VARCHAR(100),
-  device_version                   VARCHAR(100),
+  agent_name                       VARCHAR,
+  agent_name_version               VARCHAR,
+  agent_name_version_major         VARCHAR,
+  agent_version                    VARCHAR,
+  agent_version_major              VARCHAR,
+  device_brand                     VARCHAR,
+  device_name                      VARCHAR,
+  device_version                   VARCHAR,
   layout_engine_class              VARCHAR,
-  layout_engine_name               VARCHAR(100),
-  layout_engine_name_version       VARCHAR(150),
-  layout_engine_name_version_major VARCHAR(120),
-  layout_engine_version            VARCHAR(50),
-  layout_engine_version_major      VARCHAR(20),
+  layout_engine_name               VARCHAR,
+  layout_engine_name_version       VARCHAR,
+  layout_engine_name_version_major VARCHAR,
+  layout_engine_version            VARCHAR,
+  layout_engine_version_major      VARCHAR,
   operating_system_class           VARCHAR,
-  operating_system_name            VARCHAR(100),
-  operating_system_name_version    VARCHAR(150),
-  operating_system_version         VARCHAR(50)
+  operating_system_name            VARCHAR,
+  operating_system_name_version    VARCHAR,
+  operating_system_version         VARCHAR
 );
 
 -- Create staging table - acts as input to sessions step

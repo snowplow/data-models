@@ -1,5 +1,5 @@
 /*
-   Copyright 2021 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2021-2022 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -87,8 +87,8 @@ INSERT INTO {{.scratch_schema}}.users_metadata_this_run{{.entropy}} (
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.users_manifest{{.entropy}}
 AS (
   SELECT
-    'seed'::VARCHAR(36) AS domain_userid,
-    '{{.start_date}}'::TIMESTAMP_NTZ AS start_tstamp
+    'seed'::VARCHAR(128) AS domain_userid,
+    '1970-01-01'::TIMESTAMP_NTZ AS start_tstamp
 );
 
 -- Setup Users table

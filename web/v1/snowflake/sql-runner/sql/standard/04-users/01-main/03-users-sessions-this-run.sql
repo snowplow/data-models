@@ -1,5 +1,5 @@
 /*
-   Copyright 2021 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2021-2022 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -27,5 +27,4 @@ AS (
     ON a.domain_userid = b.domain_userid
 
   WHERE a.start_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.users_limits{{.entropy}})
-    AND a.start_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.users_limits{{.entropy}})
 );

@@ -1,5 +1,5 @@
 /*
-   Copyright 2021 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2021-2022 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -97,7 +97,7 @@ AS (
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.base_session_id_manifest{{.entropy}}
 AS (
   SELECT
-    'seed'::VARCHAR(36) AS session_id,
+    'seed'::VARCHAR(128) AS session_id,
     '{{.start_date}}'::TIMESTAMP_NTZ AS min_tstamp
 );
 
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.events_staged{{.entropy}} (
 
   se_category                 VARCHAR(1000),
   se_action                   VARCHAR(1000),
-  se_label                    VARCHAR(1000),
+  se_label                    VARCHAR(4096),
   se_property                 VARCHAR(1000),
   se_value                    DOUBLE PRECISION,
 

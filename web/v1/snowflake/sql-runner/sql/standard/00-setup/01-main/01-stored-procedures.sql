@@ -1,5 +1,5 @@
 /*
-   Copyright 2021 Snowplow Analytics Ltd. All rights reserved.
+   Copyright 2021-2022 Snowplow Analytics Ltd. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -86,74 +86,89 @@ CREATE OR REPLACE PROCEDURE {{.output_schema}}.column_check(SOURCE_SCHEMA VARCHA
   AS
   $$
 
-  var delim = '~';
-  var sourceColumns = list_cols_with_type(SOURCE_SCHEMA,SOURCE_TABLE,delim).split(delim);
-  var targetColumns = list_cols_with_type(TARGET_SCHEMA,TARGET_TABLE,delim).split(delim);
+  column_check_stmt = `
+    WITH target_columns AS (
+    SELECT
+      isc.column_name,
+      isc.data_type,
+      isc.ordinal_position,
+      isc.character_maximum_length
 
-  if (targetColumns.some(notIncludedIn(sourceColumns)) === true) {
+    FROM information_schema.columns AS isc
+    WHERE table_schema = UPPER(:1)
+    AND table_name = UPPER(:2)
+    )
 
-      throw "ERROR: Source table is missing column(s) which exist in target table.";
+  , source_columns AS (
+    SELECT
+      isc.column_name,
+      isc.data_type,
+      isc.ordinal_position,
+      isc.character_maximum_length,
+      isc.numeric_precision,
+      isc.numeric_scale
+
+    FROM information_schema.columns AS isc
+    WHERE table_schema = UPPER(:3)
+    AND table_name = UPPER(:4)
+    )
+
+  SELECT
+    SUM(CASE WHEN sc.column_name IS NULL THEN 1 ELSE 0 END) AS missing_in_source,
+    SUM(CASE WHEN tc.column_name IS NULL THEN 1 ELSE 0 END) AS missing_in_target,
+    LISTAGG(
+      CASE
+      WHEN tc.column_name IS NOT NULL
+        THEN NULL
+      WHEN sc.data_type='TEXT'
+        THEN CONCAT(sc.column_name, ' VARCHAR(',sc.character_maximum_length, ')')
+      WHEN sc.data_type='NUMBER'
+        THEN CONCAT(sc.column_name, ' NUMBER(', sc.numeric_precision, ',',sc.numeric_scale, ')')
+      ELSE
+        CONCAT(sc.column_name, ' ', sc.data_type)
+      END
+      , ', ') WITHIN GROUP (ORDER BY sc.ordinal_position) AS cols_to_add,
+      LISTAGG(CASE WHEN tc.column_name IS NOT NULL AND sc.character_maximum_length > tc.character_maximum_length THEN sc.column_name END, ', ') as cols_w_incompatible_char_limits
+
+  FROM target_columns tc
+  FULL OUTER JOIN source_columns sc
+  ON tc.column_name = sc.column_name
+  AND tc.data_type = sc.data_type
+  AND tc.ordinal_position = sc.ordinal_position`;
+
+  var res = snowflake.createStatement({sqlText: column_check_stmt,
+                                       binds: [TARGET_SCHEMA, TARGET_TABLE,SOURCE_SCHEMA, SOURCE_TABLE]}
+                                      ).execute();
+  res.next();
+
+  missing_in_source = res.getColumnValue(1);
+  missing_in_target = res.getColumnValue(2);
+  cols_to_add = res.getColumnValue(3);
+  cols_with_varchar_issue = res.getColumnValue(4);
+
+
+  if (missing_in_source > 0) {
+    throw "ERROR: Source table is either missing column(s) which exist in target table or their position is wrong.";
+  }
+
+  if (cols_with_varchar_issue !== '') {
+    throw "ERROR: field length for source varchar column(s) " + cols_with_varchar_issue + " is longer than the target."
+  }
+
+  if (missing_in_target > 0) {
+
+    if ( AUTOMIGRATE !== 'TRUE' ) {
+      throw "ERROR: Target table is missing column(s),but automigrate is not enabled.";
+
+    } else {
+        var alter_stmt = `ALTER TABLE ` + TARGET_SCHEMA + `.` + TARGET_TABLE + ` ADD COLUMN ` + cols_to_add;
+        snowflake.createStatement({sqlText: alter_stmt}).execute();
+        return "ok. Columns added."
+      }
 
   } else {
-
-      var columnAdditions = sourceColumns.filter(notIncludedIn(targetColumns));
-
-      if (sourceColumns.some(notIncludedIn(targetColumns)) === true) {
-          if ( AUTOMIGRATE !== 'TRUE' ) {
-              throw "ERROR: Target table is missing column(s),but automigrate is not enabled.";
-          } else {
-              // enforce order
-              for (var i = 0; i < targetColumns.length; i++) {
-                  if (targetColumns[i] !== sourceColumns[i]) {
-                      throw "ERROR: Can only migrate extra columns of the end of source"
-                  }
-              }
-              add_columns_to(TARGET_SCHEMA, TARGET_TABLE, columnAdditions.join(','));
-              return "ok.Columns added."
-          }
-      } else {
-          return "ok. Columns match."
-      }
-  }
-
-  // == Helpers ==
-
-  function list_cols_with_type(sch,tbl,delimiter) {
-      var stmt = `
-          SELECT
-              LISTAGG(
-                  CASE
-                    WHEN isc.data_type='TEXT'
-                      THEN CONCAT(isc.column_name, ' VARCHAR(',isc.character_maximum_length, ')')
-                    WHEN isc.data_type='NUMBER'
-                      THEN CONCAT(isc.column_name, ' NUMBER(', isc.numeric_precision, ',',isc.numeric_scale, ')')
-                    ELSE
-                      CONCAT(isc.column_name, ' ', isc.data_type)
-                  END, '` + delimiter + `')
-              WITHIN GROUP (order by isc.ordinal_position)
-          FROM information_schema.columns AS isc
-          WHERE table_schema='` + sch + `'
-            AND table_name='` + tbl + `';`;
-
-      var res = snowflake.createStatement({sqlText: stmt}).execute();
-      res.next();
-      result = res.getColumnValue(1);
-
-      return result;
-  }
-
-  function notIncludedIn(arr) {
-      return function(elt) {
-        return ! arr.includes(elt);
-      };
-  }
-
-  function add_columns_to(sch, tbl, cols) {
-      var alter_stmt = `ALTER TABLE ` + sch + `.` + tbl + ` ADD COLUMN ` + cols;
-      snowflake.createStatement({sqlText: alter_stmt}).execute();
-
-      return "ok. Columns added.";
-  }
+        return "ok. Columns match."
+    }
 
   $$
 ;
