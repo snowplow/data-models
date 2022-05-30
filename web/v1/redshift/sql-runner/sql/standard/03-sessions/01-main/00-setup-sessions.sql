@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.sessions{{.entropy}} (
   domain_sessionid VARCHAR(128) ENCODE ZSTD,
   domain_sessionidx INT ENCODE ZSTD,
 
-  start_tstamp TIMESTAMP ENCODE ZSTD,
+  start_tstamp TIMESTAMP ENCODE RAW,
   end_tstamp TIMESTAMP ENCODE ZSTD,
 
   -- user fields

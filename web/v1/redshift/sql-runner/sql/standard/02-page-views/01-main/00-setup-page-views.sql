@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.page_views{{.entropy}} (
   dvce_created_tstamp TIMESTAMP ENCODE ZSTD,
   collector_tstamp TIMESTAMP ENCODE ZSTD,
   derived_tstamp TIMESTAMP ENCODE ZSTD,
-  start_tstamp TIMESTAMP ENCODE ZSTD,
+  start_tstamp TIMESTAMP ENCODE RAW,
   end_tstamp TIMESTAMP ENCODE ZSTD,
 
   engaged_time_in_s INT ENCODE ZSTD,
