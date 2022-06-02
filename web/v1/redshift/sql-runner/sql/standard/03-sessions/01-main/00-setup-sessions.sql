@@ -220,7 +220,7 @@ SORTKEY (start_tstamp);
 
 -- Staged manifest table as input to users step
 CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.sessions_userid_manifest_staged{{.entropy}} (
-  domain_userid VARCHAR(36),
+  domain_userid VARCHAR(128),
   start_tstamp TIMESTAMP
 )
 DISTSTYLE KEY
