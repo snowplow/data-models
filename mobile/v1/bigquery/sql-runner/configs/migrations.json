@@ -2,14 +2,10 @@
     "schema": "iglu:com.snowplowanalytics.datamodeling/config/jsonschema/1-0-0",
     "data": {
         "enabled": true,
-        "storage": "Default",
+        "storage": "Bigquery",
         "playbooks": [
         {
-            "playbook": "standard/99-migrations/1.2.0-migration",
-            "dependsOn": []
-        },
-        {
-            "playbook": "standard/99-migrations/1.3.0-migration",
+            "playbook": "standard/99-migrations/1.1.0-migration",
             "dependsOn": []
         }
         ],

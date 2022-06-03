@@ -1,0 +1,17 @@
+ALTER TABLE IF EXISTS {{.scratch_schema}}.page_views_staged{{.entropy}}
+ ALTER COLUMN agent_name SET DATA TYPE VARCHAR,
+  agent_name_version SET DATA TYPE VARCHAR,
+  agent_name_version_major SET DATA TYPE VARCHAR,
+  agent_version SET DATA TYPE VARCHAR,
+  agent_version_major SET DATA TYPE VARCHAR,
+  device_brand SET DATA TYPE VARCHAR,
+  device_name SET DATA TYPE VARCHAR,
+  device_version SET DATA TYPE VARCHAR,
+  layout_engine_name SET DATA TYPE VARCHAR,
+  layout_engine_name_version SET DATA TYPE VARCHAR,
+  layout_engine_name_version_major SET DATA TYPE VARCHAR,
+  layout_engine_version SET DATA TYPE VARCHAR,
+  layout_engine_version_major SET DATA TYPE VARCHAR,
+  operating_system_name SET DATA TYPE VARCHAR,
+  operating_system_name_version SET DATA TYPE VARCHAR,
+  operating_system_version SET DATA TYPE VARCHAR;

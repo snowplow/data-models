@@ -1,0 +1,44 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 1.0.1-migration
+  :queries:
+    - :name: base-session-id-manifest
+      :file: standard/99-migrations/1.0.1-migration/base-session-id-manifest.sql
+      :template: true
+- :name: 1.0.1-migration
+  :queries:
+    - :name: events-staged
+      :file: standard/99-migrations/1.0.1-migration/events-staged.sql
+      :template: true
+- :name: 1.0.1-migration
+  :queries:
+    - :name: users-manifest
+      :file: standard/99-migrations/1.0.1-migration/users-manifest.sql
+      :template: true
+- :name: 1.0.1-migration
+  :queries:
+    - :name: page-views-staged
+      :file: standard/99-migrations/1.0.1-migration/page-views-staged.sql
+      :template: true
+- :name: 1.0.1-migration
+  :queries:
+    - :name: page-views
+      :file: standard/99-migrations/1.0.1-migration/page-views.sql
+      :template: true
+- :name: 1.0.1-migration
+  :queries:
+    - :name: sessions
+      :file: standard/99-migrations/1.0.1-migration/sessions.sql
+      :template: true

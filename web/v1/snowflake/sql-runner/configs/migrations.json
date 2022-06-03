@@ -1,0 +1,17 @@
+{
+    "schema": "iglu:com.snowplowanalytics.datamodeling/config/jsonschema/1-0-0",
+    "data": {
+      "dagName": "standard-webmodel",
+      "enabled": true,
+      "storage": "Default",
+      "sqlRunner": "0.9.3",
+      "lockType": "hard",
+      "playbooks": [
+        {
+          "playbook": "standard/99-migrations/1.0.1-migration",
+          "dependsOn": []
+        }
+      ]
+    }
+  }
+  

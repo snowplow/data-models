@@ -1,0 +1,15 @@
+:targets:
+- :name:
+  :type:    bigquery
+  :project:
+  :region:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 1.1.0-migration
+  :queries:
+    - :name: mobile-events-staged
+      :file: standard/99-migrations/1.1.0-migration/mobile-events-staged.sql
+      :template: true
