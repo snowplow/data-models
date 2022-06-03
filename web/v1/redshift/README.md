@@ -167,7 +167,7 @@ Detail on configuring the users module's playbook can be found [in the relevant 
 
 ## A note on duplicates
 
-This version of the model (1.2.0) excludes duplicated event_ids and page_view_ids. Ideally in the future it will provide standard options for handling them, however because customisations of this model involve queries on federated atomic tables, the safest option for a first version is to exclude them.
+This version of the model (>1.1.0) excludes duplicated event_ids and page_view_ids. Ideally in the future it will provide standard options for handling them, however because customisations of this model involve queries on federated atomic tables, the safest option for a first version is to exclude them.
 
 If there is a need to handle duplicates, this can be done by adding a custom module to the base level of aggregation - take good care to manage the possibility of introducing duplicates downstream if doing so.
 

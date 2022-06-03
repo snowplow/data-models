@@ -1,42 +1,47 @@
+Redshift Web Version 1.3.0 (2022-06-06)
+--------------------------
+Redshift web: Change SORTKEY encoding to RAW (#129) (thanks @mark-walle!)
+Redshift Web: Fix column lengths in manifest tables (#131)
+
 Snowflake Web Version 1.0.1 (2022-02-24)
 ---------------------------------------
-Snowflake Web: Update column check stored procedure (Close #125)
-Snowflake Web: Fix varchar length for pseudonymized fields (Close #122)
-Snowflake Web: Remove start_date variable from users module (Close #123)
-Snowflake Web: Update copyright notices (Close #124)
-Snowflake Web: Fix logic in users_sessions_this_run to account for sparse data (Close #120)
-Snowflake Web: Fix varchar length for yauaa columns (Close #97)
-Snowflake Web: Fix se_label column length in events_staged (Close #109)
+Snowflake Web: Update column check stored procedure (#125)
+Snowflake Web: Fix varchar length for pseudonymized fields (#122)
+Snowflake Web: Remove start_date variable from users module (#123)
+Snowflake Web: Update copyright notices (#124)
+Snowflake Web: Fix logic in users_sessions_this_run to account for sparse data (#120)
+Snowflake Web: Fix varchar length for yauaa columns (#97)
+Snowflake Web: Fix se_label column length in events_staged (#109)
 
 Snowflake Mobile Version 1.1.0 (2021-06-16)
 ---------------------------------------
-Snowflake Mobile: Update update_manifest to throw error message (Close #104)
-Snowflake Mobile: Update commit_table procedure to throw error messages (Close #103)
-Snowflake Mobile: Fix column order in events_this_run to allow for events_staged table migration (Close #102)
+Snowflake Mobile: Update update_manifest to throw error message (#104)
+Snowflake Mobile: Update commit_table procedure to throw error messages (#103)
+Snowflake Mobile: Fix column order in events_this_run to allow for events_staged table migration (#102)
 
 BigQuery Mobile Version 1.1.0 (2021-06-15)
 ---------------------------------------
-BigQuery Mobile: Add mobile_staging_reconcilition to temp tables validation config (Close #100)
-BigQuery Mobile: Fix column order in events_this_run to allow for events_staged table migration (Close #99)
+BigQuery Mobile: Add mobile_staging_reconcilition to temp tables validation config (#100)
+BigQuery Mobile: Fix column order in events_this_run to allow for events_staged table migration (#99)
 
 Redshift Mobile Version 1.1.0 (2021-05-17)
 ---------------------------------------
-Redshift Mobile: Increase session_id character limit in manifest (Close #93)
-Redshift Mobile: Add simplified configs (Close #89)
-Redshift Mobile: Set app errors module to disabled by default (Close #88)
-Redshift Mobile: Add model_tstamp to derived tables (Close #82)
-Redshift Mobile: Move app errors columns to end of table (Close #83)
-Redshift Mobile: Remove CTE from user-aggs (Close #80)
+Redshift Mobile: Increase session_id character limit in manifest (#93)
+Redshift Mobile: Add simplified configs (#89)
+Redshift Mobile: Set app errors module to disabled by default (#88)
+Redshift Mobile: Add model_tstamp to derived tables (#82)
+Redshift Mobile: Move app errors columns to end of table (#83)
+Redshift Mobile: Remove CTE from user-aggs (#80)
 
 Snowflake Mobile Version 1.0.0 (2021-05-06)
 ---------------------------------------
-Add Snowflake mobile model v1 (Close #85)
+Add Snowflake mobile model v1 (#85)
 
 BigQuery Mobile Version 1.0.0 (2021-04-26)
 ---------------------------------------
-Update licence (Close #79)
-Fix credential loading in scripts (close #72)
-Mobile: Add BigQuery mobile model v1 (close #73)
+Update licence (#79)
+Fix credential loading in scripts (#72)
+Mobile: Add BigQuery mobile model v1 (#73)
 
 Redshift Mobile Version 1.0.0 (2021-03-25)
 ---------------------------------------
@@ -51,8 +56,8 @@ Update Architecture diagram to match snowplow/snowplow (#62)
 
 BigQuery Web Version 1.0.2 (2021-03-11)
 ---------------------------------------
-BigQuery: Handle schema evolution in core contexts (close #52)
-Update SQL Runner download link to point to Github releases (close #51)
+BigQuery: Handle schema evolution in core contexts (#52)
+Update SQL Runner download link to point to Github releases (#51)
 
 BigQuery Web Version 1.0.1 (2021-02-24)
 ---------------------------------------
