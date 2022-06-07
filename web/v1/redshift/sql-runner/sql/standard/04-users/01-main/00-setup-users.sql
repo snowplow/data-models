@@ -87,7 +87,7 @@ INSERT INTO {{.scratch_schema}}.users_metadata_this_run{{.entropy}} (
 );
 
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.users_manifest{{.entropy}} (
-  domain_userid VARCHAR(36),
+  domain_userid VARCHAR(128),
   start_tstamp TIMESTAMP
 )
 DISTSTYLE KEY
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.users{{.entropy}} (
   domain_userid VARCHAR(128) ENCODE ZSTD,
   network_userid VARCHAR(128) ENCODE ZSTD,
 
-  start_tstamp TIMESTAMP ENCODE ZSTD,
+  start_tstamp TIMESTAMP ENCODE RAW,
   end_tstamp TIMESTAMP ENCODE ZSTD,
 
   page_views INT ENCODE ZSTD,

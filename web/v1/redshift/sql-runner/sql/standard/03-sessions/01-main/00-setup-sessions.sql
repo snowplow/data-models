@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.sessions{{.entropy}} (
   domain_sessionid VARCHAR(128) ENCODE ZSTD,
   domain_sessionidx INT ENCODE ZSTD,
 
-  start_tstamp TIMESTAMP ENCODE ZSTD,
+  start_tstamp TIMESTAMP ENCODE RAW,
   end_tstamp TIMESTAMP ENCODE ZSTD,
 
   -- user fields
@@ -220,7 +220,7 @@ SORTKEY (start_tstamp);
 
 -- Staged manifest table as input to users step
 CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.sessions_userid_manifest_staged{{.entropy}} (
-  domain_userid VARCHAR(36),
+  domain_userid VARCHAR(128),
   start_tstamp TIMESTAMP
 )
 DISTSTYLE KEY
