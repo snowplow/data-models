@@ -1,0 +1,19 @@
+:targets:
+- :name:
+  :type:     redshift
+  :host:
+  :database:
+  :port:
+  :username:
+  :password:
+  :ssl:
+:variables:
+  :scratch_schema:     scratch
+  :output_schema:      derived
+  :entropy:            ""
+:steps:
+- :name: 1.2.0-migration
+  :queries:
+    - :name: events-staged
+      :file: standard/99-migrations/1.2.0-migration/events-staged.sql
+      :template: true

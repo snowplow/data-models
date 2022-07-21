@@ -1,5 +1,9 @@
-Redshift Web Version 1.3.0 (2022-06-06)
---------------------------
+Maintenance release (2022-07-21)
+--------------------------------
+Add migrations for previous releases (#133)
+
+Redshift Web Version 1.3.0 (2022-06-07)
+--------------------------------------
 Redshift web: Change SORTKEY encoding to RAW (#129) (thanks @mark-walle!)
 Redshift Web: Fix column lengths in manifest tables (#131)
 
