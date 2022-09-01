@@ -5,7 +5,7 @@
     {
       "expectation_type": "expect_table_column_count_to_equal",
       "kwargs": {
-        "value": 129
+        "value": 130
       }
     },
     {
@@ -140,6 +140,7 @@
           "event_version",
           "event_fingerprint",
           "true_tstamp",
+          "load_tstamp",
           "page_view_id"
         ]
       }

@@ -14,4 +14,4 @@
    limitations under the License.
 */
 
-TRUNCATE {{.scratch_schema}}.events_staged{{.entropy}};
+DROP TABLE {{.scratch_schema}}.events_staged{{.entropy}};
