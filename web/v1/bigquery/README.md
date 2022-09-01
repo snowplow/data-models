@@ -8,7 +8,7 @@ To customise the model, we recommend following the guidance found in the README 
 
 ### Prerequisites
 
-[SQL-runner](https://github.com/snowplow/sql-runner) must be installed, and a dataset of web events from the [Snowplow Javascript tracker](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) must be available in the database.
+[SQL-runner](https://github.com/snowplow/sql-runner) must be installed, and a dataset of web events from the [Snowplow Javascript tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/) must be available in the database.
 
 ### Configuration
 

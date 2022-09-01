@@ -8,7 +8,7 @@ To customise the model, we recommend following the guidance found in the README 
 
 ### Prerequisites
 
-[SQL-runner 0.9.3](https://github.com/snowplow/sql-runner) or later must be installed, and a dataset of mobile events from either the Snowplow [iOS tracker](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/objective-c-tracker/) or [Android tracker](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/android-tracker/) must be available in the database. The session context and screen view events most both be enabled for the mobile model to run. 
+[SQL-runner 0.9.3](https://github.com/snowplow/sql-runner) or later must be installed, and a dataset of mobile events from either the Snowplow [iOS tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/objective-c-tracker/) or [Android tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/android-tracker/) must be available in the database. The session context and screen view events most both be enabled for the mobile model to run.
 
 ### Configuration
 
@@ -120,7 +120,7 @@ The `{{.scratch_schema}}.mobile_events_this_run` table contains all events relev
 
 If there is a requirement that a custom module consumes data _more frequently than the screen views module for example_, the `{{.scratch_schema}}.mobile_events_this_run` table may be used for this purpose.
 
-The `{{.scratch_schema}}.mobile_events_staged` table is incrementally updated to contain all events relevant to any run of the base module _since the last time the sessions module consumed it_ (ie since the last time the `99-sessions-complete.yml.tmpl` has run). This allows one to run the base module more frequently than the subsequent modules (if, for example, a custom module reads from events_this_run). 
+The `{{.scratch_schema}}.mobile_events_staged` table is incrementally updated to contain all events relevant to any run of the base module _since the last time the sessions module consumed it_ (ie since the last time the `99-sessions-complete.yml.tmpl` has run). This allows one to run the base module more frequently than the subsequent modules (if, for example, a custom module reads from events_this_run).
 
 Detail on configuring the base module's playbook can be found [in the relevant playbook directory's README](sql-runner/playbooks/standard/01-base).
 
@@ -214,7 +214,7 @@ Detail on configuring the users module's playbook can be found [in the relevant 
 
 While the model is configured by default to run the entire way through, i.e. from the base module through to the users module, it is possible to run each module independently. For instance one could run the screen views module hourly while only running the sessions module daily. To do so you should run hourly all modules up to and including the desired module i.e. the base and screen view modules. The sessions module can then be run on a daily schedule. A few points to note:
 
-- It is only when the sessions module is run that the `{{.scratch_schema}}.mobile_events_staged` is truncated. As a result, the hourly runs of the screen views module will both process new events data as well as re-process data stored in `mobile_events_staged` since the last time the sessions module ran. 
+- It is only when the sessions module is run that the `{{.scratch_schema}}.mobile_events_staged` is truncated. As a result, the hourly runs of the screen views module will both process new events data as well as re-process data stored in `mobile_events_staged` since the last time the sessions module ran.
 - Prior to running sessions module ensure that all input modules have been run i.e. base, screen views and _any enabled optional modules_. This ensures all the inputs are up to date and in-sync.
 
 ### Incomplete Runs
@@ -222,7 +222,7 @@ While the model is configured by default to run the entire way through, i.e. fro
 It is not a requirement to run every module. For example you may decide you do not need sessions or users data and only want screen view data. To do so:
 
 - Set `stage_next` to `False` and `:ends_run:` to true in the screen views module. See the [README](sql-runner/playbooks/02-screen-views) for more details.
-- Run all modules up to and including the screen views module. 
+- Run all modules up to and including the screen views module.
 - Ensure that the sessions 'complete' playbook, `99-sessions-complete.yml.tmpl`, is the last step in the run. This playbook includes the truncation of the `mobile_events_staged` table. Without this truncation _each subsequent run will re-process data severely impacting performance._
 
 ## A note on duplicates

@@ -16,7 +16,7 @@ The Snowplow atomic data acts as an immutable log of all the actions that occurr
 
 # Try Snowplow
 
-This repo contains data models which are relevant to users who already have a full Snowplow pipeline running (which can be done Open Source or via [Snowplow BDP](https://snowplowanalytics.com/snowplow-bdp/)).
+This repo contains data models which are relevant to users who already have a full Snowplow pipeline running (which can be done Open Source or via [Snowplow BDP](https://snowplow.io/snowplow-bdp/)).
 
 If you don't have a pipeline yet, you might be interested in finding out what Snowplow can do by setting up [Try Snowplow](https://try.snowplowanalytics.com/?utm_source=github&utm_medium=post&utm_campaign=try-snowplow).
 
@@ -66,7 +66,7 @@ For detail on using the helper scripts, see the README in `.scripts/`
 
 ### Snowplow BDP
 
-Snowplow BDP customers can configure jobs for SQL-runner in production via configuration files. [See our docs site for details on doing so](https://docs.snowplowanalytics.com/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/). The `configs/datamodeling.json` file in each model is an example configuration for the standard model. The `configs/example_with_custom.json` file is an example configuration with a customization.
+Snowplow BDP customers can configure jobs for SQL-runner in production via configuration files. [See our docs site for details on doing so](https://docs.snowplow.io/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/). The `configs/datamodeling.json` file in each model is an example configuration for the standard model. The `configs/example_with_custom.json` file is an example configuration with a customization.
 
 ### Open Source
 
@@ -103,12 +103,12 @@ limitations under the License.
 
 [license]: http://www.apache.org/licenses/LICENSE-2.0
 [license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
-[tracker-classificiation]: https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/
+[tracker-classificiation]: https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/
 [actively-maintained]: https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Actively%20Maintained&color=6638b8&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC
 
-[tracker-docs]: https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/
-[docs-what-is-dm]: https://docs.snowplowanalytics.com/docs/modeling-your-data/what-is-data-modeling/
-[docs-data-models]: https://docs.snowplowanalytics.com/docs/modeling-your-data/
+[tracker-docs]: https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/
+[docs-what-is-dm]: https://docs.snowplow.io/docs/modeling-your-data/what-is-data-modeling/
+[docs-data-models]: https://docs.snowplow.io/docs/modeling-your-data/
 
 [sql-runner]: https://github.com/snowplow/sql-runner
 [sql-runner-github]: https://github.com/snowplow/sql-runner/releases/
