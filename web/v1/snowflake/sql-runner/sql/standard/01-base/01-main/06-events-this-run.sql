@@ -18,6 +18,7 @@
 CREATE OR REPLACE PROCEDURE {{.scratch_schema}}.create_events_this_run()
   RETURNS VARCHAR
   LANGUAGE JAVASCRIPT
+  EXECUTE AS CALLER
   AS
   $$
 
@@ -37,7 +38,11 @@ CREATE OR REPLACE PROCEDURE {{.scratch_schema}}.create_events_this_run()
       new_col = new_col + ',';
   }
 
+  var sql_stmt2 =`SET (LOWER_LIMIT, UPPER_LIMIT) = (SELECT lower_limit, upper_limit FROM {{.scratch_schema}}.base_run_limits{{.entropy}});`
+  snowflake.createStatement({sqlText: sql_stmt2}).execute();
+
   var fin_query=`
+
     CREATE OR REPLACE TABLE {{.scratch_schema}}.events_this_run{{.entropy}}
     AS
       SELECT
@@ -45,8 +50,8 @@ CREATE OR REPLACE PROCEDURE {{.scratch_schema}}.create_events_this_run()
       FROM {{.input_schema}}.events AS a
       INNER JOIN {{.scratch_schema}}.base_sessions_to_include{{.entropy}} AS b
         ON a.domain_sessionid = b.session_id
-      WHERE a.collector_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.base_run_limits{{.entropy}})
-        AND a.collector_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.base_run_limits{{.entropy}});`;
+      WHERE a.collector_tstamp >= $LOWER_LIMIT
+        AND a.collector_tstamp <= $UPPER_LIMIT;`;
 
   snowflake.createStatement({sqlText: fin_query}).execute();
 
