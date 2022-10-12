@@ -15,6 +15,10 @@
 */
 
 
+-- Use variable to set scan limits
+
+SET (LOWER_LIMIT, UPPER_LIMIT) = (SELECT lower_limit, upper_limit FROM {{.scratch_schema}}.base_new_events_limits{{.entropy}});
+
 -- Get sessionids for new events
 CREATE OR REPLACE TABLE {{.scratch_schema}}.base_sessions_to_process{{.entropy}}
 AS (
@@ -29,8 +33,8 @@ AS (
     ON a.event_id = b.event_id
 
   WHERE b.event_id IS NULL
-    AND a.collector_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.base_new_events_limits{{.entropy}})
-    AND a.collector_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.base_new_events_limits{{.entropy}})
+    AND a.collector_tstamp >= $LOWER_LIMIT
+    AND a.collector_tstamp <= $UPPER_LIMIT
     AND a.domain_sessionid IS NOT NULL
     AND TIMESTAMPDIFF(DAY, a.dvce_created_tstamp, a.dvce_sent_tstamp) <= {{or .days_late_allowed 3}}
 
