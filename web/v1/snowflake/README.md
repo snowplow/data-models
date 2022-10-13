@@ -214,7 +214,7 @@ Detail on configuring the users module's playbook can be found [in the relevant 
 
 ## A note on duplicates
 
-This version of the model (1.0.1) excludes duplicated `event_id`s and `page_view_id`s. Ideally in the future it will provide standard options for handling them.
+This version of the model (1.0.2) excludes duplicated `event_id`s and `page_view_id`s. Ideally in the future it will provide standard options for handling them.
 
 If there is a need to handle duplicates, this can be done by adding a custom module to the base level of aggregation - take good care to manage the possibility of introducing duplicates downstream if doing so.
 
@@ -223,8 +223,8 @@ Normally, one would expect less than 1% duplicates in the dataset. If the requir
 
 ## A note on Constraints and Clustering keys
 
-This 1.0.1 version of the Snowflake web model does not use Constraints or Clustering keys in the table definitions, even though it could.
+This 1.0.2 version of the Snowflake web model does not use Constraints or Clustering keys in the table definitions, even though it could.
 
 Concerning [clustering keys](https://docs.snowflake.com/en/user-guide/tables-clustering-keys.html#strategies-for-selecting-clustering-keys), Snowflake's naturally clusters the tables on insertion order, and there hasn't been evidence so far suggesting a change towards another manual clustering strategy.
 
-Concerning table [constraints](https://docs.snowflake.com/en/sql-reference/constraints-overview.html), it is a fact that Snowflake enforces **only** the `NOT NULL` constraint. Therefore, in this 1.0.1 version we decided to include only this constraint that is actually enforced, for clarity on the model's assumptions.
+Concerning table [constraints](https://docs.snowflake.com/en/sql-reference/constraints-overview.html), it is a fact that Snowflake enforces **only** the `NOT NULL` constraint. Therefore, in this 1.0.2 version we decided to include only this constraint that is actually enforced, for clarity on the model's assumptions.
