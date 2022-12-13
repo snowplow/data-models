@@ -1,3 +1,7 @@
+Version 1.0.4 (2022-12-13)
+--------------------------
+BigQuery: Fix upsert limit in commit_table procedure (Close #75)
+
 Version 1.0.3 (2021-03-24)
 --------------------------
 BigQuery: Change session lookback to use days rather than hours (#60)

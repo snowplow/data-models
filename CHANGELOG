@@ -1,3 +1,7 @@
+BigQuery Web Version 1.0.4 (2022-12-13)
+----------------------------------------
+Snowflake Web: Fix upsert limit in commit_table procedure (Close #75)
+
 Snowflake Web Version 1.0.2 (2022-10-13)
 ----------------------------------------
 Snowflake Web: Optimise partition pruning (Close #140)
