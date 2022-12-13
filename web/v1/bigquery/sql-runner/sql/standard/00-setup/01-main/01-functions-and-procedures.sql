@@ -105,7 +105,7 @@ BEGIN
 
   -- Get lower limit
   EXECUTE IMMEDIATE
-    format("SELECT TIMESTAMP_SUB(MIN(%s), INTERVAL {{or .upsert_lookback_days 30}} DAY) FROM %s", partitionKey, TARGET_PATH) INTO LOWER_LIMIT;
+    format("SELECT TIMESTAMP_SUB(MIN(%s), INTERVAL {{or .upsert_lookback_days 30}} DAY) FROM %s", partitionKey, SOURCE_PATH) INTO LOWER_LIMIT;
 
   -- Perform DELETE <> INSERT transaction
   BEGIN
