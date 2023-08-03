@@ -1,4 +1,8 @@
-[![actively-maintained]][tracker-classificiation] [![License][license-image]][license]
+# MAINTENANCE-ONLY MODE 
+
+## ⚠️ For any new developments we highly recommend using our [dbt packages](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/) instead of these data models. SQL Runner and associated data models are no longer under active development and will only receive bug fixes in the future. Our dbt packages have all the same features as these SQL runner data models, and many many more features as well as more overall packages. They also support Redshift, BigQuery, Snowflake, Databricks, and Postgres.
+
+[![maintained]][tracker-classificiation] [![License][license-image]][license]
 
 ![snowplow-logo](media/snowplow_logo.png)
 
@@ -76,7 +80,7 @@ For local use, the `.scripts/run_config.sh` script can be used to run a config -
 
 ## dbt
 
-For users using dbt we have the [snowplow-web](https://github.com/snowplow/dbt-snowplow-web) dbt package, allowing you to run the web model via dbt. Currently the package only supports Redshift, with BigQuery and Snowflake support to follow soon. Similarly, the mobile model will soon be supported in dbt.
+For users using dbt we have the [snowplow-web](https://github.com/snowplow/dbt-snowplow-web) and [snowplow-mobile](https://github.com/snowplow/dbt-snowplow-mobile) dbt packages, allowing you to run the web and/or mobile models via dbt. These packages support Redshift, BigQuery, Snowflake, Databricks, and Postgres.
 
 ## Using other tools
 
@@ -104,7 +108,7 @@ limitations under the License.
 [license]: http://www.apache.org/licenses/LICENSE-2.0
 [license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
 [tracker-classificiation]: https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/
-[actively-maintained]: https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Actively%20Maintained&color=6638b8&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC
+[maintained]: https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Maintained&color=9e62dd&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC
 
 [tracker-docs]: https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/
 [docs-what-is-dm]: https://docs.snowplow.io/docs/modeling-your-data/what-is-data-modeling/
