@@ -22,22 +22,22 @@ AS (
 
   WITH events AS (
     SELECT
-      {{if eq .model "web"}} a.contexts_com_snowplowanalytics_snowplow_web_page_1[0]:id::VARCHAR(36) AS page_view_id, {{end}}
+      {{if eq .model "web"}} a.contexts_com_snowplowanalytics_snowplow_web_page_1[0]:id::VARCHAR AS page_view_id, {{end}}
       {{if eq .model "mobile"}}
         -- screen view events
-        a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:id::VARCHAR(36) AS screen_view_id,
+        a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:id::VARCHAR AS screen_view_id,
         a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:name::VARCHAR AS screen_view_name,
-        a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:previousId::VARCHAR(36) AS screen_view_previous_id,
+        a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:previousId::VARCHAR AS screen_view_previous_id,
         a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:previousName::VARCHAR AS screen_view_previous_name,
         a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:previousType::VARCHAR AS screen_view_previous_type,
         a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:transitionType::VARCHAR AS screen_view_transition_type,
         a.unstruct_event_com_snowplowanalytics_mobile_screen_view_1:type::VARCHAR AS screen_view_type,
         -- session context
-        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR(36) AS session_id,
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR AS session_id,
         a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionIndex::INT AS session_index,
-        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:previousSessionId::VARCHAR(36) AS previous_session_id,
-        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:userId::VARCHAR(36) AS device_user_id,
-        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:firstEventId::VARCHAR(36) AS session_first_event_id,
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:previousSessionId::VARCHAR AS previous_session_id,
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:userId::VARCHAR AS device_user_id,
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:firstEventId::VARCHAR AS session_first_event_id,
         -- mobile context
         {{if eq .mobile_context true}}
           a.contexts_com_snowplowanalytics_snowplow_mobile_context_1[0]:deviceManufacturer::VARCHAR AS device_manufacturer,
@@ -50,7 +50,7 @@ AS (
           a.contexts_com_snowplowanalytics_snowplow_mobile_context_1[0]:carrier::VARCHAR AS carrier,
           a.contexts_com_snowplowanalytics_snowplow_mobile_context_1[0]:openIdfa::VARCHAR AS open_idfa,
           a.contexts_com_snowplowanalytics_snowplow_mobile_context_1[0]:networkTechnology::VARCHAR AS network_technology,
-          a.contexts_com_snowplowanalytics_snowplow_mobile_context_1[0]:networkType::VARCHAR(255) AS network_type,
+          a.contexts_com_snowplowanalytics_snowplow_mobile_context_1[0]:networkType::VARCHAR AS network_type,
         {{else}}
           CAST(NULL AS VARCHAR) AS device_manufacturer,
           CAST(NULL AS VARCHAR) AS device_model,
@@ -62,7 +62,7 @@ AS (
           CAST(NULL AS VARCHAR) AS carrier,
           CAST(NULL AS VARCHAR) AS open_idfa,
           CAST(NULL AS VARCHAR) AS network_technology,
-          CAST(NULL AS VARCHAR(255)) AS network_type,
+          CAST(NULL AS VARCHAR) AS network_type,
         {{end}}
         -- geo context
         {{if eq .geolocation_context true}}
@@ -84,15 +84,15 @@ AS (
         {{end}}
         -- app context
         {{if eq .application_context true}}
-          a.contexts_com_snowplowanalytics_mobile_application_1[0]:build::VARCHAR(255) AS build,
-          a.contexts_com_snowplowanalytics_mobile_application_1[0]:version::VARCHAR(255) AS version,
+          a.contexts_com_snowplowanalytics_mobile_application_1[0]:build::VARCHAR AS build,
+          a.contexts_com_snowplowanalytics_mobile_application_1[0]:version::VARCHAR AS version,
         {{else}}
-          CAST(NULL AS VARCHAR(255)) AS build,
-          CAST(NULL AS VARCHAR(255)) AS version,
+          CAST(NULL AS VARCHAR) AS build,
+          CAST(NULL AS VARCHAR) AS version,
         {{end}}
         -- screen context
         {{if eq .screen_context true}}
-          a.contexts_com_snowplowanalytics_mobile_screen_1[0]:id::VARCHAR(36) AS screen_id,
+          a.contexts_com_snowplowanalytics_mobile_screen_1[0]:id::VARCHAR AS screen_id,
           a.contexts_com_snowplowanalytics_mobile_screen_1[0]:name::VARCHAR AS screen_name,
           a.contexts_com_snowplowanalytics_mobile_screen_1[0]:activity::VARCHAR AS screen_activity,
           a.contexts_com_snowplowanalytics_mobile_screen_1[0]:fragment::VARCHAR AS screen_fragment,
@@ -100,7 +100,7 @@ AS (
           a.contexts_com_snowplowanalytics_mobile_screen_1[0]:type::VARCHAR AS screen_type,
           a.contexts_com_snowplowanalytics_mobile_screen_1[0]:viewController::VARCHAR AS screen_view_controller,
         {{else}}
-          CAST(NULL AS VARCHAR(36)) AS screen_id,
+          CAST(NULL AS VARCHAR) AS screen_id,
           CAST(NULL AS VARCHAR) AS screen_name,
           CAST(NULL AS VARCHAR) AS screen_activity,
           CAST(NULL AS VARCHAR) AS screen_fragment,
@@ -115,7 +115,7 @@ AS (
       {{.input_schema}}.events AS a
     INNER JOIN 
       {{.scratch_schema}}.{{.model}}_base_sessions_to_include{{.entropy}} AS b
-      ON {{if eq .model "web"}} a.domain_sessionid {{else if eq .model "mobile"}} a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR(36) {{end}} = b.session_id
+      ON {{if eq .model "web"}} a.domain_sessionid {{else if eq .model "mobile"}} a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR {{end}} = b.session_id
 
     WHERE 
       a.collector_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.{{.model}}_base_run_limits{{.entropy}})

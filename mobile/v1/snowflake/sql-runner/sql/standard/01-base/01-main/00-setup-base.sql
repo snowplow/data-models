@@ -31,15 +31,15 @@ INSERT INTO {{.scratch_schema}}.{{.model}}_metadata_run_id{{.entropy}} (
 -- Permanent metadata table
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
   run_id                     TIMESTAMP_NTZ,
-  model_version              VARCHAR(64),
-  model                      VARCHAR(64),
-  module                     VARCHAR(64),
+  model_version              VARCHAR,
+  model                      VARCHAR,
+  module                     VARCHAR,
   run_start_tstamp           TIMESTAMP_NTZ,
   run_end_tstamp             TIMESTAMP_NTZ,
   rows_this_run              INTEGER,
-  distinct_key               VARCHAR(64),
+  distinct_key               VARCHAR,
   distinct_key_count         INTEGER,
-  time_key                   VARCHAR(64),
+  time_key                   VARCHAR,
   min_time_key               TIMESTAMP_NTZ,
   max_time_key               TIMESTAMP_NTZ,
   duplicate_rows_removed     INTEGER,
@@ -48,17 +48,17 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
 
 -- Setup temp metadata tables for this run
 CREATE OR REPLACE TABLE {{.scratch_schema}}.{{.model}}_base_metadata_this_run{{.entropy}} (
-  id                         VARCHAR(64),
+  id                         VARCHAR,
   run_id                     TIMESTAMP_NTZ,
-  model_version              VARCHAR(64),
-  model                      VARCHAR(64),
-  module                     VARCHAR(64),
+  model_version              VARCHAR,
+  model                      VARCHAR,
+  module                     VARCHAR,
   run_start_tstamp           TIMESTAMP_NTZ,
   run_end_tstamp             TIMESTAMP_NTZ,
   rows_this_run              INTEGER,
-  distinct_key               VARCHAR(64),
+  distinct_key               VARCHAR,
   distinct_key_count         INTEGER,
-  time_key                   VARCHAR(64),
+  time_key                   VARCHAR,
   min_time_key               TIMESTAMP_NTZ,
   max_time_key               TIMESTAMP_NTZ,
   duplicate_rows_removed     INTEGER,
@@ -90,13 +90,13 @@ INSERT INTO {{.scratch_schema}}.{{.model}}_base_metadata_this_run{{.entropy}} (
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.{{.model}}_base_event_id_manifest{{.entropy}}
 AS (
   SELECT
-    'seed'::VARCHAR(36) AS event_id,
+    'seed'::VARCHAR AS event_id,
     '{{.start_date}}'::TIMESTAMP_NTZ AS collector_tstamp
 );
 
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.{{.model}}_base_session_id_manifest{{.entropy}}
 AS (
   SELECT
-    'seed'::VARCHAR(128) AS session_id,
+    'seed'::VARCHAR AS session_id,
     '{{.start_date}}'::TIMESTAMP_NTZ AS min_tstamp
 );

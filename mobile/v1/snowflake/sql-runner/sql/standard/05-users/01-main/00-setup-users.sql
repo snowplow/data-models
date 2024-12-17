@@ -29,15 +29,15 @@ INSERT INTO {{.scratch_schema}}.mobile_metadata_run_id{{.entropy}}
 -- Permanent metadata table
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
   run_id                     TIMESTAMP_NTZ,
-  model_version              VARCHAR(64),
-  model                      VARCHAR(64),
-  module                     VARCHAR(64),
+  model_version              VARCHAR,
+  model                      VARCHAR,
+  module                     VARCHAR,
   run_start_tstamp           TIMESTAMP_NTZ,
   run_end_tstamp             TIMESTAMP_NTZ,
   rows_this_run              INTEGER,
-  distinct_key               VARCHAR(64),
+  distinct_key               VARCHAR,
   distinct_key_count         INTEGER,
-  time_key                   VARCHAR(64),
+  time_key                   VARCHAR,
   min_time_key               TIMESTAMP_NTZ,
   max_time_key               TIMESTAMP_NTZ,
   duplicate_rows_removed     INTEGER,
@@ -46,17 +46,17 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
 
 -- Setup Metadata
 CREATE OR REPLACE TABLE {{.scratch_schema}}.mobile_users_metadata_this_run{{.entropy}} (
-  id                         VARCHAR(64),
+  id                         VARCHAR,
   run_id                     TIMESTAMP_NTZ,
-  model_version              VARCHAR(64),
-  model                      VARCHAR(64),
-  module                     VARCHAR(64),
+  model_version              VARCHAR,
+  model                      VARCHAR,
+  module                     VARCHAR,
   run_start_tstamp           TIMESTAMP_NTZ,
   run_end_tstamp             TIMESTAMP_NTZ,
   rows_this_run              INTEGER,
-  distinct_key               VARCHAR(64),
+  distinct_key               VARCHAR,
   distinct_key_count         INTEGER,
-  time_key                   VARCHAR(64),
+  time_key                   VARCHAR,
   min_time_key               TIMESTAMP_NTZ,
   max_time_key               TIMESTAMP_NTZ,
   duplicate_rows_removed     INTEGER,
@@ -85,16 +85,16 @@ INSERT INTO {{.scratch_schema}}.mobile_users_metadata_this_run{{.entropy}} (
 );
 
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_users_manifest{{.entropy}} (
-  device_user_id VARCHAR(4096),
+  device_user_id VARCHAR,
   start_tstamp TIMESTAMP_NTZ
 );
 
 -- Setup Users table
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_users{{.entropy}} (
 
-  user_id VARCHAR(255),
-  device_user_id VARCHAR(4096),
-  network_userid VARCHAR(128),
+  user_id VARCHAR,
+  device_user_id VARCHAR,
+  network_userid VARCHAR,
 
   start_tstamp TIMESTAMP_NTZ,
   end_tstamp TIMESTAMP_NTZ,
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_users{{.entropy}} (
   last_screen_view_transition_type VARCHAR,
   last_screen_view_type VARCHAR,
 
-  platform VARCHAR(255),
+  platform VARCHAR,
   dvce_screenwidth INT,
   dvce_screenheight INT,
   device_manufacturer VARCHAR,
@@ -129,14 +129,14 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.mobile_users{{.entropy}} (
   apple_idfv VARCHAR,
   open_idfa VARCHAR,
 
-  geo_country VARCHAR(2),
-  geo_region VARCHAR(3),
-  geo_city VARCHAR(75),
-  geo_zipcode VARCHAR(15),
+  geo_country VARCHAR,
+  geo_region VARCHAR,
+  geo_city VARCHAR,
+  geo_zipcode VARCHAR,
   geo_latitude FLOAT,
   geo_longitude FLOAT,
-  geo_region_name VARCHAR(100),
-  geo_timezone VARCHAR(64),
+  geo_region_name VARCHAR,
+  geo_timezone VARCHAR,
 
   first_carrier VARCHAR,
   last_carrier VARCHAR

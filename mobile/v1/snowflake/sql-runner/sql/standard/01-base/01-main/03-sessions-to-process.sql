@@ -19,7 +19,7 @@
 CREATE OR REPLACE TABLE {{.scratch_schema}}.{{.model}}_base_sessions_to_process{{.entropy}}
 AS (
   SELECT
-    {{if eq .model "web"}} a.domain_sessionid {{else if eq .model "mobile"}} a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR(36) {{end}} AS session_id,
+    {{if eq .model "web"}} a.domain_sessionid {{else if eq .model "mobile"}} a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR {{end}} AS session_id,
     MIN(a.collector_tstamp) AS min_tstamp,
     MAX(a.collector_tstamp) AS max_tstamp
 
@@ -31,7 +31,7 @@ AS (
   WHERE b.event_id IS NULL
     AND a.collector_tstamp >= (SELECT lower_limit FROM {{.scratch_schema}}.{{.model}}_base_new_events_limits{{.entropy}})
     AND a.collector_tstamp <= (SELECT upper_limit FROM {{.scratch_schema}}.{{.model}}_base_new_events_limits{{.entropy}})
-    AND {{if eq .model "web"}} a.domain_sessionid {{else if eq .model "mobile"}} a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR(36) {{end}} IS NOT NULL
+    AND {{if eq .model "web"}} a.domain_sessionid {{else if eq .model "mobile"}} a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::VARCHAR {{end}} IS NOT NULL
     AND TIMESTAMPDIFF(DAY, a.dvce_created_tstamp, a.dvce_sent_tstamp) <= {{or .days_late_allowed 3}}
     AND a.platform IN (
       {{range $i, $platform := .platform_filters}} {{if $i}}, {{end}} '{{$platform}}'  -- User defined platforms if specified
