@@ -87,15 +87,15 @@ AS (
     e.event_index_in_session,
 
         --Error details
-    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:message::VARCHAR(2048) AS message,
-    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:programmingLanguage::VARCHAR(255) AS programming_language,
-    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:className::VARCHAR(1024) AS class_name,
-    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:exceptionName::VARCHAR(1024) AS exception_name,
+    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:message::VARCHAR AS message,
+    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:programmingLanguage::VARCHAR AS programming_language,
+    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:className::VARCHAR AS class_name,
+    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:exceptionName::VARCHAR AS exception_name,
     e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:isFatal::BOOLEAN AS is_fatal,
     e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:lineNumber::INT AS line_number,
-    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:stackTrace::VARCHAR(8192) AS stack_trace,
+    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:stackTrace::VARCHAR AS stack_trace,
     e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:threadId::INT AS thread_id,
-    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:threadName::VARCHAR(1024) AS thread_name
+    e.unstruct_event_com_snowplowanalytics_snowplow_application_error_1:threadName::VARCHAR AS thread_name
 
     FROM
       {{.scratch_schema}}.mobile_events_staged{{.entropy}} e

@@ -182,7 +182,7 @@ CREATE OR REPLACE PROCEDURE {{.output_schema}}.column_checker(SOURCE_SCHEMA VARC
   Inputs:
   TARGET_SCHEMA:         the schema of the target table
   TARGET_TABLE:          the target table to add columns to
-  COLUMNS_TO_ADD:        comma seperated list of colum definitions to add e.g. event_name VARCHAR(100)
+  COLUMNS_TO_ADD:        comma seperated list of colum definitions to add e.g. event_name VARCHAR
   To drop:
   DROP PROCEDURE {{.output_schema}}.alter_table(VARCHAR,VARCHAR,VARCHAR);
 */
