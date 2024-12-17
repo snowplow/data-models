@@ -1,3 +1,7 @@
+Version 1.0.3 (2025-01-08)
+----------------------------------------
+Snowflake Web: Remove length limits from varchar fields
+
 Version 1.0.2 (2022-10-13)
 --------------------------
 Snowflake web: Optimise partition pruning (Close #140)
