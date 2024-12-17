@@ -1,3 +1,11 @@
+Snowflake Mobile Version 1.1.1 (2025-01-08)
+----------------------------------------
+Snowflake Mobile: Remove length limits from varchar fields
+
+Snowflake Web Version 1.0.3 (2025-01-08)
+----------------------------------------
+Snowflake Web: Remove length limits from varchar fields
+
 BigQuery Web Version 1.0.4 (2022-12-13)
 ----------------------------------------
 Snowflake Web: Fix upsert limit in commit_table procedure (Close #75)
