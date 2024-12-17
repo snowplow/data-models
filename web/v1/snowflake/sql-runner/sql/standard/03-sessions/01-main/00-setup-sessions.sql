@@ -30,15 +30,15 @@ INSERT INTO {{.scratch_schema}}.metadata_run_id{{.entropy}}
 -- Permanent metadata table
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
   run_id                     TIMESTAMP_NTZ,
-  model_version              VARCHAR(64),
-  model                      VARCHAR(64),
-  module                     VARCHAR(64),
+  model_version              VARCHAR,
+  model                      VARCHAR,
+  module                     VARCHAR,
   run_start_tstamp           TIMESTAMP_NTZ,
   run_end_tstamp             TIMESTAMP_NTZ,
   rows_this_run              INTEGER,
-  distinct_key               VARCHAR(64),
+  distinct_key               VARCHAR,
   distinct_key_count         INTEGER,
-  time_key                   VARCHAR(64),
+  time_key                   VARCHAR,
   min_time_key               TIMESTAMP_NTZ,
   max_time_key               TIMESTAMP_NTZ,
   duplicate_rows_removed     INTEGER,
@@ -48,17 +48,17 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.datamodel_metadata{{.entropy}} (
 
 -- Setup temp metadata tables for this run
 CREATE OR REPLACE TABLE {{.scratch_schema}}.sessions_metadata_this_run{{.entropy}} (
-  id                         VARCHAR(64),
+  id                         VARCHAR,
   run_id                     TIMESTAMP_NTZ,
-  model_version              VARCHAR(64),
-  model                      VARCHAR(64),
-  module                     VARCHAR(64),
+  model_version              VARCHAR,
+  model                      VARCHAR,
+  module                     VARCHAR,
   run_start_tstamp           TIMESTAMP_NTZ,
   run_end_tstamp             TIMESTAMP_NTZ,
   rows_this_run              INTEGER,
-  distinct_key               VARCHAR(64),
+  distinct_key               VARCHAR,
   distinct_key_count         INTEGER,
-  time_key                   VARCHAR(64),
+  time_key                   VARCHAR,
   min_time_key               TIMESTAMP_NTZ,
   max_time_key               TIMESTAMP_NTZ,
   duplicate_rows_removed     INTEGER,
@@ -88,82 +88,82 @@ INSERT INTO {{.scratch_schema}}.sessions_metadata_this_run{{.entropy}} (
 -- Setup Sessions table
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.sessions{{.entropy}} (
   -- app ID
-  app_id                           VARCHAR(255),
+  app_id                           VARCHAR,
 
   -- session fields
-  domain_sessionid                 VARCHAR(128)     NOT NULL,
+  domain_sessionid                 VARCHAR     NOT NULL,
   domain_sessionidx                INTEGER,
 
   start_tstamp                     TIMESTAMP_NTZ,
   end_tstamp                       TIMESTAMP_NTZ,
 
   -- user fields
-  user_id                          VARCHAR(255),
-  domain_userid                    VARCHAR(128),
-  network_userid                   VARCHAR(128),
+  user_id                          VARCHAR,
+  domain_userid                    VARCHAR,
+  network_userid                   VARCHAR,
 
   page_views                       INTEGER,
   engaged_time_in_s                INTEGER,
   absolute_time_in_s               INTEGER,
 
   -- first page fields
-  first_page_title                 VARCHAR(2000),
-  first_page_url                   VARCHAR(4096),
-  first_page_urlscheme             VARCHAR(16),
-  first_page_urlhost               VARCHAR(255),
-  first_page_urlpath               VARCHAR(3000),
-  first_page_urlquery              VARCHAR(6000),
-  first_page_urlfragment           VARCHAR(3000),
+  first_page_title                 VARCHAR,
+  first_page_url                   VARCHAR,
+  first_page_urlscheme             VARCHAR,
+  first_page_urlhost               VARCHAR,
+  first_page_urlpath               VARCHAR,
+  first_page_urlquery              VARCHAR,
+  first_page_urlfragment           VARCHAR,
 
   -- last page fields
-  last_page_title                  VARCHAR(2000),
-  last_page_url                    VARCHAR(4096),
-  last_page_urlscheme              VARCHAR(16),
-  last_page_urlhost                VARCHAR(255),
-  last_page_urlpath                VARCHAR(3000),
-  last_page_urlquery               VARCHAR(6000),
-  last_page_urlfragment            VARCHAR(3000),
+  last_page_title                  VARCHAR,
+  last_page_url                    VARCHAR,
+  last_page_urlscheme              VARCHAR,
+  last_page_urlhost                VARCHAR,
+  last_page_urlpath                VARCHAR,
+  last_page_urlquery               VARCHAR,
+  last_page_urlfragment            VARCHAR,
 
   -- referrer fields
-  referrer                         VARCHAR(4096),
-  refr_urlscheme                   VARCHAR(16),
-  refr_urlhost                     VARCHAR(255),
-  refr_urlpath                     VARCHAR(6000),
-  refr_urlquery                    VARCHAR(6000),
-  refr_urlfragment                 VARCHAR(3000),
-  refr_medium                      VARCHAR(25),
-  refr_source                      VARCHAR(50),
-  refr_term                        VARCHAR(255),
+  referrer                         VARCHAR,
+  refr_urlscheme                   VARCHAR,
+  refr_urlhost                     VARCHAR,
+  refr_urlpath                     VARCHAR,
+  refr_urlquery                    VARCHAR,
+  refr_urlfragment                 VARCHAR,
+  refr_medium                      VARCHAR,
+  refr_source                      VARCHAR,
+  refr_term                        VARCHAR,
 
   -- marketing fields
-  mkt_medium                       VARCHAR(255),
-  mkt_source                       VARCHAR(255),
-  mkt_term                         VARCHAR(255),
-  mkt_content                      VARCHAR(500),
-  mkt_campaign                     VARCHAR(255),
-  mkt_clickid                      VARCHAR(128),
-  mkt_network                      VARCHAR(64),
+  mkt_medium                       VARCHAR,
+  mkt_source                       VARCHAR,
+  mkt_term                         VARCHAR,
+  mkt_content                      VARCHAR,
+  mkt_campaign                     VARCHAR,
+  mkt_clickid                      VARCHAR,
+  mkt_network                      VARCHAR,
 
   -- geo fields
-  geo_country                      VARCHAR(2),
-  geo_region                       VARCHAR(3),
-  geo_region_name                  VARCHAR(100),
-  geo_city                         VARCHAR(75),
-  geo_zipcode                      VARCHAR(15),
+  geo_country                      VARCHAR,
+  geo_region                       VARCHAR,
+  geo_region_name                  VARCHAR,
+  geo_city                         VARCHAR,
+  geo_zipcode                      VARCHAR,
   geo_latitude                     DOUBLE PRECISION,
   geo_longitude                    DOUBLE PRECISION,
-  geo_timezone                     VARCHAR(64),
+  geo_timezone                     VARCHAR,
 
   -- IP address
-  user_ipaddress                   VARCHAR(128),
+  user_ipaddress                   VARCHAR,
 
   -- user agent
-  useragent                        VARCHAR(1000),
+  useragent                        VARCHAR,
 
-  br_renderengine                  VARCHAR(50),
-  br_lang                          VARCHAR(255),
+  br_renderengine                  VARCHAR,
+  br_lang                          VARCHAR,
 
-  os_timezone                      VARCHAR(255),
+  os_timezone                      VARCHAR,
 
   -- optional iab fields
   category                         VARCHAR,
@@ -210,6 +210,6 @@ CREATE TABLE IF NOT EXISTS {{.output_schema}}.sessions{{.entropy}} (
 
 -- Staged manifest table as input to users step
 CREATE TABLE IF NOT EXISTS {{.scratch_schema}}.sessions_userid_manifest_staged{{.entropy}} (
-  domain_userid VARCHAR(128),
+  domain_userid VARCHAR,
   start_tstamp TIMESTAMP_NTZ
 );
