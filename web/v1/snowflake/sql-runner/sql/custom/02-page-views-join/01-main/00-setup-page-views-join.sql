@@ -17,11 +17,11 @@
 
 CREATE TABLE IF NOT EXISTS {{.output_schema}}.page_views_join{{.entropy}} (
 
-  page_view_id                 VARCHAR(36)      NOT NULL,
+  page_view_id                 VARCHAR      NOT NULL,
   start_tstamp                 TIMESTAMP_NTZ,
   link_clicks                  INTEGER,
   first_link_target            VARCHAR,
   bounced_page_view            BOOLEAN,
   engagement_score             DOUBLE PRECISION,
-  channel                      VARCHAR(255)
+  channel                      VARCHAR
 );

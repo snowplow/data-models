@@ -67,7 +67,7 @@ For example, to count link click events per page view:
 -- 1. Create prod table
 CREATE TABLE IF NOT EXISTS derived.pv_link_clicks (
 
-    page_view_id       VARCHAR(36)      NOT NULL,
+    page_view_id       VARCHAR      NOT NULL,
     min_tstamp         TIMESTAMP_NTZ,
     link_click_count   INTEGER
 );
