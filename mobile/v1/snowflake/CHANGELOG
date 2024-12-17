@@ -1,3 +1,7 @@
+Version 1.1.1 (2025-01-08)
+----------------------------------------
+Snowflake Mobile: Remove length limits from varchar fields
+
 Version 1.1.0 (2021-06-16)
 --------------------------
 Snowflake Mobile: Update update_manifest to throw error message (Close #104)
